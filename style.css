@@ -1,6 +1,19 @@
+@import url('https://googleapis.com');
+
 body {
-    background-color: #0d1b2a; /* Dark blue hex color */
-    color: #ffffff;           /* White text color so it remains readable */
-    font-family: sans-serif;
+    background-color: #030712; /* Your ultra-dark background color */
+    color: #ffffff;           /* White text color for basic paragraphs */
+    font-family: 'Inter', sans-serif; /* Applies the clean look from your image */
     padding: 40px;
+    line-height: 1.6;         /* Gives the text nice breathing room */
+}
+
+h1 {
+    color: #7ec7fc;           /* Bright light blue heading 1 color */
+    font-weight: 700;         /* Makes the main title bold */
+}
+
+h2 {
+    color: #cbd5e1;           /* Soft neon/light blue heading 2 color */
+    font-weight: 500;         /* Gives it that clean, semi-bold weight */
 }
