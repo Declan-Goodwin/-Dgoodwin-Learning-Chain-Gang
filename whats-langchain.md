@@ -3,7 +3,7 @@ layout: default
 ---
 <h1 style="display: flex; align-items: center; gap: 15px;">
   <img src="{{ '/images/LangChain-Logo-only.png' | relative_url }}" height="60" style="vertical-align: middle;" alt="LangChain Logo">
-  <span>What is LangChain!?</span>
+  <span>What is LangChain?</span>
 </h1>
 
 <details>
@@ -26,9 +26,9 @@ layout: default
 <p>LangChain is an open-source framework designed to simplify the creation of applications powered by Large Language Models (LLMs). <br>
   It provides a standardized way to connect these language models to:</p>
   <ul>
-    <li>External Data Sources,</li>
-    <li>Application Programming Interfaces (APIs), and </li>
-    <li>Computation Tools</li>
+    <li>external data sources,</li>
+    <li>application programming interfaces (APIs), and </li>
+    <li>computation tools</li>
       </ul>
 <p>Instead of managing complex AI prompts and connections from scratch, developers use its pre-built components to orchestrate multi-step workflows. This allows the AI to remember past parts of a conversation, execute sequential tasks, and dynamically choose the best tool to solve a user's request.</p>
 
