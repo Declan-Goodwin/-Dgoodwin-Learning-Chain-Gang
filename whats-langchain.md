@@ -8,7 +8,7 @@ layout: default
 
 <details>
   <summary style="cursor: pointer; display: list-item;">
-    <h2 style="display: inline; margin-left: 5px;">LangChain Beginner (Don't Make Me Think)</h2>
+    <h2 style="display: inline; margin-left: 5px;">LangChain Beginner: Explain it Simply</h2>
   </summary>
   
   <p>LangChain is a special toolkit that helps software developers build clever apps using powerful AI models like ChatGPT.</p>
@@ -20,7 +20,7 @@ layout: default
 
 <details>
  <summary style="cursor: pointer; display: list-item;">
-    <h2 style="display: inline; margin-left: 5px;">LangChain Intermediate (I know a couple things about a couple things)</h2>
+    <h2 style="display: inline; margin-left: 5px;">LangChain Intermediate: How the Components Work</h2>
   </summary>
   
 <p>LangChain is an open-source framework designed to simplify the creation of applications powered by Large Language Models (LLMs). <br>
@@ -36,7 +36,7 @@ layout: default
 
 <details>
    <summary style="cursor: pointer; display: list-item;">
-    <h2 style="display: inline; margin-left: 5px;">LangChain Expert (I basically invented this)</h2>
+    <h2 style="display: inline; margin-left: 5px;">LangChain Advanced: Architecture and Implementation</h2>
   </summary>
   
 <p>LangChain is a composable orchestration framework that abstracts the complexities of integrating Large Language Models(LLMs) into software architectures through modular abstractions. 
