@@ -58,6 +58,18 @@ layout: default
       </ul>
 <p>Instead of managing complex AI prompts and connections from scratch, developers use its pre-built components to orchestrate multi-step workflows. This allows the AI to remember past parts of a conversation, execute sequential tasks, and dynamically choose the best tool to solve a user's request.</p>
 
+<h3>Simple Analogy</h3>
+<p> Think of an AI model as a house's wooden frame. It gives the house it's shape and it holds everything up, but if you try to live in it as-is, you won't have running water, any lights to turn on, and you will freeze at night. 
+<br> 
+LangChain is like the utilities infrastructure, the plumbing, the electrical wiring, the drywall, and the windows.
+(better but still bad because above we state that its a package of capabilities that support faster application development by providing common framework + infrastructure. Describing it as housing utilities might make it seem more bespoke)</p>
+
+<h3>One Concrete Example</h3>
+<p>Imagine a company wants an AI assistant that can answer questions about customer orders. 
+   <br>
+The AI model understands the customer;s question, but it does not know whether a particular order has shipped. A developer can use LangChain to connect the model to the company's order databased.
+  <br><br></p>
+
 </details>
 
 <details>
