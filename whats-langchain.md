@@ -47,7 +47,7 @@ layout: default
 <p> Think of an AI model as a house's wooden frame. It gives the house it's shape and it holds everything up, but if you try to live in it as-is, you won't have running water, any lights to turn on, and you will freeze at night. 
     <br> 
 LangChain is like the utilities infrastructure, the plumbing, the electrical wiring, the drywall, and the windows.
-<!-- (better but still bad because above we state that its a package of capabilities that support faster application development by providing common framework + infrastructure. Describing it as housing utilities might make it seem more bespoke) --> </p> 
+<!-- (better but still bad because above we state that its a package of capabilities that support faster application development by providing common framework + infrastructure. Describing it as housing utilities might make it seem more bespoke) --> 
 
 <h3>Practical Use Case </h3>
 <p>Imagine a company wants an AI assistant that can answer questions about customer orders. 
