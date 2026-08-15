@@ -55,7 +55,7 @@ LangChain is like the utilities infrastructure, the plumbing, the electrical wir
 By itself, the AI model will understand a customer's question, but without access to the company's database it will not know any details about a particular customer's order - what was ordered, how much it cost, how much it weighed, where it shipped from, where it was in transit, etc.
   <br><br>
 LangChain provides a developer with the framework and infrastructure to connect the model to the company's order, inbound logistics, and outbound logistics databases. 
-  <br><br></p>
+</p>
 </details>
 
 <details>
