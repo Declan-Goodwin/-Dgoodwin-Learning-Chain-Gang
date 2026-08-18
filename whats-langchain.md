@@ -12,7 +12,7 @@ layout: default
     <h2 style="display: inline; margin-left: 5px;">LangChain Beginner: Explain it Simply</h2>
   </summary>
   
-  <p>LangChain is an open-source framework that helps developers build applications powered by AI models.
+  <p>LangChain is an open-source framework that helps developers build applications powered by AI models. 
     <br><br>
   It provides reusable components for connecting AI models to data, tools, and other software. It also helps developers coordinate how those components work together. Developers can combine these components instead of building every part of an AI application from scratch.</p>
 
@@ -80,7 +80,7 @@ LangChain helps the developer connect and coordinate the components involved in 
  <summary style="cursor: pointer; display: list-item;">
     <h2 style="display: inline; margin-left: 5px;">LangChain Intermediate: How the Components Work</h2>
   </summary>
-  
+  <h3> Major Components & Terminology</h3>
 <p>LangChain is an open-source framework designed to simplify the creation of applications powered by Large Language Models (LLMs). <br>
   It provides a standardized way to connect these language models to:</p>
   <ul>
