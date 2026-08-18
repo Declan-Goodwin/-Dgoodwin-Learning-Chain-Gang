@@ -14,7 +14,7 @@ layout: default
   
   <p>LangChain is an open-source framework that helps developers build applications powered by AI models like GPT, Gemini, Claude, and many more.
     <br><br>
-  It provides ready-made components for connecting AI models to data, tools, and other software, and for coordinating how those components work together. Developers can combine these components instead of building   every part of an AI application from scratch.</p>
+  It provides reusable components for connecting AI models to data, tools, and other software, and for coordinating how those components work together. Developers can combine these components instead of building   every part of an AI application from scratch.</p>
 
  <h3>What Problem Does It Solve?</h3>
  <p>Building an AI application requires more than choosing an AI model. Developers also need ways to connect the model to other resources (like tools, information, or software) and coordinate how those resources will work together.
