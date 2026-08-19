@@ -16,4 +16,37 @@ h1 {
 h2 {
     color: #cbd5e1;           /* Soft neon/light blue heading 2 color */
     font-weight: 500;         /* Gives it that clean, semi-bold weight */
+
+}
+
+/* Container wrapper */
+.term-container {
+  margin-bottom: 24px;
+}
+
+/* Forces 'Model:' to stay inline with the definition text */
+.term-title {
+  display: inline;
+  margin: 0;
+  color: #7ec7ff;        /* Matches your h1/heading accent color */
+  font-weight: 700;
+}
+
+/* Standardizes the main definition text */
+.term-definition {
+  color: #ffffff;        /* Matches your main body text color */
+}
+
+/* The Explainer / Note block with custom spacing */
+.term-note {
+  margin-top: 6px;       /* This is your perfect mini-break spacing */
+  padding-left: 14px;    /* Spaces text away from the left border accent */
+  border-left: 3px solid #cbd5e1; /* Matches your h2 color for a clean slate accent line */
+  color: #cbd5e1;        /* Uses your soft h2 text color to create hierarchy */
+}
+
+/* Makes the 'Important Note:' text pop out a bit more */
+.term-note-label {
+  color: #ffffff;        /* Matches your pure white paragraph color */
+  font-weight: 700;
 }
