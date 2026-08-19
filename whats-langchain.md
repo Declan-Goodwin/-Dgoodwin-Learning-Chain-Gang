@@ -81,20 +81,16 @@ LangChain helps the developer connect and coordinate the components involved in 
     <h2 style="display: inline; margin-left: 5px;">LangChain Intermediate: How the Components Work</h2>
   </summary>
       <h3> Major Components & Terminology</h3>
-        <h4> Model </h4>
-          <ul>
-            <li>
-              <!-- This wrapper forces everything inside it to align cleanly on the left -->
-              <div style="display: inline-block; vertical-align: top;">
-                <div>The language model interprets inputs, generates responses, and can decide whether to call an available tool.</div>
-                <div style="margin-top: 4px;">
-                  <b>Important Note:</b> LangChain does not provide the model itself. Rather, it provides standardized interfaces for working with models from providers such as Anthropic, Google, and OpenAI.
-                </div>
-              </div>
-            </li>
-          </ul>
+<!-- First Term: Model -->
+<div class="term-container">
+  <h4 class="term-title">Model:</h4>
+  <span class="term-definition">The language model interprets inputs, generates responses, and can decide whether to call an available tool.</span>
+  <div class="term-note">
+    <strong class="term-note-label">Important Note:</strong> LangChain does not provide the model itself. Rather, it provides standardized interfaces for working with models from providers such as Anthropic, Google,                                                                 and OpenAI.
+  </div>
+</div>
 
-
+  
 </details>
 
 <details>
