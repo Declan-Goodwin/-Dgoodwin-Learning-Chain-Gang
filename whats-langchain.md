@@ -112,6 +112,7 @@ LangChain helps the developer connect and coordinate the components involved in 
   <div class="term-note">
     <strong class="term-note-label"> Important Note:</strong> A tool has a defined purpose, input structure, and output. The model can request a tool call, but the surrounding application executes it.
   </div>
+
 </details>
 
 <details>
@@ -128,7 +129,7 @@ LangChain helps the developer connect and coordinate the components involved in 
     <br><br>
   Additionally, it streamlines prompt engineering through structured PromptTemplates and ensures predictable execution via the LangChain Expression Language (LCEL).
   </p>
-</details>
+  </details>
 
 
 
