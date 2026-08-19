@@ -80,15 +80,20 @@ LangChain helps the developer connect and coordinate the components involved in 
  <summary style="cursor: pointer; display: list-item;">
     <h2 style="display: inline; margin-left: 5px;">LangChain Intermediate: How the Components Work</h2>
   </summary>
-  <h3> Major Components & Terminology</h3>
-<p>LangChain is an open-source framework designed to simplify the creation of applications powered by Large Language Models (LLMs). <br>
-  It provides a standardized way to connect these language models to:</p>
-  <ul>
-    <li>external data sources,</li>
-    <li>application programming interfaces (APIs), and </li>
-    <li>computation tools</li>
-      </ul>
-<p>Instead of managing complex AI prompts and connections from scratch, developers use its pre-built components to orchestrate multi-step workflows. This allows the AI to remember past parts of a conversation, execute sequential tasks, and dynamically choose the best tool to solve a user's request.</p>
+      <h3> Major Components & Terminology</h3>
+        <h4> Model </h4>
+          <ul>
+            <li>
+              <!-- This wrapper forces everything inside it to align cleanly on the left -->
+              <div style="display: inline-block; vertical-align: top;">
+                <div>The language model interprets inputs, generates responses, and can decide whether to call an available tool.</div>
+                <div style="margin-top: 4px;">
+                  <b>Important Note:</b> LangChain does not provide the model itself. Rather, it provides standardized interfaces for working with models from providers such as Anthropic, Google, and OpenAI.
+                </div>
+              </div>
+            </li>
+          </ul>
+
 
 </details>
 
