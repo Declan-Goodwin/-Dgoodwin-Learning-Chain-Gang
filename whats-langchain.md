@@ -85,12 +85,32 @@ LangChain helps the developer connect and coordinate the components involved in 
 <div class="term-container">
   <h4 class="term-title">Model:</h4>
   <span class="term-definition">The language model interprets inputs, generates responses, and can decide whether to call an available tool.</span>
+  
   <div class="term-note">
-    <strong class="term-note-label">Important Note:</strong> LangChain does not provide the model itself. Rather, it provides standardized interfaces for working with models from providers such as Anthropic, Google,                                                                 and OpenAI.
+    <strong class="term-note-label">Important Note:</strong> LangChain does not provide the model itself. Instead, it provides standardized interfaces for working with models from providers such as Anthropic, Google,                                                                and OpenAI.
   </div>
 </div>
 
-  
+<div class="term-container">
+  <h4 class="term-title">Messages:</h4>
+  <span class="term-definition">Messages are the structured inputs and outputs exchanged with a chat model. They can represent:</span>
+
+  <ul style="line-height: 1.5; margin-top: 8px;">
+    <li>Developer or system instructions</li>
+    <li>User input</li>
+    <li>Model responses</li>
+    <li>Tool requests</li>
+    <li>Tool Results</li>
+  </ul>
+  <!-- This is more precise than saying the model receives “a prompt,” because an agent often works with an evolving sequence of messages. -->
+</div>
+
+  <div class="term-container">
+  <h4 class="term-title">Tools:</h4>
+  <span class="term-definition">Tools are functions that allow an agent to retrieve information or perform actions outside the model. Examples include searching the web, querying a database, retrieving an order, or                                     updating another application.</span>
+   
+  <div class="term-note">
+    <strong class="term-note-label"> Important Note:</strong> A tool has a defined purpose, input structure, and output. The model can request a tool call, but the surrounding application executes it.
 </details>
 
 <details>
