@@ -60,20 +60,20 @@ When a customer asks, "Where is my order?", the application can:
 LangChain helps the developer connect and coordinate the components involved in this process.
 </p>
 
- <h3>When Might I Need It?</h3>
- <p>You might use LangChain when an AI application needs to do more than generate a response using the model’s training data.
- <br>
- For example, an application might need to:
- <ul>
-   <li> Retrieve information from an outside source</li>
-   <li> Search a collection of documents</li>
-   <li> Use software tools or APIs</li>
-   <li> Maintain information during a conversation</li>
-   <li> Decide which action to take next</li>
-   <li> Complete a task involving several steps</li>
- </ul>
- If your application only needs to send one prompt to an AI model and return its response, you may not need LangChain.
- </p>
+<h3>When Might I Need It?</h3>
+   <p>You might use LangChain when an AI application needs to do more than generate a response using the model’s training data.
+   <br>
+   For example, an application might need to:
+   <ul>
+     <li> Retrieve information from an outside source</li>
+     <li> Search a collection of documents</li>
+     <li> Use software tools or APIs</li>
+     <li> Maintain information during a conversation</li>
+     <li> Decide which action to take next</li>
+     <li> Complete a task involving several steps</li>
+   </ul>
+   If your application only needs to send one prompt to an AI model and return its response, you may not need LangChain.
+   </p>
 </details>
 
 <details>
@@ -115,17 +115,19 @@ LangChain helps the developer connect and coordinate the components involved in 
 </details>
 
 <details>
-   <summary style="cursor: pointer; display: list-item;">
+ <summary style="cursor: pointer; display: list-item;">
     <h2 style="display: inline; margin-left: 5px;">LangChain Advanced: Architecture and Implementation</h2>
   </summary>
-  
-<p>LangChain is a composable orchestration framework that abstracts the complexities of integrating Large Language Models(LLMs) into software architectures through modular abstractions. 
- <br>
-It formalizes state management and context window optimization via specialized Memory modules and manages data ingestion pipelines using Document Loaders and Text Splitters for Vector Retrieval-Augmented Generation (RAG).
-<br>
-By utilizing Chains and autonomous Agents equipped with ReAct (Reasoning and Acting) loops, it enables dynamic execution paths and tool call routing based on LLM outputs. 
-<br>
-Additionally, it streamlines prompt engineering through structured PromptTemplates and ensures predictable execution via the LangChain Expression Language (LCEL).</p>
+      
+  <p>
+    LangChain is a composable orchestration framework that abstracts the complexities of integrating Large Language Models(LLMs) into software architectures through modular abstractions. 
+    <br><br>
+    It formalizes state management and context window optimization via specialized Memory modules and manages data ingestion pipelines using Document Loaders and Text Splitters for Vector Retrieval-Augmented Generation (RAG).
+    <br><br>
+    By utilizing Chains and autonomous Agents equipped with ReAct (Reasoning and Acting) loops, it enables dynamic execution paths and tool call routing based on LLM outputs. 
+    <br><br>
+  Additionally, it streamlines prompt engineering through structured PromptTemplates and ensures predictable execution via the LangChain Expression Language (LCEL).
+  </p>
 </details>
 
 
@@ -133,13 +135,16 @@ Additionally, it streamlines prompt engineering through structured PromptTemplat
 
 
 <!-- Me thinking I'm cooler than I am, trying to see if I can add wiki like features - like overing over a word to display a micro menu that displays the definition -->
-The house has a problem with its <span class="wiki-hover">Mechanical<span class="micro-menu"><strong> Systems;</strong><br>this includes HVAC, ductwork, and ventilation.<br><a href="/wiki/mechanical">Read Wiki Page →</a></span></span> systems.
+<!-- The house has a problem with its <span class="wiki-hover">Mechanical<span class="micro-menu"><strong> Systems;</strong><br>this includes HVAC, ductwork, and ventilation.<br><a href="/wiki/mechanical">Read Wiki Page →</a></span></span> systems. 
+-->
 
+<!-- 
 <style>
 .wiki-hover { position: relative; border-bottom: 1px dashed #0066cc; cursor: help; color: #0066cc; dplay: inline-block; }
 .wiki-hover .micro-menu { visibility: hidden; width: 220px; background-color: #ffffff; color: #333333; text-align: left; border: 1px solid #cccccc; border-radius: 4px; padding: 10px; position: absolute; z-index: 1; bottom: 125%; left: 50%; margin-left: -110px; box-shadow: 0px 4px 8px rgba(0,0,0,0.1); }
 .wiki-hover:hover .micro-menu { visibility: visible; }
 </style>
+-->
 
 
 
