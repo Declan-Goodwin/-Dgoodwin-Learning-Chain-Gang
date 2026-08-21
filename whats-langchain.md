@@ -120,9 +120,11 @@ LangChain helps the developer connect and coordinate the components involved in 
   </span>
 
 <div class="term-note">
-  <strong class="term-note-label"> Agent = Model + Harness</strong> <br>
-  <span class="term-definition"> The harness is the operational environment and control architecture that wraps around a core language model, it consists of the surrounding instructions, tools, and middleware, that enable autonomous execution.
-</details>
+  <strong class="term-note-label"> Agent = Model + Harness</strong> 
+</div>
+  <span class="term-definition"> The harness is the operational environment and control architecture that wraps around a core language model, it consists of the surrounding instructions, tools, and middleware, that enable autonomous execution. </span>
+ </div>
+  </details>
 
 <details>
  <summary style="cursor: pointer; display: list-item;">
