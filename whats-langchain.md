@@ -107,13 +107,21 @@ LangChain helps the developer connect and coordinate the components involved in 
 
   <div class="term-container">
   <h4 class="term-title">Tools:</h4>
-  <span class="term-definition">Tools are functions that allow an agent to retrieve information or perform actions outside the model. Examples include searching the web, querying a database, retrieving an order, or                                       updating another application.</span>
+  <span class="term-definition">Tools are functions that allow an agent to retrieve information or perform actions outside the model. Examples include searching the web, querying a database, retrieving an order, or updating another application.</span>
    
   <div class="term-note">
     <strong class="term-note-label"> Important Note:</strong> A tool has a defined purpose, input structure, and output. The model can request a tool call, but the surrounding application executes it.
   </div>
 </div>
 
+<div class="term-container">
+  <h4 class="term-title">Agent:</h4>
+  <span class="term-definition">An agent combines a model with instructions, tools, and behavior that governs how they work together. LangChain currently defines the basic agent pattern as a model calling tools in a loop until it can complete the task.
+  </span>
+
+<div class="term-note">
+  <strong class="term-note-label"> Agent = Model + Harness</strong> <br>
+  <span class="term-definition"> The harness is the operational environment and control architecture that wraps around a core language model, it consists of the surrounding instructions, tools, and middleware, that enable autonomous execution.
 </details>
 
 <details>
