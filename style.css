@@ -50,3 +50,13 @@ h2 {
   color: #ffffff;        /* Matches your pure white paragraph color */
   font-weight: 700;
 }
+
+.subdefinition {
+  margin: 0.75rem 0 0.75rem 1.25rem;
+  padding-left: 1rem;
+  border-left: 2px solid rgba(88, 166, 255, 0.35);
+}
+
+.subterm {
+  color: #79c0ff;
+}
