@@ -81,13 +81,12 @@ LangChain helps the developer connect and coordinate the components involved in 
     <h2 style="display: inline; margin-left: 5px;">LangChain Intermediate: How the Components Work</h2>
   </summary>
       <h3> Major Components & Terminology</h3>
-<!-- First Term: Model -->
+
 <div class="term-container">
   <h4 class="term-title">Model:</h4>
   <span class="term-definition">The language model interprets inputs, generates responses, and can decide whether to call an available tool.</span>
-  
   <div class="term-note">
-    <strong class="term-note-label">Important Note:</strong> LangChain does not provide the model itself. Instead, it provides standardized interfaces for working with models from providers such as Anthropic, Google,                                                                and OpenAI.
+   <span> <strong class="term-note-label">Important Note:</strong> LangChain does not provide the model itself. Instead, it provides standardized interfaces for working with models from providers such as Anthropic, Google,                                    and OpenAI.</span>
   </div>
 </div>
 
@@ -180,7 +179,7 @@ LangChain helps the developer connect and coordinate the components involved in 
     </div>
      <p><strong>Quick Analogy:</strong> Long-term memory is remembering a story your friend told you a year ago; whereas, Short-term memory is tying in that story to make a point about the current conversation. </p>
   </div>
-    <br>
+    
 <div class="term-container">
   <h4 class="term-title">Middleware</h4>
   <span class="term-definition">Middleware lets developers inspect or modify what happens at different points in the agent loop. It can support:
@@ -201,6 +200,25 @@ LangChain helps the developer connect and coordinate the components involved in 
   <span class="term-definition">Structured output constrains the model’s final response to a defined format or schema. This matters when another software component (not just a human) is consuming the response.
   </span>
 </div> 
+
+ <h3> How Information Moves Through It </h3>
+   <p> A simplified process execution would look like: </p>
+    <ol style="line-height: 1.5; margin-top: 8px;">
+          <li> The user submits a request.</li>
+          <li> The application adds the request to the agent’s state.</li>
+          <li> LangChain prepares the model’s context using instructions, conversation history, available tools, and relevant state.</li>
+          <li> The model determines whether it can answer directly or needs a tool.</li>
+          <li> <em>If needed</em>, the model requests a tool call using structured inputs.</li>
+          <li> The application executes the tool and returns its result to the agent.</li>
+          <li> The result becomes additional context for the model.</li>
+          <li> The model may call another tool or generate a final response.</li>
+          <li> The application returns the response to the user.</li>
+        </ol>
+  <div>
+   <span> <strong class="term-note-label"> Critical Insight: </strong> Information does not simply travel from the user to the model and back. It may circulate through the agent loop several times as the model requests tools and receives their results.     </span>
+  </div>
+<p> One day when I grow up a Diagram will live here :)</p>
+
 
 </details>
 
