@@ -180,8 +180,9 @@ LangChain helps the developer connect and coordinate the components involved in 
         
   <div class="term-note">
   <span> <strong class="term-note-label"> Important Note: </strong> Long-term memory is not automatically included in every model call. The application must retrieve relevant information and add it to the model’s current context. </span>
-<br><br>
- <p><strong>Quick Analogy:</strong> Long-term memory is remembering a story your friend told you a year ago; whereas, Short-term memory is tying in that story to make a point about the current conversation. </p>
+  </div>
+  <br>
+   <p><strong>Quick Analogy:</strong> Long-term memory is remembering a story your friend told you a year ago; whereas, Short-term memory is tying in that story to make a point about the current conversation. </p>
   </div>
 
 <div class="term-container">
@@ -203,9 +204,8 @@ LangChain helps the developer connect and coordinate the components involved in 
   <h4 class="term-title">Structured Output:</h4>
   <span class="term-definition">Structured output constrains the model’s final response to a defined format or schema. This matters when another software component (not just a human) is consuming the response.
   </span>
-</div>
- 
-  </details>
+  </div> 
+</details>
 
 <details>
  <summary style="cursor: pointer; display: list-item;">
