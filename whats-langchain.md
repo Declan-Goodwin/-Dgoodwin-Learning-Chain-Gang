@@ -125,6 +125,86 @@ LangChain helps the developer connect and coordinate the components involved in 
 <br>
   <span class="term-definition"> The harness is the operational environment and control architecture that wraps around a core language model, it consists of the surrounding instructions, tools, and middleware, that enable autonomous execution. </span>
  </div>
+
+ <div class="term-container">
+  <h4 class="term-title">Context</h4>
+  <span class="term-definition">The information provided to a model when it is asked to generate a response or make a decision. Context can include instructions, messages, tool descriptions, tool results, and information retrieved from other sources.
+  </span>
+
+<div class="term-note">
+  <span> <strong class="term-note-label"> Important Note: </strong> The model can only reason from information included in its current context or learned during training. Information stored elsewhere must be retrieved and added to the context before the model can use it.</span>
+</div>
+</div>
+
+<div class="term-container">
+  <h4 class="term-title">Context Window:</h4>
+  <span class="term-definition">The maximum amount of information a model can process during a single call. Its size is measured in tokens and includes the input provided to the model and, depending on the provider’s accounting, space used for the generated output. 
+  <br><br>
+  Because the context window is limited, an application may need to select, summarize, or remove information before calling the model.</span>
+</div>
+
+<div class="term-container">
+  <h4 class="term-title">State:</h4>
+  <span class="term-definition">The evolving information an application maintains while an agent or workflow is running. State commonly includes conversation messages, tool results, uploaded files, authentication status, and other values needed to continue the task.
+  <br><br>
+  When the application calls the model, it may use some portion of that state to construct the model’s current context. </span>
+<div class="term-note">
+  <span> <strong class="term-note-label"> Important Note: </strong> State belongs to the application state’s execution process. It is not identical to the context presented to the model. </span>
+</div>
+</div>
+
+  <div class="term-container">
+  <h4 class="term-title">Memory:</h4>
+  <span class="term-definition">The mechanisms an application uses to preserve and retrieve information beyond a single model call. It is comprised of <em>short-term memory</em> and <em>long-term memory</em>.
+    <br><br>
+    Memory <strong>does not mean</strong> that the model permanently remembers information itself. Instead, the application stores information and makes it available when it becomes relevant to the execution process.
+</span>
+  </div>
+  <br>
+    <div class="subdefinition">
+      <span><strong class="subterm">Short-Term Memory:</strong> Information preserved within a single conversation or thread. In a LangChain agent, short-term memory is managed as part of the agent’s state and can be persisted so the thread can resume later.
+    <br><br>
+     <p>Examples include:</p>
+  <ul style="line-height: 1.5; margin-top: 8px;">
+    <li>Conversation history</li>
+    <li>Results from earlier tool calls</li>
+    <li>Files associated with the current thread</li>
+    <li>Progress made during a multi-step task</li>
+  </ul>
+        Long conversations may need to be trimmed or summarized because the entire history may not fit, or may not remain useful—within the model’s context window.
+      </span>
+    </div>
+  <br>
+  <div class="subdefinition">
+      <span><strong class="subterm">Long-Term Memory:</strong> Information stored across different conversations or threads. It allows an application to retain information such as user preferences, historical details, or previously extracted insights and retrieve them when relevant.
+        
+  <div class="term-note">
+  <span> <strong class="term-note-label"> Important Note: </strong> Long-term memory is not automatically included in every model call. The application must retrieve relevant information and add it to the model’s current context. </span>
+<br><br>
+ <p><strong>Quick Analogy:</strong> Long-term memory is remembering a story your friend told you a year ago; whereas, Short-term memory is tying in that story to make a point about the current conversation. </p>
+  </div>
+
+<div class="term-container">
+  <h4 class="term-title">Middleware</h4>
+  <span class="term-definition">Middleware lets developers inspect or modify what happens at different points in the agent loop. It can support:
+     <ul style="line-height: 1.5; margin-top: 8px;">
+        <li>Logging</li>
+        <li>Guardrails</li>
+        <li>Human approval</li>
+        <li>Retries and fallbacks</li>
+        <li> Prompt modification</li>
+        <li>Tool restrictions</li>
+        <li>Summarization</li>
+      </ul>
+  </span>
+</div>
+
+<div class="term-container">
+  <h4 class="term-title">Structured Output:</h4>
+  <span class="term-definition">Structured output constrains the model’s final response to a defined format or schema. This matters when another software component (not just a human) is consuming the response.
+  </span>
+</div>
+ 
   </details>
 
 <details>
