@@ -156,14 +156,13 @@ LangChain helps the developer connect and coordinate the components involved in 
   <div class="term-container">
   <h4 class="term-title">Memory:</h4>
   <span class="term-definition">The mechanisms an application uses to preserve and retrieve information beyond a single model call. It is comprised of <em>short-term memory</em> and <em>long-term memory</em>.
-    <br><br>
+    <br>
     Memory <strong>does not mean</strong> that the model permanently remembers information itself. Instead, the application stores information and makes it available when it becomes relevant to the execution process.
-</span>
+  </span>
   </div>
-  <br>
     <div class="subdefinition">
       <span><strong class="subterm">Short-Term Memory:</strong> Information preserved within a single conversation or thread. In a LangChain agent, short-term memory is managed as part of the agent’s state and can be persisted so the thread can resume later.
-    <br><br>
+    <br>
      <p>Examples include:</p>
   <ul style="line-height: 1.5; margin-top: 8px;">
     <li>Conversation history</li>
@@ -174,15 +173,14 @@ LangChain helps the developer connect and coordinate the components involved in 
         Long conversations may need to be trimmed or summarized because the entire history may not fit, or may not remain useful—within the model’s context window.
       </span>
     </div>
-  <br>
-<div class="subdefinition">
+  <div class="subdefinition">
       <span><strong class="subterm">Long-Term Memory:</strong> Information stored across different conversations or threads. It allows an application to retain information such as user preferences, historical details, or previously extracted insights and retrieve them when relevant.</span>  
-  <div class="term-note">
-  <span> <strong class="term-note-label"> Important Note: </strong> Long-term memory is not automatically included in every model call. The application must retrieve relevant information and add it to the model’s current context. </span>
+    <div class="term-note">
+    <span> <strong class="term-note-label"> Important Note: </strong> Long-term memory is not automatically included in every model call. The application must retrieve relevant information and add it to the model’s current context. </span>
+    </div>
+     <p><strong>Quick Analogy:</strong> Long-term memory is remembering a story your friend told you a year ago; whereas, Short-term memory is tying in that story to make a point about the current conversation. </p>
   </div>
-   <p><strong>Quick Analogy:</strong> Long-term memory is remembering a story your friend told you a year ago; whereas, Short-term memory is tying in that story to make a point about the current conversation. </p>
-</div>
-
+    <br>
 <div class="term-container">
   <h4 class="term-title">Middleware</h4>
   <span class="term-definition">Middleware lets developers inspect or modify what happens at different points in the agent loop. It can support:
