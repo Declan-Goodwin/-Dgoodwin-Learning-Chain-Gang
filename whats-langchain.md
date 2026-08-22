@@ -175,15 +175,13 @@ LangChain helps the developer connect and coordinate the components involved in 
       </span>
     </div>
   <br>
-  <div class="subdefinition">
-      <span><strong class="subterm">Long-Term Memory:</strong> Information stored across different conversations or threads. It allows an application to retain information such as user preferences, historical details, or previously extracted insights and retrieve them when relevant.
-        
+<div class="subdefinition">
+      <span><strong class="subterm">Long-Term Memory:</strong> Information stored across different conversations or threads. It allows an application to retain information such as user preferences, historical details, or previously extracted insights and retrieve them when relevant.</span>  
   <div class="term-note">
   <span> <strong class="term-note-label"> Important Note: </strong> Long-term memory is not automatically included in every model call. The application must retrieve relevant information and add it to the model’s current context. </span>
   </div>
-  <br>
    <p><strong>Quick Analogy:</strong> Long-term memory is remembering a story your friend told you a year ago; whereas, Short-term memory is tying in that story to make a point about the current conversation. </p>
-  </div>
+</div>
 
 <div class="term-container">
   <h4 class="term-title">Middleware</h4>
@@ -205,6 +203,7 @@ LangChain helps the developer connect and coordinate the components involved in 
   <span class="term-definition">Structured output constrains the model’s final response to a defined format or schema. This matters when another software component (not just a human) is consuming the response.
   </span>
 </div> 
+
 </details>
 
 
