@@ -204,8 +204,9 @@ LangChain helps the developer connect and coordinate the components involved in 
   <h4 class="term-title">Structured Output:</h4>
   <span class="term-definition">Structured output constrains the model’s final response to a defined format or schema. This matters when another software component (not just a human) is consuming the response.
   </span>
-  </div> 
+</div> 
 </details>
+
 
 <details>
  <summary style="cursor: pointer; display: list-item;">
@@ -221,7 +222,7 @@ LangChain helps the developer connect and coordinate the components involved in 
     <br><br>
   Additionally, it streamlines prompt engineering through structured PromptTemplates and ensures predictable execution via the LangChain Expression Language (LCEL).
   </p>
-  </details>
+</details>
 
 
 
