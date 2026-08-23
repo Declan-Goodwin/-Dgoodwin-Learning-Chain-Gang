@@ -19,6 +19,16 @@ h2 {
 
 }
 
+.page-tagline {
+  max-width: 70ch;
+  margin: 0.5rem 0 1.75rem;
+  color: #9ca3af;
+  font-size: 1rem;
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.6;
+}
+
 /* Container wrapper */
 .term-container {
   margin-bottom: 24px;
