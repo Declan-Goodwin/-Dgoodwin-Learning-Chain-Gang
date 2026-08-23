@@ -70,3 +70,10 @@ h2 {
 .subterm {
   color: #79c0ff;
 }
+
+.definition-example {
+  margin: 1rem 0 1rem 1.5rem;
+  padding-left: 1rem;
+  color: #b8c0cc;
+  font-style: italic;
+}
