@@ -141,15 +141,13 @@ LangChain helps the developer connect and coordinate the components involved in 
 
 <div class="term-container">
   <h4 class="term-title">Context Window:</h4>
-  <span class="term-definition">The maximum amount of information a model can process during a single call. Its size is measured in tokens and includes the input provided to the model and the space used for the generated output. 
-  <br><br>
-  Because the context window is limited, an application may need to select, summarize, or remove information before calling the model.</span>
+  <span class="term-definition">The maximum amount of information a model can process during a single call. Its size is measured in tokens and includes the input provided to the model and the space used for the generated output. Because the context window is limited, an application may need to select, summarize, or remove information before calling the model.</span>
 </div>
 
 <div class="term-container">
   <h4 class="term-title">State:</h4>
   <span class="term-definition">The evolving information an application maintains while an agent or workflow is running. State commonly includes conversation messages, tool results, uploaded files, authentication status, and other values needed to continue the task.
-  <br><br>
+  <br>
   When the application calls the model, it may use some portion of that state to construct the model’s current context. </span>
 <div class="term-note">
   <span> <strong class="term-note-label"> Important Note: </strong> State belongs to the application’s execution process. It is not identical to the context presented to the model. </span>
@@ -186,23 +184,27 @@ LangChain helps the developer connect and coordinate the components involved in 
     
 <div class="term-container">
   <h4 class="term-title">Middleware:</h4>
-  <span class="term-definition">Middleware lets developers inspect or modify what happens at different points in the agent loop. It can support:
+  <span class="term-definition">Middleware lets developers inspect or modify what happens at different points in the agent loop.</span>
+   <p style="line-height: 1.5; margin-top: 8px;"> Developers can use middleware to add functionality such as: </p> 
      <ul style="line-height: 1.5; margin-top: 8px;">
-        <li>Logging</li>
-        <li>Guardrails</li>
-        <li>Human approval</li>
+        <li>Logging agent activity</li>
+        <li>Applying guardrails</li>
+        <li>Adding human-in-the-loop review, approval, or decision points approval</li>
         <li>Retries and fallbacks</li>
-        <li>Prompt modification</li>
-        <li>Tool restrictions</li>
-        <li>Summarization</li>
+        <li>Modifying model instructions</li>
+        <li>Restricting access to tools</li>
+        <li>Summarizing conversation history</li>
       </ul>
-  </span>
-</div>
+    <p>Rather than completing an agent’s primary task, middleware adds behavior around how the task is completed. This behavior can guide, constrain, or support the process.</p>
+  </div>
 
 <div class="term-container">
   <h4 class="term-title">Structured Output:</h4>
-  <span class="term-definition">Structured output constrains the model’s final response to a defined format or schema. This matters when another software component (not just a human) is consuming the response.
-  </span>
+  <span class="term-definition">Is a way of requiring a model’s response to follow a predefined structure, rather than returning only free-form text. </span>
+   <p>Developers use structured output when another part of the application needs to reliably identify and use specific pieces of information from the response.</p>
+    <p class="definition-example"> 
+      <strong>For example:</strong> Instead of responding with a paragraph about an order, the model could return separate fields for the order number, shipping status, and estimated delivery date.</p>
+    <p><strong>Middleware</strong> influences how an agent completes a task. <strong>Structured output</strong> defines how the final result must be organized.</p>
 </div> 
 
  <h3> How Information Moves Through It </h3>
