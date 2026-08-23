@@ -71,13 +71,19 @@ h2 {
   color: #79c0ff;
 }
 
-.definition-example {
-  margin: 0.6rem 2rem !important;
-  padding: 0;
-  color: inherit;
-  font-style: normal;
+.term-definition {
+  line-height: 1.45;
 }
 
-.term-comparison {
-  margin-top: 0.75rem !important;
+.term-definition p {
+  margin: 0;
+}
+
+.term-definition .definition-example {
+  margin-top: 0.4rem;
+  margin-left: 2rem;
+}
+
+.term-definition .term-comparison {
+  margin-top: 0.4rem;
 }
