@@ -217,7 +217,9 @@ LangChain helps the developer connect and coordinate the components involved in 
   <div>
    <span> <strong class="term-note-label"> Critical Insight: </strong> Information does not simply travel from the user to the model and back. It may circulate through the agent loop several times as the model requests tools and receives their results.     </span>
   </div>
- <img src="{{ '/images/Agent-Workflow-Update.png' | relative_url }}" height="900" height="600" style="horizontal-align: middle;" alt="Agent Process Flow">
+  <br>
+<img src="{{ '/images/Agent-Workflow-Update.png' | relative_url }}" width="900" height="600" style="display: block; margin: 0 auto;" alt="Agent Process Flow">
+
 
 
 </details>
