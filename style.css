@@ -71,11 +71,19 @@ h2 {
   color: #79c0ff;
 }
 
-.definition-example {
+.term-definition {
+  line-height: 1.45;
+}
+
+.term-definition p {
+  margin: 0;
+}
+
+.term-definition .definition-example {
   margin-top: 0.4rem;
   margin-left: 2rem;
 }
 
-.term-comparison {
+.term-definition .term-comparison {
   margin-top: 0.4rem;
 }
