@@ -1,11 +1,15 @@
 ---
 layout: default
 ---
+<header class="page-heading"> 
 <h1 style="display: flex; align-items: center; gap: 15px;">
   <img src="{{ '/images/LangChain-Logo-only.png' | relative_url }}" height="60" style="vertical-align: middle;" alt="LangChain Logo">
   <span>What is LangChain?</span>
 </h1>
-
+  <p class="page-tagline">
+    Explore LangChain at three levels of technical depth. Start with the beginner explanation, then expand the intermediate and advanced sections as you become more familiar.
+  </p>
+</header>
 
 <details>
   <summary style="cursor: pointer; display: list-item;">
@@ -99,7 +103,7 @@ LangChain helps the developer connect and coordinate the components involved in 
     <li>User input</li>
     <li>Model responses</li>
     <li>Tool requests</li>
-    <li>Tool Results</li>
+    <li>Tool results</li>
   </ul>
   <!-- This is more precise than saying the model receives “a prompt,” because an agent often works with an evolving sequence of messages. -->
 </div>
@@ -122,11 +126,11 @@ LangChain helps the developer connect and coordinate the components involved in 
   <strong class="term-note-label"> Agent = Model + Harness</strong> 
 </div>
 <br>
-  <span class="term-definition"> The harness is the operational environment and control architecture that wraps around a core language model, it consists of the surrounding instructions, tools, and middleware, that enable autonomous execution. </span>
+  <span class="term-definition"> The harness is the operational environment and control architecture that wraps around a core language model. It consists of instructions, tools, middleware and other components that enable the agent to execute tasks.      </span>
  </div>
 
  <div class="term-container">
-  <h4 class="term-title">Context</h4>
+  <h4 class="term-title">Context:</h4>
   <span class="term-definition">The information provided to a model when it is asked to generate a response or make a decision. Context can include instructions, messages, tool descriptions, tool results, and information retrieved from other sources.
   </span>
 
@@ -137,7 +141,7 @@ LangChain helps the developer connect and coordinate the components involved in 
 
 <div class="term-container">
   <h4 class="term-title">Context Window:</h4>
-  <span class="term-definition">The maximum amount of information a model can process during a single call. Its size is measured in tokens and includes the input provided to the model and, depending on the provider’s accounting, space used for the generated output. 
+  <span class="term-definition">The maximum amount of information a model can process during a single call. Its size is measured in tokens and includes the input provided to the model and the space used for the generated output. 
   <br><br>
   Because the context window is limited, an application may need to select, summarize, or remove information before calling the model.</span>
 </div>
@@ -148,7 +152,7 @@ LangChain helps the developer connect and coordinate the components involved in 
   <br><br>
   When the application calls the model, it may use some portion of that state to construct the model’s current context. </span>
 <div class="term-note">
-  <span> <strong class="term-note-label"> Important Note: </strong> State belongs to the application state’s execution process. It is not identical to the context presented to the model. </span>
+  <span> <strong class="term-note-label"> Important Note: </strong> State belongs to the application’s execution process. It is not identical to the context presented to the model. </span>
 </div>
 </div>
 
@@ -177,18 +181,18 @@ LangChain helps the developer connect and coordinate the components involved in 
     <div class="term-note">
     <span> <strong class="term-note-label"> Important Note: </strong> Long-term memory is not automatically included in every model call. The application must retrieve relevant information and add it to the model’s current context. </span>
     </div>
-     <p><strong>Quick Analogy:</strong> Long-term memory is remembering a story your friend told you a year ago; whereas, Short-term memory is tying in that story to make a point about the current conversation. </p>
+     <p><strong>Quick Analogy:</strong> Long-term memory is remembering all the summer trips you and your best friend have taken together. Short-term memory is remembering the destinations your friend has suggested while you plan this summer’s trip.</p>
   </div>
     
 <div class="term-container">
-  <h4 class="term-title">Middleware</h4>
+  <h4 class="term-title">Middleware:</h4>
   <span class="term-definition">Middleware lets developers inspect or modify what happens at different points in the agent loop. It can support:
      <ul style="line-height: 1.5; margin-top: 8px;">
         <li>Logging</li>
         <li>Guardrails</li>
         <li>Human approval</li>
         <li>Retries and fallbacks</li>
-        <li> Prompt modification</li>
+        <li>Prompt modification</li>
         <li>Tool restrictions</li>
         <li>Summarization</li>
       </ul>
