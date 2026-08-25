@@ -171,7 +171,7 @@ LangChain helps the developer connect and coordinate the components involved in 
     <li>Files associated with the current thread</li>
     <li>Progress made during a multi-step task</li>
   </ul>
-        Long conversations may need to be trimmed or summarized because the entire history may not fit, or may not remain useful—within the model’s context window.
+        Long conversations may need to be trimmed or summarized because the entire history may not fit, or may not remain useful within the model’s context window.
       </span>
     </div>
   <div class="subdefinition">
