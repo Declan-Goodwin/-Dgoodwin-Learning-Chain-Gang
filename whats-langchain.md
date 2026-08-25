@@ -199,12 +199,14 @@ LangChain helps the developer connect and coordinate the components involved in 
   </div>
 
 <div class="term-container">
-  <h4 class="term-title">Structured Output:</h4>
-  <span class="term-definition">Is a way of requiring a model’s response to follow a predefined structure, rather than returning only free-form text. </span>
-   <p>Developers use structured output when another part of the application needs to reliably identify and use specific pieces of information from the response.</p>
-    <p class="definition-example"> <strong>For example:</strong> Instead of responding with a paragraph about an order, the model could return separate fields for the order number, shipping status, and estimated delivery date. </p>
-   <p class="term-comparison"> <strong>Middleware</strong> influences how an agent completes a task. <strong>Structured output</strong> defines how the final result must be organized. </p>
-</div> 
+   <div class="term-definition">
+    <h4 class="term-title">Structured Output:</h4>
+      <span>Is a way of requiring a model’s response to follow a predefined structure, rather than returning only free-form text.</span>
+       <p>Developers use structured output when another part of the application needs to reliably identify and use specific pieces of information from the response. </p>
+       <p class="definition-example"> <strong>For example:</strong> Instead of responding with a paragraph about an order, the model could return separate fields for the order number, shipping status, and estimated delivery date. </p>
+       <p class="term-comparison"> <strong>Middleware</strong> influences how an agent completes a task. <strong>Structured output</strong> defines how the final result must be organized. </p>
+  </div> 
+</div>
 
  <h3> How Information Moves Through It </h3>
    <p> A simplified process execution would look like: </p>
