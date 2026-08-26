@@ -227,7 +227,29 @@ LangChain helps the developer connect and coordinate the components involved in 
   <br>
 <img src="{{ '/images/Agent-Workflow-Update.png' | relative_url }}" width="550" height="550" style="display: block; margin: 0 auto;" alt="Agent Process Flow">
 
-
+ <h3> Typical Development Workflow </h3>
+   <ol class="development-workflow"> 
+     <li>
+       <h4>Frame the Problem</h4>
+         <p>Before selecting a model or creating an agent, define the problem the application is intended to solve. This helps prevent teams from building an AI application simply because the technology is available. </p>
+         <p>Consider:</p>
+           <ul> 
+             <li> Who experiences the problem?</li>
+             <li> What are they try to accomplish?</li>
+             <li> Where does the current process create difficulty, delay, or risk?</li>
+             <li> What evidence confirms that the problem exists?</li>
+             <li> What measurable outcome would represent an improvement?</li>
+             <li> Does the problem require an AI agent, or could a simpler solution work better?</li>
+           </ul>
+      </li>
+      <li> 
+        <h4>Define the Application's Requirements</h4>
+          <p>Determine what the application must do to address the validated problem. Identify the information it needs, the actions it must perform, the people and systems it will interact with, and any operational or security constraints.</p>
+      </li>
+      <li> 
+        <h4>Select the Model</h4>
+          <p>Choose a model based on the capabilities the application requires, along with factors such as cost, response time, context-window size, privacy requirements, and provider availability.</p>
+      </li>
 
 </details>
 
