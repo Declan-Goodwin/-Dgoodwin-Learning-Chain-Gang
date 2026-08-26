@@ -87,3 +87,15 @@ h2 {
 .term-definition .term-comparison {
   margin-top: 0.4rem;
 }
+
+.development-workflow li {
+  margin-bottom: 1rem;
+}
+
+.development-workflow h4 {
+  margin: 0 0 0.25rem;
+}
+
+.development-workflow p {
+  margin: 0;
+}
