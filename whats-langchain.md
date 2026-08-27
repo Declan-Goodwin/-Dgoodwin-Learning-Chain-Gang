@@ -275,10 +275,18 @@ LangChain helps the developer connect and coordinate the components involved in 
       <strong class="term-note-label"> Frame the problem -> build the application -> measure the outcome -> reconsider the solution. </strong>
 <!-- Code example? --> 
 
- <h3> How it Interacts with Other LangChain Products </h3>
-   <h4>LangGraph</h4>
-     <p>LangGraph is the lower-level orchestration framework beneath LangChain agents. LangChain provides a higher-level agent-building interface; LangGraph gives developers more direct control over state, execution paths, persistence, and combinations of deterministic and agent-driven behavior. </p>
-     <strong class="term-note-label"> Use LangChain </strong> to build a customizable agent quickly. <strong>Use LangGraph</strong> when you need more explicit control over how the workflow progresses.
+ <h3> How it Interacts with Other LangChain Products </h3>  
+<div class="term-container">
+  <h4 class="term-title">LangGraph</h4>
+  <span class="term-definition">LangGraph is the lower-level orchestration framework beneath LangChain agents. LangChain provides a higher-level agent-building interface; LangGraph gives developers more direct control over state, execution paths, persistence, and combinations of deterministic and agent-driven behavior. </span>
+  <div class="term-note">
+   <strong class="term-note-label"> Use LangChain </strong> to build a customizable agent quickly. <strong>Use LangGraph</strong> when you need more explicit control over how the workflow progresses.
+  </div>
+</div>
+
+
+
+
 </details>
 
 
@@ -296,6 +304,14 @@ LangChain helps the developer connect and coordinate the components involved in 
     <br><br>
   Additionally, it streamlines prompt engineering through structured PromptTemplates and ensures predictable execution via the LangChain Expression Language (LCEL).
   </p>
+
+
+
+
+
+
+
+  
 </details>
 
 
