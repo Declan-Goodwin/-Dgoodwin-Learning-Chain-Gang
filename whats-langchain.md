@@ -233,9 +233,9 @@ LangChain helps the developer connect and coordinate the components involved in 
        <h4>Frame the Problem</h4>
          <p>Before selecting a model or creating an agent, define the problem the application is intended to solve. This helps prevent teams from building an AI application simply because the technology is available. </p>
          <p>Consider:</p>
-           <ul> 
+           <ul style="line-height: 1.5; margin-top: 8px;">
              <li> Who experiences the problem?</li>
-             <li> What are they try to accomplish?</li>
+             <li> What are they trying to accomplish?</li>
              <li> Where does the current process create difficulty, delay, or risk?</li>
              <li> What evidence confirms that the problem exists?</li>
              <li> What measurable outcome would represent an improvement?</li>
@@ -250,6 +250,34 @@ LangChain helps the developer connect and coordinate the components involved in 
         <h4>Select the Model</h4>
           <p>Choose a model based on the capabilities the application requires, along with factors such as cost, response time, context-window size, privacy requirements, and provider availability.</p>
       </li>
+      <li>
+        <h4>Define Instructions and Tools</h4>
+          <p>Write the agent’s instructions and define the tools it may use. Each tool should address a specific application requirement and have clearly defined inputs and outputs.</p>
+      </li>
+      <li>
+        <h4>Configure the Agent</h4>
+          <p>Connect the model, instructions, and tools. Add state, memory, middleware, and structured output where the application’s requirements justify them.</p>
+      </li>
+      <li>
+        <h4>Test and Evaluate</h4>
+          <p>Test the application using representative scenarios, including expected inputs, ambiguous requests, tool failures, and potentially unsafe actions.</p>
+          <p>Evaluate both technical performance and whether the application improves the original user problem.</p>
+      </li>
+      <li>
+        <h4>Deploy and Monitor</h4>
+          <p>Deploy the application into its intended environment. Monitor behavior, cost, response time, tool usage, failures, and user outcomes.</p>
+      </li>
+      <li> 
+        <h4>Improve the Application</h4>
+          <p>Use evaluation results, execution traces, and user feedback to revise the application. Improvements may involve changing instructions, tools, models, control logic, or even reconsidering whether the original solution was appropriate.</p>
+      </li>
+      <strong class="term-note-label"> Frame the problem -> build the application -> measure the outcome -> reconsider the solution. </strong>
+<!-- Code example? --> 
+
+ <h3> How it Interacts with Other LangChain Products </h3>
+   <h4>LangGraph</h4>
+     <p>LangGraph is the lower-level orchestration framework beneath LangChain agents. LangChain provides a higher-level agent-building interface; LangGraph gives developers more direct control over state, execution paths, persistence, and combinations of deterministic and agent-driven behavior. </p>
+     <strong class="term-note-label"> Use LangChain </strong> to build a customizable agent quickly. <strong>Use LangGraph</strong> when you need more explicit control over how the workflow progresses.
 
 </details>
 
