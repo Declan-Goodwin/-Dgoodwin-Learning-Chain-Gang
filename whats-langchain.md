@@ -271,6 +271,7 @@ LangChain helps the developer connect and coordinate the components involved in 
         <h4>Improve the Application</h4>
           <p>Use evaluation results, execution traces, and user feedback to revise the application. Improvements may involve changing instructions, tools, models, control logic, or even reconsidering whether the original solution was appropriate.</p>
       </li>
+   </ol>
       <strong class="term-note-label"> Frame the problem -> build the application -> measure the outcome -> reconsider the solution. </strong>
 <!-- Code example? --> 
 
@@ -278,7 +279,6 @@ LangChain helps the developer connect and coordinate the components involved in 
    <h4>LangGraph</h4>
      <p>LangGraph is the lower-level orchestration framework beneath LangChain agents. LangChain provides a higher-level agent-building interface; LangGraph gives developers more direct control over state, execution paths, persistence, and combinations of deterministic and agent-driven behavior. </p>
      <strong class="term-note-label"> Use LangChain </strong> to build a customizable agent quickly. <strong>Use LangGraph</strong> when you need more explicit control over how the workflow progresses.
-
 </details>
 
 
