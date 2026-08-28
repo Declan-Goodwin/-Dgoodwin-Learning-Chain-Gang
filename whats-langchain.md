@@ -275,7 +275,77 @@ LangChain helps the developer connect and coordinate the components involved in 
 <!-- Code example? --> 
 
  <h3> How it Interacts with Other LangChain Products </h3>  
+   <div class="term-container">
+      <h4 class="term-title">LangGraph: Controlling Agent Workflows</h4>
+        <span class="term-definition">LangGraph is a lower-level orchestration runtime for building and executing stateful agents and workflows.</span>
+          <p>LangChain agents are built on LangGraph. LangChain provides higher-level components for configuring common agent behavior, while LangGraph provides the underlying capabilities for maintaining state and controlling how execution progresses.            </p>
+          <p>Developers may work directly with LangGraph when they need greater control over execution paths, persistence, human decision points, or workflows combining predetermined steps with model-driven decisions. 
+          </p>
+    <div class="term-note">
+      <span> <strong class="term-note-label">When to Use</strong> Use LangChain when its higher-level agent architecture provides enough control. Work directly with LangGraph when the application requires a more explicitly designed workflow. </span>
+    </div>
+   </div>
   <div class="term-container">
+      <h4 class="term-title">LangSmith: Observing and Evaluating Applications</h4>
+        <p>LangSmith is a platform for observing, evaluating, and improving AI applications.</p>
+        <p>It records application activity as traces, allowing developers to inspect model calls, tool usage, workflow steps, errors, and final outputs. Developers can also test applications against datasets, compare versions, and monitor behavior in               production.
+        </p>
+        <p>LangSmith works with LangChain and LangGraph, but it is not required to run applications built with either product. It can also be used with other AI frameworks.</p>
+     <div class="term-note">
+      <span> <strong class="term-note-label">The Through Line:</strong> LangChain helps build the application. LangGraph controls more customized execution. LangSmith helps developers understand and improve how the application behaves. </span>
+    </div>
+  </div>
+ <h3>Benefits and Tradeoffs</h3>
+  <p><strong>Benefits:</strong></p> 
+    <ul style="line-height: 1.5; margin-top: 8px;">
+      <li>Provides standardized interfaces across model and tool providers</li>
+      <li>Reduces the amount of application plumbing developers build themselves</li>
+      <li>Offers reusable agent patterns and integrations</li>
+      <li>Supports memory, middleware, structured output, and tool calling</li>
+      <li>Makes it easier to replace or reconfigure individual components</li>
+      <li>Integrates with LangGraph for greater workflow control</li>
+      <li>Integrates with LangSmith for tracing and evaluation</li>
+    </ul>
+  <p><strong>Tradeoffs:</strong></p> 
+     <ul style="line-height: 1.5; margin-top: 8px;">
+       <li>Adds another abstraction layer that developers must understand</li>
+       <li>Can be unnecessary for simple model requests</li>
+       <li>Agent behavior can be nondeterministic and difficult to test</li>
+       <li>Additional tools and agent steps increase latency and cost</li>
+       <li>Framework updates can require developers to revise existing applications</li>
+       <li>Prebuilt abstractions may provide less control than custom code</li>
+       <li>Connecting a tool does not automatically make its data accurate, safe, or appropriate</li>
+       <li>Developers remain responsible for access controls, error handling, validation, and monitoring</li>
+     </ul>
+  </details>
+
+
+<details>
+ <summary style="cursor: pointer; display: list-item;">
+    <h2 style="display: inline; margin-left: 5px;">LangChain Advanced: Architecture and Implementation</h2>
+  </summary>
+      
+  <p>
+    LangChain is a composable orchestration framework that abstracts the complexities of integrating Large Language Models(LLMs) into software architectures through modular abstractions. 
+    <br><br>
+    It formalizes state management and context window optimization via specialized Memory modules and manages data ingestion pipelines using Document Loaders and Text Splitters for Vector Retrieval-Augmented Generation (RAG).
+    <br><br>
+    By utilizing Chains and autonomous Agents equipped with ReAct (Reasoning and Acting) loops, it enables dynamic execution paths and tool call routing based on LLM outputs. 
+    <br><br>
+  Additionally, it streamlines prompt engineering through structured PromptTemplates and ensures predictable execution via the LangChain Expression Language (LCEL).
+  </p>
+
+<!-- What to preserve for later
+
+Keep the deeper material in your working notes. It is not wasted; it belongs elsewhere:
+
+Detailed LangGraph customer-order workflow → dedicated LangGraph page
+Traces and diagnostic example → dedicated LangSmith page
+Offline versus online evaluation → LangSmith intermediate page
+Deployment modes → LangSmith advanced page
+Full three-product architecture table → ecosystem overview or homepage -->
+
+<div class="term-container">
     <h4 class="term-title">LangGraph: The Runtime Beneath LangChain Agents</h4>
     <span class="term-definition">LangGraph is a lower-level orchestration runtime for building and executing stateful agents and workflows.</span>
       <p>In this context, <strong>orchestration</strong> means controlling how an application progresses through different steps, what information it maintains, and what happens when the application must branch, pause, resume, or wait for human input.         </p>
@@ -290,7 +360,7 @@ LangChain helps the developer connect and coordinate the components involved in 
         </ul>
   </div>
      <div class="subdefinition">
-       <strong class="subterm">How LangChain and LangGraph Work TOgether</strong>
+       <strong class="subterm">How LangChain and LangGraph Work Together</strong>
          <p>LangChain agents are built on LangGraph. When a developer creates an agent through LangChain, LangChain provides the higher-level components and interfaces used to configure the agent. LangGraph provides the underlying runtime that executes the agent loop and maintains its progress.</p>
            <ul style="line-height: 1.5; margin-top: 8px;">
              <li><strong>LangChain</strong></li>
@@ -346,31 +416,8 @@ LangChain helps the developer connect and coordinate the components involved in 
             <p>Use <strong>LangGraph</strong> directly when the application requires customized execution paths, persistent state, human decision points, or a deliberate combination of predictable and model-driven behavior.</p>
             <p>The decision is not necessarily <strong>LangChain</strong> or <strong>LangGraph.</strong> It is often a decision about which layer of control the developer needs to work with.</p>
      </div>
-</details>
-
-
-<details>
- <summary style="cursor: pointer; display: list-item;">
-    <h2 style="display: inline; margin-left: 5px;">LangChain Advanced: Architecture and Implementation</h2>
-  </summary>
-      
-  <p>
-    LangChain is a composable orchestration framework that abstracts the complexities of integrating Large Language Models(LLMs) into software architectures through modular abstractions. 
-    <br><br>
-    It formalizes state management and context window optimization via specialized Memory modules and manages data ingestion pipelines using Document Loaders and Text Splitters for Vector Retrieval-Augmented Generation (RAG).
-    <br><br>
-    By utilizing Chains and autonomous Agents equipped with ReAct (Reasoning and Acting) loops, it enables dynamic execution paths and tool call routing based on LLM outputs. 
-    <br><br>
-  Additionally, it streamlines prompt engineering through structured PromptTemplates and ensures predictable execution via the LangChain Expression Language (LCEL).
-  </p>
-
-
-
-
-
-
-
-  
+  <div class="term-container">
+    <h4 class="term-title">LangGraph: The Runtime Beneath LangChain Agents</h4>
 </details>
 
 
