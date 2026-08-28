@@ -163,7 +163,6 @@ LangChain helps the developer connect and coordinate the components involved in 
   </div>
     <div class="subdefinition">
       <span><strong class="subterm">Short-Term Memory:</strong> Information preserved within a single conversation or thread. In a LangChain agent, short-term memory is managed as part of the agent’s state and can be persisted so the thread can resume later.
-    <br>
      <p>Examples include:</p>
   <ul style="line-height: 1.5; margin-top: 8px;">
     <li>Conversation history</li>
@@ -276,17 +275,77 @@ LangChain helps the developer connect and coordinate the components involved in 
 <!-- Code example? --> 
 
  <h3> How it Interacts with Other LangChain Products </h3>  
-<div class="term-container">
-  <h4 class="term-title">LangGraph</h4>
-  <span class="term-definition">LangGraph is the lower-level orchestration framework beneath LangChain agents. LangChain provides a higher-level agent-building interface; LangGraph gives developers more direct control over state, execution paths, persistence, and combinations of deterministic and agent-driven behavior. </span>
-  <div class="term-note">
-   <strong class="term-note-label"> Use LangChain </strong> to build a customizable agent quickly. <strong>Use LangGraph</strong> when you need more explicit control over how the workflow progresses.
+  <div class="term-container">
+    <h4 class="term-title">LangGraph: The Runtime Beneath LangChain Agents</h4>
+    <span class="term-definition">LangGraph is a lower-level orchestration runtime for building and executing stateful agents and workflows.</span>
+      <p>In this context, <strong>orchestration</strong> means controlling how an application progresses through different steps, what information it maintains, and what happens when the application must branch, pause, resume, or wait for human input.         </p>
+      <p>LangGraph provides execution capabilities such as:</p>
+        <ul style="line-height: 1.5; margin-top: 8px;">
+          <li>Maintaining and persisting state</li>
+          <li>Controlling how a workflow moves between steps</li>
+          <li>Combining predetermined steps with model-driven decisions</li>
+          <li>Pausing execution for human review or approval</li>
+          <li>Resuming interrupted or long-running tasks</li>
+          <li>Streaming updates while an application runs</li>
+        </ul>
   </div>
-</div>
-
-
-
-
+     <div class="subdefinition">
+       <strong class="subterm">How LangChain and LangGraph Work TOgether</strong>
+         <p>LangChain agents are built on LangGraph. When a developer creates an agent through LangChain, LangChain provides the higher-level components and interfaces used to configure the agent. LangGraph provides the underlying runtime that executes the agent loop and maintains its progress.</p>
+           <ul style="line-height: 1.5; margin-top: 8px;">
+             <li><strong>LangChain</strong></li>
+               <p>Provides higher-level abstractions for assembling models, tools, instructions, middleware, and common agent behavior</p>
+             <li><strong>LangGraph</strong></li>
+               <p>Provides the runtime for executing and controlling stateful agents and workflows</p>
+           </ul>
+         <p>A developer using LangChain may benefit from LangGraph without interacting with it directly. LangGraph’s execution capabilities operate beneath the higher-level LangChain agent interface.</p>
+         <p>The products are therefore complementary layers rather than competing ways to build the same application.</p>
+     </div>
+     <div class="subdefinition">
+           <strong class="subterm">When Would a Developer Use LangGraph Directly?</strong>
+           <p>LangChain is often sufficient when an application follows a common agent pattern: the model receives a request, selects and calls tools as needed, and continues until it can produce a response.</p>
+           <p>A developer might work directly with LangGraph when the application requires more explicit control over how that process unfolds.</p>
+           <p>For example, direct LangGraph development may be useful when an application must:</p>
+             <ul style="line-height: 1.5; margin-top: 8px;">
+               <li>Follow some steps in a predetermined order</li>
+               <li>Choose between different execution paths</li>
+               <li>Maintain custom information throughout a workflow </li>
+               <li>Pause at defined decision points for human involvement</li>
+               <li>Resume a task after an interruption</li>
+               <li>Coordinate a long-running or multi-stage process</li>
+               <li>Combine predictable software logic with model-driven decisions</li>
+             </ul>
+         <p>Using LangGraph directly does not require abandoning LangChain. Developers can still use LangChain’s model interfaces, tools, and other components within a LangGraph workflow.</p>
+     </div>
+     <div class="subdefinition">
+          <strong class="subterm">Practical Example</strong>
+            <p>Consider an AI customer-service application that handles order problems. A basic LangChain agent might:</p>
+             <ol style="line-height: 1.5; margin-top: 8px;">
+               <li>Interpret the customer’s question.</li>
+               <li>Use a tool to retrieve the order.</li>
+               <li>Review the order status.</li>
+               <li>Generate an answer for the customer.</li>
+             </ol>
+           <p>That common model-and-tool loop may be sufficient when the application only needs to locate information and explain it.</p>
+           <p>The workflow becomes more complex if the application must also:</p>
+             <ol style="line-height: 1.5; margin-top: 8px;">
+               <li>Verify the customer’s identity.</li>
+               <li>Retrieve the order and shipping history.</li>
+               <li>Determine whether the package is delayed, lost, or delivered.</li>
+               <li>Follow a different process for each condition.</li>
+               <li>Request human approval before issuing a refund above a defined amount.</li>
+               <li>Open a claim with the shipping provider.</li>
+               <li>Preserve its progress while waiting for the claim result.</li>
+               <li>Resume the process when new information becomes available.</li>
+             </ol>
+           <p>LangGraph allows the developer to represent these steps, decision points, and interruptions as an explicitly controlled workflow. Model-driven decisions can still be used where flexibility is helpful, while predetermined logic governs steps that must follow established rules.</p>
+     </div>
+     <div class="subdefinition">
+          <strong class="subterm">Which One Should You Use?</strong>
+            <p>Use <strong>LangChain</strong> when its higher-level agent architecture provides enough control for the application.</p>
+            <p>Use <strong>LangGraph</strong> directly when the application requires customized execution paths, persistent state, human decision points, or a deliberate combination of predictable and model-driven behavior.</p>
+            <p>The decision is not necessarily <strong>LangChain</strong> or <strong>LangGraph.</strong> It is often a decision about which layer of control the developer needs to work with.</p>
+     </div>
 </details>
 
 
