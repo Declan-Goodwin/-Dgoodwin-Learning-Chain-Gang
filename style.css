@@ -92,6 +92,10 @@ h2 {
   margin-bottom: 1rem;
 }
 
+.development-workflow ul li {
+  margin-bottom: 0;
+}
+
 .development-workflow h4 {
   margin: 0 0 0.25rem;
 }
