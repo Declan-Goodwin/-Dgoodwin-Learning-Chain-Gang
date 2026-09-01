@@ -88,7 +88,7 @@ h2 {
   margin-top: 0.4rem;
 }
 
-.development-workflow li {
+.development-workflow > li {
   margin-bottom: 1rem;
 }
 
