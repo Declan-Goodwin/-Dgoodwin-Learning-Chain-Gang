@@ -347,7 +347,21 @@ LangChain helps the developer connect and coordinate the components involved in 
   </p>
   <p><strong>LangChain</strong> provides higher-level abstractions for assembling AI applications. <strong>LangGraph</strong> provides the lower-level orchestration model used when those applications require explicit control over execution, state, persistence, branching, or recovery.
   </p>
-  <p>A LangChain agent may therefore <em>run on LangGraph</em> without the developer manually constructing a graph. When an application's execution logic becomes more specialized, that same developer can move downward and work directly with LangGraph.     </p>
+  <p> A LangChain agent may therefore <em>run on LangGraph</em> without the developer manually constructing a graph. When an application's execution logic becomes more specialized, that same developer can move downward and work directly with LangGraph.    </p>
+  <div class="term-container">
+    <h4 class="term-title">Workflow vs. Agent</h4>
+       <div class="term-note">
+         <span> A <strong class="term-note-label">Workflow </strong> has substantially predetermined execution paths. </span>
+       </div>
+       <div class="term-note">
+         <span> An <strong class="term-note-label">Agent</strong> can dynamically choose its next action based on the model, available tools, and current state.</span>
+       </div>
+  </div>
+    <p>LangGraph supports both patterns, and they can be combined. A deterministic workflow might classify a request first, route it to a specialized agent, require human approval before a sensitive action, and then return to deterministic processing afterward.
+    </p>
+    <p>Insert Diagram Here :)</p>
+<h3>State, Persistence, and Memory</h3>
+           
 
 
 
