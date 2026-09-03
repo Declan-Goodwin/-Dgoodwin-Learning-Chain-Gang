@@ -361,7 +361,7 @@ LangChain helps the developer connect and coordinate the components involved in 
     </p>
     <p>Insert Diagram Here :)</p>
 <h3>State, Persistence, and Memory</h3>
-           
+  <p>Once an application contains multiple execution steps, information has to move between those steps. <strong>State</strong> is the application's working record of what is currently true during execution.</p>           
 
 
 
