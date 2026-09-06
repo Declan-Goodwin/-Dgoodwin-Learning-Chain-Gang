@@ -390,14 +390,14 @@ LangChain helps the developer connect and coordinate the components involved in 
         <p>Without persistence, application state exists only while the workflow is running. If execution stops, the process crashes, or the user returns later, that working state may be lost.</p>
         <p>LangGraph provides persistence through <strong>checkpointers</strong>. When a graph uses a checkpointer, snapshots of its state are saved as execution progresses. Those snapshots are called <strong>checkpoints</strong> and are organized into <strong>threads</strong>. A thread represents the continuing history of a particular interaction or workflow. </p>
         <p>Conceptually:</p>
-        <ul style="line-height: 1.5; margin-top: 8px;">
-          <li><strong>State</strong><em>What does the application know right now?</em></li>
-          <p>↓</p>
-          <li><strong>Checkpoint</strong><em>What did the application know at this point in execution?</em></li>
-          <p>↓</p>
-          <li><strong>Thread</strong><em>Which continuing interaction do those checkpoints belong to?</em></li>
-          <p>↓</p>
-          <li><strong>Persistence</strong><em>Can that state be recovered and used later?</em></li>
+        <ul style="line-height: 1.15; margin-top: 8px;">
+          <li><strong>State</strong> <em>What does the application know right now?</em></li>
+          <p><strong>↓</strong></p>
+          <li><strong>Checkpoint</strong> <em>What did the application know at this point in execution?</em></li>
+          <p><strong>↓</strong></p>
+          <li><strong>Thread</strong> <em>Which continuing interaction do those checkpoints belong to?</em></li>
+          <p><strong>↓</strong></p>
+          <li><strong>Persistence</strong> <em>Can that state be recovered and used later?</em></li>
         </ul>
         <p>This means a workflow does not necessarily have to restart from the beginning every time execution is interrupted.</p>
  </div>
