@@ -417,8 +417,8 @@ LangChain helps the developer connect and coordinate the components involved in 
  <div class="subdefinition">
       <span><strong class="subterm">Short-Term and Long-Term Memory</strong></span>
         <p>LangChain distinguishes memory partly by <strong>how broadly the information should be available</strong>.</p>
-        <p><strong>Short-term memory</strong>is thread-scoped. It allows an application to retain information within an ongoing conversation or workflow. LangChain agents manage this as part of agent state, with a checkpointer persisting that state so the same thread can continue across multiple interactions.</p>
-        <p><strong>Long-term memory</strong>exists outside a single thread. It allows information to be recalled across different conversations or sessions.</p>
+        <p><strong>Short-term memory</strong> is thread-scoped. It allows an application to retain information within an ongoing conversation or workflow. LangChain agents manage this as part of agent state, with a checkpointer persisting that state so the same thread can continue across multiple interactions.</p>
+        <p><strong>Long-term memory</strong> exists outside a single thread. It allows information to be recalled across different conversations or sessions.</p>
         <p>LangGraph uses a <strong>Store</strong> for this type of persistence. Unlike a checkpointer, which preserves the evolving state of a particular thread, a Store holds application-defined information that can be accessed across threads.</p>
         <p>For example, consider an assistant used repeatedly by the same person.</p>
         <p>A checkpointer might preserve:</p>
