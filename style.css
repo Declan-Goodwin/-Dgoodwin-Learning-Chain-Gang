@@ -52,6 +52,18 @@ h3 {
   line-height: 1.15;
 }
 
+.content-block {
+    max-width: 115ch;
+}
+
+.content-wide {
+    max-width: 140ch;
+}
+
+.content-full {
+    max-width: none;
+}
+
 /* Container wrapper */
 .term-container {
   margin-bottom: 24px;
