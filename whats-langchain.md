@@ -437,7 +437,7 @@ LangChain helps the developer connect and coordinate the components involved in 
         <p><strong>Short-term memory:</strong> <em>What should this thread remember?</em></p>
         <p><strong>Long-term memory:</strong> <em>What should the application remember beyond this thread?</em></p>
         <p>Persistence therefore does more than make an AI application "remember." It creates continuity across execution—allowing workflows to pause, recover, resume, revisit earlier states, and selectively carry useful information into future interactions.</p>
-        
+ </div>
 <h3>Streaming and Runtime Behavior</h3>
   <p class="page-tagline"> Streaming <strong>does not</strong> only mean displaying words one token at a time.</p>
   <p>An application can expose multiple kinds of information while it executes. LangChain currently supports streaming model tokens, agent progress updates, and application-defined custom events. At the LangGraph level, developers can also stream state values, state updates, checkpoint information, task execution events, and detailed debugging information.</p>
@@ -449,7 +449,7 @@ LangChain helps the developer connect and coordinate the components involved in 
   <p>With streaming, the application could surface:</p>
    <dl style="line-height: 1.15; margin-top: 8px;">
      <dd>Searching records...</dd>
-     <p><em>Found 14 candidate documents</em></p>
+     <dd><em>Found 14 candidate documents</em></dd>
      <dd>Reviewing 6 relevant sources...</dd>
      <dd>Comparing findings...</dd>
      <dd>Generating recommendation...</dd>
