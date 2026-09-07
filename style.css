@@ -56,11 +56,15 @@ h3 {
     max-width: 115ch;
 }
 
-.content-wide {
+.content-block.compact {
+    max-width: 95ch;
+}
+
+.content-block.wide {
     max-width: 140ch;
 }
 
-.content-full {
+.content-block.full {
     max-width: none;
 }
 
