@@ -467,7 +467,7 @@ LangChain helps the developer connect and coordinate the components involved in 
   <p>The important idea is that building with LangChain isn't primarily about turning features on. It's about deciding <strong>where the model should have discretion and where software should retain control.</strong></p>
     <div class="subdefinition content-block compact">
       <span><strong class="subterm">Agent or Deterministic Workflow?</strong></span> 
-        <dl style="line-height: 1.15; margin-top: 8px;">
+       <dl class="decision-list">
           <dt>Is the sequence already known?</dt>
             <dd>Encode the sequence.</dd>
           <dt>Does the next action require interpretation?</dt>
@@ -478,7 +478,7 @@ LangChain helps the developer connect and coordinate the components involved in 
     </div>
     <div class="subdefinition content-block compact">
       <span><strong class="subterm">Model Selection</strong></span>
-        <dl style="line-height: 1.15; margin-top: 8px;">
+        <dl class="decision-list">
           <dt>What level of reasoning does this step require?</dt>
             <dd>More capable models may be appropriate for complex reasoning, while simpler tasks may not justify the same cost or latency.</dd>
           <dt>How quickly does the application need to respond?</dt>
@@ -491,7 +491,7 @@ LangChain helps the developer connect and coordinate the components involved in 
     </div>
     <div class="subdefinition content-block compact">
       <span><strong class="subterm">Context and Retrieval Strategy </strong></span>
-        <dl style="line-height: 1.15; margin-top: 8px;">
+        <dl class="decision-list">
           <dt>What information does the model actually need for this decision?</dt>
             <dd>Provide relevant context rather than automatically exposing every piece of information available to the application. The model does not need to see everything the application knows.</dd>
           <dt>When should that information be provided?</dt>
@@ -507,7 +507,7 @@ LangChain helps the developer connect and coordinate the components involved in 
     </div>
     <div class="subdefinition content-block compact">
       <span><strong class="subterm">Tool Design</strong></span>
-        <dl style="line-height: 1.15; margin-top: 8px;">
+        <dl class="decision-list">
           <dt>What should the model actually be allowed to do?</dt>
             <dd>Only expose tools that are necessary for the model's role in the application. Access to a capability does not automatically mean the model should be given control over it.</dd>
           <dt>How much freedom should each tool provide?</dt>
@@ -524,7 +524,7 @@ LangChain helps the developer connect and coordinate the components involved in 
     </div>
     <div class="subdefinition content-block compact">
       <span><strong class="subterm">Structured Output</strong></span>
-        <dl style="line-height: 1.15; margin-top: 8px;">
+        <dl class="decision-list">
           <dt>Will another system need to consume the result?</dt>
             <dd>If so, predictable fields and data types may be more useful than free-form prose.</dd>
           <dt>Does the response need to follow a consistent schema?</dt>
@@ -538,7 +538,7 @@ LangChain helps the developer connect and coordinate the components involved in 
     </div>
     <div class="subdefinition content-block compact">
       <span><strong class="subterm">Middleware</strong></span>
-        <dl style="line-height: 1.15; margin-top: 8px;">
+        <dl class="decision-list">
           <dt>What needs to happen around model or tool execution?</dt>
             <dd>Middleware can introduce behavior such as logging, validation, guardrails, retries, context management, or other controls without embedding that logic separately into every step.</dd>
           <dt>Should behavior change depending on the current state?</dt>
