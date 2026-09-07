@@ -359,10 +359,10 @@ LangChain helps the developer connect and coordinate the components involved in 
          <span> An <strong class="term-note-label">Agent</strong> can dynamically choose its next action based on the model, available tools, and current state.</span>
        </div>
   </div>
-</div>
     <p>LangGraph supports both patterns, and they can be combined. A deterministic workflow might classify a request first, route it to a specialized agent, require human approval before a sensitive action, and then return to deterministic processing afterward.
     </p>
     <p>Insert Diagram Here :)</p>
+</div>
 <div class="content-block">
 <h3>State, Persistence, and Memory</h3>
   <p>Once an application contains multiple execution steps, information has to move between those steps. <strong>State is the application's working record of what is currently true during execution.</strong></p> 
