@@ -332,7 +332,7 @@ LangChain helps the developer connect and coordinate the components involved in 
     <li>How can execution be inspected, resumed, evaluated, and deployed reliably?</li>
   </ul>   
 <p>Advanced LangChain development is therefore less about adding more components and more about controlling the behavior of the system those components create.</p>
-  
+<div class="content-block">  
 <h3>Architecture and Execution Model</h3>
   <p>At Intermediate we talked about components interacting. Here we explain that those interactions ultimately create an <strong>execution topology</strong>.</p>
   <p>A modern LangChain agent is not simply:</p>
@@ -357,9 +357,11 @@ LangChain helps the developer connect and coordinate the components involved in 
          <span> An <strong class="term-note-label">Agent</strong> can dynamically choose its next action based on the model, available tools, and current state.</span>
        </div>
   </div>
+</div>
     <p>LangGraph supports both patterns, and they can be combined. A deterministic workflow might classify a request first, route it to a specialized agent, require human approval before a sensitive action, and then return to deterministic processing afterward.
     </p>
     <p>Insert Diagram Here :)</p>
+<div class="content-block">
 <h3>State, Persistence, and Memory</h3>
   <p>Once an application contains multiple execution steps, information has to move between those steps. <strong>State is the application's working record of what is currently true during execution.</strong></p> 
   <p>State may contain conversation messages, intermediate results, user identifiers, retrieved information, tool results, workflow status, or any other values later steps need.</p>
@@ -438,6 +440,8 @@ LangChain helps the developer connect and coordinate the components involved in 
         <p><strong>Long-term memory:</strong> <em>What should the application remember beyond this thread?</em></p>
         <p>Persistence therefore does more than make an AI application "remember." It creates continuity across execution—allowing workflows to pause, recover, resume, revisit earlier states, and selectively carry useful information into future interactions.</p>
  </div>
+</div>
+<div class="content-block">
 <h3>Streaming and Runtime Behavior</h3>
   <p class="heading-tagline"> Streaming <strong>does not</strong> only mean displaying words one token at a time.</p>
   <p>An application can expose multiple kinds of information while it executes. LangChain currently supports streaming model tokens, agent progress updates, and application-defined custom events. At the LangGraph level, developers can also stream state values, state updates, checkpoint information, task execution events, and detailed debugging information.</p>
@@ -455,9 +459,11 @@ LangChain helps the developer connect and coordinate the components involved in 
      <dd>Generating recommendation...</dd>
    </dl>
  <p>All of this occurring while the final answer still streams token by token. That means streaming becomes more than a UX trick, but <strong>a layer of visibility over execution</strong>.</p>
+</div>
+<div class="content-block">
 <h3>Configuration and Architectural Choices</h3>
 
-
+</div>
  <!-- 
    <p>
     LangChain is a composable orchestration framework that abstracts the complexities of integrating Large Language Models(LLMs) into software architectures through modular abstractions. 
