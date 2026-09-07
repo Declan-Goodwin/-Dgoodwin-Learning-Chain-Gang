@@ -19,6 +19,18 @@ h2 {
 
 }
 
+h3 {
+    color: #a8c7dc;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    margin-bottom: 0.35rem;
+}
+
+.heading-tagline {
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+}
+
 .page-tagline {
   max-width: 78ch;
   margin: 0.5rem 0 1.75rem;
@@ -30,14 +42,16 @@ h2 {
 }
 
 .heading-tagline {
-  max-width: 100ch;
-  margin: 0.2rem 0 .5rem;
+  max-width: 78ch;
+  margin-top: 0;
+  margin-bottom: 0.75rem;
   color: #9ca3af;
   font-size: 1rem;
   font-style: italic;
   font-weight: 300;
-  line-height: 1.6;
+  line-height: 1.15;
 }
+
 /* Container wrapper */
 .term-container {
   margin-bottom: 24px;
