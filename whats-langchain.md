@@ -378,7 +378,7 @@ LangChain helps the developer connect and coordinate the components involved in 
       <li>the final structured response.</li>
     </ul>
     <p>A retrieval node might add documents to that state. An analysis node might inspect those documents and add findings. A routing decision might then use those findings to determine whether the workflow should continue researching or proceed to the final response.</p>
-  <div class="subdefinition content-block.compact">
+<div class="subdefinition content-block compact">
       <span><strong class="subterm">Context, State, and Memory</strong></span> 
         <p>These concepts are related, but they describe different parts of the system.</p>
            <ul style="line-height: 1.5; margin-top: 8px;">
@@ -389,7 +389,7 @@ LangChain helps the developer connect and coordinate the components involved in 
         <p>The important distinction is that <strong>the model does not necessarily receive everything stored in application state.</strong>The application determines which portions of state are relevant and supplies the appropriate information as context when calling the model. Likewise, not everything held in state needs to become long-term memory.</p>
         <p>A workflow might temporarily store hundreds of retrieved documents in state while producing an answer without preserving those documents as information the system should remember later.</p>
  </div>
- <div class="subdefinition content-block.compact">
+<div class="subdefinition content-block compact">
       <span><strong class="subterm">Persistence and Checkpoints</strong></span> 
         <p>Without persistence, application state exists only while the workflow is running. If execution stops, the process crashes, or the user returns later, that working state may be lost.</p>
         <p>LangGraph provides persistence through <strong>checkpointers</strong>. When a graph uses a checkpointer, snapshots of its state are saved as execution progresses. Those snapshots are called <strong>checkpoints</strong> and are organized into <strong>threads</strong>. A thread represents the continuing history of a particular interaction or workflow. </p>
@@ -405,7 +405,7 @@ LangChain helps the developer connect and coordinate the components involved in 
         </ul>
         <p>This means a workflow does not necessarily have to restart from the beginning every time execution is interrupted.</p>
  </div>
- <div class="subdefinition content-block.compact">
+ <div class="subdefinition content-block compact">
       <span><strong class="subterm">Why Checkpointing Matters</strong></span> 
         <p>Checkpointing is useful for much more than remembering a conversation.</p> 
         <p>Because previous execution state can be recovered, persisted workflows can support:</p>
@@ -418,7 +418,7 @@ LangChain helps the developer connect and coordinate the components involved in 
         </ul>
         <p>These capabilities are a major reason persistence becomes important as applications move from simple model calls toward long-running or stateful workflows.</p>
  </div>
- <div class="subdefinition content-block.compact">
+ <div class="subdefinition content-block compact">
       <span><strong class="subterm">Short-Term and Long-Term Memory</strong></span>
         <p>LangChain distinguishes memory partly by <strong>how broadly the information should be available</strong>.</p>
         <p><strong>Short-term memory</strong> is thread-scoped. It allows an application to retain information within an ongoing conversation or workflow. LangChain agents manage this as part of agent state, with a checkpointer persisting that state so the same thread can continue across multiple interactions.</p>
