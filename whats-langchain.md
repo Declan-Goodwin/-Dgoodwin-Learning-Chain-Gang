@@ -324,14 +324,16 @@ LangChain helps the developer connect and coordinate the components involved in 
  <summary style="cursor: pointer; display: list-item;">
     <h2 style="display: inline; margin-left: 5px;">LangChain Advanced: Architecture and Implementation</h2>
   </summary>
-<p> At the beginner level, LangChain can be understood as a framework for connecting models to information, tools, and instructions. At the intermediate level, those components become a workflow. At the advanced level, the important questions change:</p>
-  <ul>
-    <li>How is that workflow executed?</li>
-    <li>What state survives between steps?</li>
-    <li>What happens when something fails?</li>
-    <li>How can execution be inspected, resumed, evaluated, and deployed reliably?</li>
-  </ul>   
-<p>Advanced LangChain development is therefore less about adding more components and more about controlling the behavior of the system those components create.</p>
+<div class="content-block">
+  <p> At the beginner level, LangChain can be understood as a framework for connecting models to information, tools, and instructions. At the intermediate level, those components become a workflow. At the advanced level, the important questions change:</p>
+    <ul>
+      <li>How is that workflow executed?</li>
+      <li>What state survives between steps?</li>
+      <li>What happens when something fails?</li>
+      <li>How can execution be inspected, resumed, evaluated, and deployed reliably?</li>
+    </ul>   
+  <p>Advanced LangChain development is therefore less about adding more components and more about controlling the behavior of the system those components create.</p>
+</div>
 <div class="content-block">  
 <h3>Architecture and Execution Model</h3>
   <p>At Intermediate we talked about components interacting. Here we explain that those interactions ultimately create an <strong>execution topology</strong>.</p>
