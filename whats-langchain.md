@@ -438,8 +438,25 @@ LangChain helps the developer connect and coordinate the components involved in 
         <p><strong>Long-term memory:</strong> <em>What should the application remember beyond this thread?</em></p>
         <p>Persistence therefore does more than make an AI application "remember." It creates continuity across execution—allowing workflows to pause, recover, resume, revisit earlier states, and selectively carry useful information into future interactions.</p>
         
+<h3>Streaming and Runtime Behavior</h3>
+  <p class="page-tagline"> Streaming <strong>does not</strong> only mean displaying words one token at a time.</p>
+  <p>An application can expose multiple kinds of information while it executes. LangChain currently supports streaming model tokens, agent progress updates, and application-defined custom events. At the LangGraph level, developers can also stream state values, state updates, checkpoint information, task execution events, and detailed debugging information.</p>
+  <p>Imagine an agent has to:</p>
+  <div class="term-note">
+      <span> <strong class="term-note-label"> Interpret request -> search records -> retrieve records -> analyze records -> generate recommendation </strong> </span>
+  </div>
+  <p>Without streaming, the user might stare at a loading indicator for twenty seconds <em>(otherwise known as a lifetime in 'waiting for the robot' time).</em></p>
+  <p>With streaming, the application could surface:</p>
+   <dl style="line-height: 1.15; margin-top: 8px;">
+     <dd>Searching records...</dd>
+     <p><em>Found 14 candidate documents</em></p>
+     <dd>Reviewing 6 relevant sources...</dd>
+     <dd>Comparing findings...</dd>
+     <dd>Generating recommendation...</dd>
+   </dl>
+ <p>All of this occurring while the final answer still streams token by token. That means streaming becomes more than a UX trick, but <strong>a layer of visibility over execution</strong>.</p>
 
-   
+
  <!-- 
    <p>
     LangChain is a composable orchestration framework that abstracts the complexities of integrating Large Language Models(LLMs) into software architectures through modular abstractions. 
