@@ -142,3 +142,17 @@ h3 {
 .development-workflow p {
   margin: 0;
 }
+
+.decision-list {
+    margin-top: 0.5rem;
+}
+
+.decision-list dt {
+    font-weight: 600;
+    margin-top: 0.75rem;
+}
+
+.decision-list dd {
+    margin-left: 0;
+    margin-top: 0.15rem;
+}
