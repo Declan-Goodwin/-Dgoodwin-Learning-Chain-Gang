@@ -464,8 +464,93 @@ LangChain helps the developer connect and coordinate the components involved in 
 </div>
 <div class="content-block">
 <h3>Configuration and Architectural Choices</h3>
-
+  <p>The important idea is that building with LangChain isn't primarily about turning features on. It's about deciding <strong>where the model should have discretion and where software should retain control.</strong></p>
+    <div class="subdefinition content-block compact">
+      <span><strong class="subterm">Agent or Deterministic Workflow?</strong></span> 
+        <dl style="line-height: 1.15; margin-top: 8px;">
+          <dt>Is the sequence already known?</dt>
+            <dd>Encode the sequence.</dd>
+          <dt>Does the next action require interpretation?</dt>
+            <dd>An agent may make sense.</dd>
+          <dt>Can normal software make the decision?</dt>
+            <dd>Don't make an LLM rediscover it.</dd>
+        </dl>
+    </div>
+    <div class="subdefinition content-block compact">
+      <span><strong class="subterm">Model Selection</strong></span>
+        <dl style="line-height: 1.15; margin-top: 8px;">
+          <dt>What level of reasoning does this step require?</dt>
+            <dd>More capable models may be appropriate for complex reasoning, while simpler tasks may not justify the same cost or latency.</dd>
+          <dt>How quickly does the application need to respond?</dt>
+            <dd>Model choice can affect latency as well as capability, so response time may become an architectural constraint.</dd>
+          <dt>Does every step need the same model?</dt>
+            <dd>Different stages of a workflow can use different models based on their individual requirements. A complex analysis step may require a more capable model while classification, extraction, or other simpler tasks may be handled by a faster or less expensive model.</dd>
+          <dt>What capabilities does the model need?</dt>
+            <dd>Consider requirements such as context length, tool calling, structured output, multimodal input, and any provider-specific capabilities the application depends on.</dd>
+        </dl>
+    </div>
+    <div class="subdefinition content-block compact">
+      <span><strong class="subterm">Context and Retrieval Strategy </strong></span>
+        <dl style="line-height: 1.15; margin-top: 8px;">
+          <dt>What information does the model actually need for this decision?</dt>
+            <dd>Provide relevant context rather than automatically exposing every piece of information available to the application. The model does not need to see everything the application knows.</dd>
+          <dt>When should that information be provided?</dt>
+            <dd>Some information belongs in the initial context, while other information may only need to be retrieved when a particular step requires it.</dd>
+          <dt>Where should the information come from?</dt>
+            <dd>Context may come from the user's request, application state, memory, retrieved documents, databases, tool results, or runtime information about the current user or environment.</dd>
+          <dt>Is more context actually better?</dt>
+            <dd>Not necessarily. Irrelevant or excessive information consumes context-window space, increases cost, and can make important information harder for the model to distinguish.</dd>
+          <dt>How should external information be retrieved?</dt>
+            <dd>Depending on the application, retrieval might use semantic search over documents, metadata filtering, structured database queries, tools that retrieve information on demand, or a combination of approaches.</dd>
+        </dl>
+        <p>The architectural question is therefore not simply "<strong>What information does the application have access to?</strong>" but "<strong>What information does the model need for this decision, and when should it receive it?</strong>"</p>
+    </div>
+    <div class="subdefinition content-block compact">
+      <span><strong class="subterm">Tool Design</strong></span>
+        <dl style="line-height: 1.15; margin-top: 8px;">
+          <dt>What should the model actually be allowed to do?</dt>
+            <dd>Only expose tools that are necessary for the model's role in the application. Access to a capability does not automatically mean the model should be given control over it.</dd>
+          <dt>How much freedom should each tool provide?</dt>
+            <dd>
+              <p>A broad tool gives the model more flexibility, while a narrower tool reduces ambiguity and can limit opportunities for incorrect actions.</p>
+              <p>For example, a generic database query tool gives the model considerably more discretion than a purpose-built tool such as <code>get_customer_record</code>. 
+                Neither approach is inherently correct; the choice determines how much responsibility belongs to the model and how much remains encoded in the application.</p>
+            </dd>
+          <dt>Can the tool's purpose be clearly understood?</dt>
+            <dd>Tool names, descriptions, inputs, and expected behavior should make it clear when the tool should be used and what information it requires.</dd>
+          <dt>What happens if the model uses the tool incorrectly?</dt>
+            <dd>Consider validation, permissions, confirmation requirements, and other safeguards—especially when a tool can modify external systems or perform consequential actions.</dd>
+        </dl>
+    </div>
+    <div class="subdefinition content-block compact">
+      <span><strong class="subterm">Structured Output</strong></span>
+        <dl style="line-height: 1.15; margin-top: 8px;">
+          <dt>Will another system need to consume the result?</dt>
+            <dd>If so, predictable fields and data types may be more useful than free-form prose.</dd>
+          <dt>Does the response need to follow a consistent schema?</dt>
+            <dd>Structured output can require the result to conform to an expected organization rather than leaving its format entirely open-ended.</dd>
+          <dt>Is free-form language actually valuable here?</dt>
+            <dd>
+              <p>Use natural-language output when flexibility is useful. Use structured output when consistency, validation, or machine readability matters more.</p>
+              <p>Structured output therefore does not primarily change <strong>what the system does</strong>. It defines <strong>how the resulting information must be organized</strong>.</p>
+            </dd>
+        </dl>
+    </div>
+    <div class="subdefinition content-block compact">
+      <span><strong class="subterm">Middleware</strong></span>
+        <dl style="line-height: 1.15; margin-top: 8px;">
+          <dt>What needs to happen around model or tool execution?</dt>
+            <dd>Middleware can introduce behavior such as logging, validation, guardrails, retries, context management, or other controls without embedding that logic separately into every step.</dd>
+          <dt>Should behavior change depending on the current state?</dt>
+            <dd>Middleware can inspect execution context and influence how later model or tool calls behave. This allows application-wide behavior to adapt without requiring each individual component to implement the same logic.</dd>
+          <dt>Does any action require human review?</dt>
+            <dd>Human-in-the-loop middleware can create <strong>decision-support checkpoints</strong> where execution pauses before a consequential action and waits for human approval or intervention.</dd>
+          <dt>Where should cross-cutting behavior live?</dt>
+            <dd>Logic that applies across multiple parts of the application often belongs in middleware rather than being repeatedly implemented inside individual nodes, tools, or prompts.</dd>
+        </dl>
+    </div>
 </div>
+  
  <!-- 
    <p>
     LangChain is a composable orchestration framework that abstracts the complexities of integrating Large Language Models(LLMs) into software architectures through modular abstractions. 
