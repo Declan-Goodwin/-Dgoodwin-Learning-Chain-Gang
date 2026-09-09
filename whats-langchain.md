@@ -562,7 +562,7 @@ LangChain helps the developer connect and coordinate the components involved in 
   <p>The concepts discussed above become easier to understand when they are combined into a single application. Consider a <strong>decision-support research agent</strong> tasked with comparing several proposed software solutions against an established set of requirements.</p>
   <p>A user might prompt:</p>
   <div class="term-note">
-    <span class="term-note-label">"Compare these three proposed solutions against our requirements and recommend which should advance for further evaluation."</span>
+    <span class="term-note-label">Compare these three proposed solutions against our requirements and recommend which should advance for further evaluation.</span>
   </div>
   <p>This is more complicated than a single model call. The system must retrieve authoritative requirements, gather relevant information about each proposal, determine whether enough evidence exists to make a comparison, organize its findings, and produce a recommendation that can be reviewed by a human decision-maker.</p>
   <div class="subdefinition content-block compact">
