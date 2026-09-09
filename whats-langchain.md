@@ -569,32 +569,53 @@ LangChain helps the developer connect and coordinate the components involved in 
     <span><strong class="subterm">Execution Flow</strong></span>
     <p>The workflow might follow this general path:</p>
       <d1> 
-        <dt>Receive Request</dt>
+        <dt><strong>Receive Request</strong></dt>
           <dd>↓</dd>
-        <dt>Validate Required Information</dt>
+        <dt><strong>Validate Required Information</strong></dt>
           <dd>↓</dd>
-        <dt>Retrieve Requirements</dt>
+        <dt><strong>Retrieve Requirements</strong></dt>
           <dd>↓</dd>
-        <dt>Retrieve Proposal Information</dt>
+        <dt><strong>Retrieve Proposal Information</strong></dt>
           <dd>↓</dd>
-        <dt>Analyze Evidence</dt>
+        <dt><strong>Analyze Evidence</strong></dt>
           <dd>↓</dd>
-        <dt>Is Additional Evidence Needed?</dt>
-          <dd><strong>Yes</strong> → retrieve additional information → return to analysis</dd>
-          <dd><strong>No</strong> → continue</dd>
+        <dt><strong>Is Additional Evidence Needed?</strong></dt>
+          <dd>
+            <p><strong>Yes</strong> → retrieve additional information → return to analysis</p>
+          </dd>
+          <dd>
+            <p><strong>No</strong> → continue</p>
+          </dd>
           <dd>↓</dd>
-        <dt>Generate Structured Recommendation</dt>
+        <dt><strong>Generate Structured Recommendation</strong></dt>
           <dd>↓</dd>
-        <dt>Human Review</dt>
+        <dt><strong>Human Review</strong></dt>
           <dd>↓</dd>
-        <dt>Final Output</dt>
+        <dt><strong>Final Output</strong></dt>
       </d1>
-    <p>The first several steps are largely deterministic because the application already knows that requirements and proposal information are necessary. The model does not need to decide whether those steps exist.</p>
-    <p>The analysis stage introduces discretion. After comparing the available evidence, the system may determine that information is missing or insufficient and request another retrieval step. Once enough evidence exists, execution can leave the research loop and proceed toward a structured recommendation.</p>
+     <p>The first several steps are largely deterministic because the application already knows that requirements and proposal information are necessary. The model does not need to decide whether those steps exist.</p>
+     <p>The analysis stage introduces discretion. After comparing the available evidence, the system may determine that information is missing or insufficient and request another retrieval step. Once enough evidence exists, execution can leave the research loop and proceed toward a structured recommendation.</p>
+      </div>
   </div>
   <div class="subdefinition content-block compact">
     <span><strong class="subterm">What Each Component Is Doing</strong></span>
       <dl class="decision-list">
+        <dt>State</dt>
+          <dd>State carries the working information needed across the workflow: the original request, requirements, proposal data, retrieved evidence, intermediate findings, and current execution status.</dd>
+        <dt>Tools</dt>
+          <dd>Tools provide controlled access to external information, such as retrieving requirements, searching proposal records, or querying supporting documentation.</dd>
+        <dt>Agent Reasoning</dt>
+          <dd>The model interprets the available evidence and determines whether the comparison can proceed or whether additional information is required.</dd>
+        <dt>Retrieval</dt>
+          <dd>Rather than loading every available document into the model's context, the application retrieves relevant information when the workflow needs it.</dd>
+        <dt>Structured Output</dt>
+          <dd>
+            <ul>
+              <li>Proposal</li>
+              <li>Relevant Evidence</li>
+              <li>Requirements Satisfied</li>
+              <li>
+          </dd>
         <dt>Middleware</dt>
           <dd>Middleware can apply behavior across execution, such as logging activity, managing context, validating tool calls, retrying failures, or enforcing review requirements.</dd>
         <dt>Persistence</dt>
@@ -606,9 +627,12 @@ LangChain helps the developer connect and coordinate the components involved in 
         <dt>Observability</dt>
           <dd>The application's execution can be traced so developers can later inspect which information was retrieved, which tools were called, how the workflow moved between steps, and where an unexpected result originated.</dd>
       </dl>
-    <p>No individual feature makes this application “advanced.” The complexity comes from coordinating them.</p>
-    <p>Deterministic software controls the portions of the workflow that are already known. The model is given discretion where interpretation is useful. State carries information between steps. Tools constrain access to external systems. Persistence allows execution to survive interruptions. Structured output constrains the result, and human review retains authority over consequential decisions.</p>
-    <p>LangChain and LangGraph provide abstractions for coordinating these behaviors without requiring every part of the execution system to be built from scratch.</p>
+     <div class="term-note">
+        <span><strong class="term-note-label">The Through Line</strong></span>
+          <p>No individual feature makes this application “advanced.” The complexity comes from coordinating them.</p>
+          <p>Deterministic software controls the portions of the workflow that are already known. The model is given discretion where interpretation is useful. State carries information between steps. Tools constrain access to external systems. Persistence allows execution to survive interruptions. Structured output constrains the result, and human review retains authority over consequential decisions.</p>
+          <p>LangChain and LangGraph provide abstractions for coordinating these behaviors without requiring every part of the execution system to be built from scratch.</p>
+      </div>
   </div>
 </div>
 
