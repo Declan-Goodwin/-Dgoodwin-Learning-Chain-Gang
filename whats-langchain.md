@@ -614,7 +614,11 @@ LangChain helps the developer connect and coordinate the components involved in 
               <li>Proposal</li>
               <li>Relevant Evidence</li>
               <li>Requirements Satisfied</li>
-              <li>
+              <li>Identified gaps</li>
+              <li>Risks</li>
+              <li>Confidence</li>
+              <li>Recommendation</li>
+            </ul>
           </dd>
         <dt>Middleware</dt>
           <dd>Middleware can apply behavior across execution, such as logging activity, managing context, validating tool calls, retrying failures, or enforcing review requirements.</dd>
