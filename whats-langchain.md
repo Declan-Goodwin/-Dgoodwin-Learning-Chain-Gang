@@ -638,7 +638,7 @@ LangChain helps the developer connect and coordinate the components involved in 
           <p>LangChain and LangGraph provide abstractions for coordinating these behaviors without requiring every part of the execution system to be built from scratch.</p>
       </div>
   </div>
-</div>
+
 
 
 
