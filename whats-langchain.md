@@ -638,8 +638,109 @@ LangChain helps the developer connect and coordinate the components involved in 
           <p>LangChain and LangGraph provide abstractions for coordinating these behaviors without requiring every part of the execution system to be built from scratch.</p>
       </div>
   </div>
-
-
+  
+<div class="content-block">
+<h3>Failure Modes and Resilience </h3>
+  <p>Traditional software often fails when code encounters a condition the developer did not anticipate. LLM applications introduce an additional problem: <strong>the application can execute successfully while the model still makes a poor decision.</strong> 
+  <p>A tool call can complete successfully but return irrelevant information. Retrieval can find documents that do not actually answer the question. A model can interpret good evidence incorrectly, choose the wrong tool, stop researching too early, or continue looping after enough information is already available. </p>
+  <p>This means failure in an LLM application is not limited to crashes, exceptions, or unavailable services. The system may remain technically operational while producing behavior that is incomplete, inefficient, inconsistent, or simply wrong.</p>
+ <div class="subdefinition content-block compact">
+    <span><strong class="subterm">Tool and External-System Failures</strong></span>
+      <p>Tools connect the model to systems outside the model itself, which introduces many of the same failure conditions found in traditional software.</p>
+      <p>An API may time out. A database may be unavailable. Authentication may expire. A tool may reject malformed arguments. A service may return incomplete data.The additional concern is that the <strong>model is often responsible for deciding when and how the tool should be used</strong></p>
+      <p>A tool can therefore work exactly as designed while still being used incorrectly.</p>
+      <div class="term-note">
+         <span><strong class="term-note-label">Example:</strong></span>
+           <p>The decision-support workflow might successfully retrieve a proposal record, but the model could request the wrong proposal, use an overly broad search, or interpret the returned information as more authoritative than it actually is.</p>
+      </div>
+ </div>
+ <div class="subdefinition content-block compact">
+    <span><strong class="subterm">Retrieval and Context Failures</strong></span>
+    <p>Giving the model access to information does not guarantee that the right information reaches the model at the right time.</p>
+    <p>Retrieval may return irrelevant documents, overlook an important source, or rank weak evidence above more useful evidence. Too much information can also create problems by crowding the context window and making important details harder to distinguish.</p>
+    <p>A failure can therefore occur even when the required information exists somewhere in the application.</p>
+      <dl>
+        <dt>The important question is not only:</dt>
+          <dd><strong>"Was the information retrieved?"</strong></dd>
+        <dt>but:</dt>
+          <dd><strong>"Was the right information retrieved, and was it useful for the decision being made?</strong></dd>
+      </dl>
+  <p><strong>Aside:</strong>**Consider an analogy here :)** </p> 
+ </div>
+ <div class="subdefinition content-block compact">
+    <span><strong class="subterm">Model and Decision Failures</strong></span>
+    <p>Some failures occur because the model makes an incorrect judgment rather than because any software component breaks.</p>
+    <p>The model might:</p>
+      <ul>
+        <li>select the wrong tool;</li>
+        <li>misunderstand a requirement;</li>
+        <li>draw an unsupported conclusion;</li>
+        <li>decide that sufficient evidence exists when additional research is needed;</li>
+        <li>continue researching when enough evidence already exists; or</li>
+        <li>produce a response that sounds confident despite weak evidence.</li>
+      </ul>
+    <p>These failures are particularly important because they may not generate an exception or obvious error message.</p>
+    <p>From the application's perspective, execution may have completed normally.</p>
+ </div>
+ <div class="subdefinition content-block compact">
+    <span><strong class="subterm">Loops and Runaway Execution</strong></span>
+    <p>Agentic systems can revisit earlier steps when additional work is required. That flexibility is useful, but it also creates the possibility of unproductive loops.</p>
+    <p>An agent might repeatedly call the same tool, retrieve similar information, alternate between two actions, or continue searching because it never becomes sufficiently confident to stop.</p>
+    <p>Without boundaries, a workflow can consume increasing amounts of time, tokens, and external-service calls without meaningfully improving the result.</p>
+    <p>Applications therefore often need explicit limits such as:</p>
+      <ul>
+        <li>maximum iterations;</li>
+        <li>execution timeouts;</li>
+        <li>token or cost budgets; and</li>
+        <li>clear stop conditions.</li>
+      </ul>
+    <p><strong>Aside:</strong>One, Many, or All explicit limits? How many is too many? How do we know when there are enough?</p>
+    <p>The goal is not to eliminate iteration. It is to prevent <strong>iteration without progress</strong>.</p>
+ </div>
+  <div class="subdefinition content-block compact">
+    <span><strong class="subterm">State and Persistence Failures</strong></span>
+    <p>State introduces another category of risk because later steps depend on information created earlier in the workflow. State may become stale, incomplete, incorrectly updated, or inconsistent with the external systems it represents.</p>
+    <p><strong>Persistence can preserve those mistakes</strong>.</p>
+    <p>A checkpoint may accurately record what the application believed at an earlier point in time while the underlying data has since changed. Resuming from that checkpoint without verifying important information can cause the workflow to continue from assumptions that are no longer valid.</p>
+    <p>Persistence therefore improves continuity, but it does not guarantee correctness.</p>
+  </div>
+  <div class="subdefinition content-block compact">
+    <span><strong class="subterm">Retries and Consequential Actions</strong></span>
+    <p>Retries are a common response to temporary failures, but they require additional care when tools can change the outside world.</p>
+    <p>Repeating a failed document search may be harmless. Repeating an action that sends an email, creates a purchase, modifies a record, or submits a request may not be.</p>
+    <p>The application must distinguish between operations that can safely be repeated and operations where retrying could duplicate a real-world action. For consequential operations, the system may need confirmation, unique transaction identifiers, validation, or human review before retrying.</p>
+  </div>
+  <div class="subdefinition content-block compact">
+    <span><strong class="subterm">Building for Resilience</strong></span>
+    <p>Resilience does not mean preventing every possible failure. It means designing the application so that failures are <strong>contained, visible, and recoverable</strong>.</p>
+    <p>Common safeguards include:</p>
+      <dl class="decision-list">
+        <dt>Validation</dt>
+          <dd>Check tool inputs, structured outputs, and important intermediate results before allowing execution to continue.</dd>
+        <dt>Retries</dt>
+          <dd>Repeat operations when failures are likely to be temporary, but only when repetition is safe.</dd>
+        <dt>Timeouts and execution limits</dt>
+          <dd>Prevent tools or agents from running indefinitely.</dd>
+        <dt>Fallbacks</dt>
+          <dd>Provide an alternative model, tool, or execution path when the preferred option is unavailable.</dd>
+        <dt>Explicit stop conditions</dt>
+          <dd>Define when an agent should stop searching, reasoning, or calling tools.</dd>
+        <dt>Checkpointing</dt>
+          <dd>Preserve progress so a long-running workflow can recover from interruption without repeating every successful step.</dd>
+        <dt>Human review</dt>
+          <dd>Pause execution before actions or decisions where automated recovery is insufficient or the consequences justify human authority.</dd>
+      </dl>
+  </div>
+  <div class="subdefinition content-block compact">
+    <span><strong class="subterm">Failure Is Not Always an Error</strong></span>    
+    <p>One of the most important differences between traditional software and LLM applications is that <strong>a successful execution is not necessarily a successful result</strong>.</p>
+    <p>The system may call every tool correctly, maintain valid state, complete every graph node, and return perfectly valid structured output<strong>and still produce a poor recommendation</strong>.</p>
+     <div class="term-note">
+         <span><strong class="term-note-label">That means</strong></span>
+           <p>reliability cannot be measured only by whether the application crashed.</p>
+     </div>
+     <p>Developers also need visibility into <strong>how the application behaved and whether that behavior produced a useful result</strong>.</p>
+  </div>
 
 
 
