@@ -742,9 +742,125 @@ LangChain helps the developer connect and coordinate the components involved in 
      <p>Developers also need visibility into <strong>how the application behaved and whether that behavior produced a useful result</strong>.</p>
   </div>
 
+<div class="content-block">
+<h3>Debugging, Observability, and Evaluation</h3>
+  <p>In a simple application, debugging often means inspecting an error message or checking whether a function returned the expected value.</p>
+  <p>Agentic applications are harder to reason about because the final response may be the result of multiple model calls, tool calls, retrieval steps, routing decisions, state updates, and retries. Looking only at the final answer can therefore hide most of what actually happened.</p>
+  <p>That creates three related but different questions:</p>
+    <ul>
+      <li><strong>Debugging</strong> asks: <i>Why did this specific execution fail or behave unexpectedly?</i></li>
+      <li><Strong>Observability</Strong> asks: <i>What happened across the workflow while it was running?</i></li>
+      <li><strong>Evaluation</strong> asks: <i>Was the resulting behavior actually good?</i></li>
+    </ul>
+  <p>These questions overlap, but are not interchangeable.</p>
+<h3>Debugging</h3>
+ <div class="subdefinition content-block compact">
+    <span><strong class="subterm">Tracing Execution</strong></span>
+    <p>A trace provides a record of how an application moved from input to output.</p>
+    <p>Instead of only seeing:</p>
+    <p><strong>User Request → Final Answer</strong></p>
+    <p>A trace can expose the intermediate execution path:</p>
+      <dl class="decision-list">
+        <dt>User Request</dt>
+          <dd>→ Model Call</dd>
+          <dd>→ Tool Selection</dd>
+          <dd>→ Tool Result</dd>
+          <dd>→ State Update</dd>
+          <dd>→ Additional Model Call</dd>
+          <dd>→ Final Output</dd>
+      </dl>
+    <p>LangSmith provides one implementation of this approach by exposing traces and individual runs, making it possible to inspect the execution path rather than treating the final response as a black box.</p>
+    <p>This becomes especially important in agentic systems because a poor result may originate several steps before the final response is generated.</p>
+ </div>
+ <div class="subdefinition content-block compact">
+    <span><strong class="subterm">Debugging the Execution Path</strong></span>
+    <p>Suppose the decision-support workflow produces a weak recommendation. The final answer alone may not reveal why.</p>
+     <dl class="decision-list">
+       <dt>The underlying trace might show that:</dt>
+         <dd>the wrong retrieval tool was selected;</dd>
+         <dd>the correct tool was used with poor arguments;</dd>
+         <dd>retrieval returned weak evidence;</dd>
+         <dd>good evidence was retrieved but interpreted incorrectly;</dd>
+         <dd>the agent stopped researching too early;</dd>
+         <dd>or the final structured response omitted information that existed earlier in the workflow.</dd>
+    </dl>
+  <p>Debugging therefore means working backward through the execution path to identify <strong>where actual behavior diverged from expected behavior</strong>.</p>
+  <p>That distinction matters because changing the final prompt would not fix a retrieval problem, and changing the retrieval strategy would not fix a tool-selection problem.</p>
+   <div class="term-note">
+         <span> The <strong class="term-note-label">trace</strong> helps identify which layer actually needs attention.</span>
+   </div>
+ </div>
+<h3>Observability</h3>
+ <div class="subdefinition content-block compact">
+    <span><strong class="subterm">Observability Beyond Individual Failures</strong></span>
+    <p>Debugging usually begins with a particular problem. Observability is broader.</p>
+    <p>Observability provides enough visibility into application behavior to identify patterns across many executions rather than investigating only when a user reports something obviously wrong.</p>
+    <p>Useful signals might include:</p>
+     <u1> 
+       <li>execution latency,</li>
+       <li>model and tool usage,</li>
+       <li>error rates,</li>
+       <li>unusually long agent trajectories,</li>
+       <li>repeated tool calls,</li>
+       <li>user feedback,</li>
+       <li>or changes in response quality over time.</li>
+     </u1>
+    <p>Observability can extend beyond individual traces to aggregate production behavior, using metrics, dashboards, alerts, and feedback to reveal patterns across many executions. LangSmith provides tooling for this kind of trace-level and production-level monitoring.</p>
+    <p>This changes the question from:</p>  
+      <dl class="decision-list">
+        <dt>"Why did this request fail?"</dt>
+          <dd>to:</dd>
+        <dt>"How is the system behaving as a whole?"</dt>
+      </dl>
+    <p>A single unusually long run <i>might</i> be harmless. A <i>steady increase</i> in average tool calls may indicate that the agent is beginning to take less efficient execution paths.</p>
+    <p>An occasional retrieval miss may be expected. A <strong>consistent pattern</strong> of retrieval failures may point to a problem in the retrieval architecture itself.</p>   
+    <div class="term-note">
+         <span><strong class="term-note-label">Observability</strong> helps reveal those patterns.</span>
+    </div>
+ </div>
+<h3>Evaluation</h3>
+  <p>Observability tells you what happened. Evaluation asks whether what happened was <strong>good enough</strong>.</p>
+  <p>This is necessary because an LLM application can execute perfectly from a software perspective while still producing a poor result.</p>
+    <ul>
+      <li>Every API request may succeed.</li>
+      <li>Every tool may return valid data.</li>
+      <li>The graph may follow an allowed execution path.</li>
+      <li>The structured output may pass validation.</li>
+    </ul>
+  <p>And the answer may <strong>still</strong> be inaccurate, incomplete, poorly reasoned, or unhelpful.</p>
+  <p>Evaluation therefore requires defining what successful behavior actually looks like.</p>
+  <p>For the decision-support example, that might mean asking whether the system retrieved relevant evidence, interpreted requirements correctly, used appropriate tools, identified important gaps, supported its conclusions with evidence, and produced a recommendation consistent with the available information.</p>
+  <div class="term-note">
+         <span> The <strong class="term-note-label">exact criteria</strong> depend on the application.</span>
+  </div>
+  <div class="subdefinition content-block compact">
+    <span><strong class="subterm">Offline Evaluation</strong></span>
+    <p><strong>Offline evaluation</strong> tests the application against known examples before or between deployments.</p>
+    <p>A dataset might contain:</p>
+      <ul>
+        <li>representative user requests,</li>
+        <li>difficult edge cases,</li>
+        <li>previously observed failures,</li>
+        <li>and <em>where appropriate</em> reference outputs or expected behavior.</li>
+      </ul> 
+    <p>A new prompt, model, retrieval strategy, tool design, or workflow version can then be run against that same dataset.</p>
+      <dl class="decision-list">
+        <dt>This makes it possible to ask:</dt>
+          <dd>Did the change improve the cases we were trying to fix?</dd>
+          <dd>Did it accidentally make previously successful cases worse?</dd>
+          <dd>Does the new model behave differently on important edge cases?</dd>
+      </dl>
+    <p>Offline evaluation can support benchmarking, regression testing, unit-style checks, and backtesting against historical production examples. LangSmith provides tooling for these kinds of evaluation workflows. This is particularly useful because changes that improve one example may degrade another.</p>
+    <div class="term-note">
+         <span><strong class="term-note-label">Note:</strong> Without repeated evaluation against a broader dataset, it is easy to optimize an application around whichever failure the developer happened to look at last.</span>
+    </div>
+  </div>
+   <div class="subdefinition content-block compact">
+    <span><strong class="subterm">Online Evaluation</strong></span>
+    
 
 
-
+  
     
  <!-- 
    <p>
