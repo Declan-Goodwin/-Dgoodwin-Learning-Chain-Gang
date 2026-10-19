@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LangChain Design Pass Preview</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="site-shell">
+<header class="page-heading"> 
+<h1>
+  <img class="page-logo" src="images/LangChain-Logo-only.png" alt="LangChain Logo">
+  <span>What is LangChain?</span>
+</h1>
+  <p class="page-tagline">
+    Explore LangChain at three levels of technical depth. Start with the beginner explanation, then expand the intermediate and advanced sections as you become more familiar.
+  </p>
+</header>
+
+<details class="level-section level-beginner">
+  <summary class="level-summary">
+    <span class="level-kicker">Beginner</span>
+    <h2>Explain it Simply</h2>
+    <span class="level-description">What LangChain is, what problem it solves, and when it might be useful.</span>
+  </summary>
+  <div class="level-content">
+    <div class="beginner-intro">
+      <p>LangChain is an open-source framework that helps developers build applications powered by AI models.</p>
+      <p>It provides reusable components for connecting AI models to data, tools, and other software. It also helps developers coordinate how those components work together. Developers can combine these components instead of building every part of an AI application from scratch.</p>
+    </div>
+
+    <section class="beginner-block">
+      <h3>What Problem Does It Solve?</h3>
+      <p>Building an AI application requires more than choosing an AI model. Developers also need ways to connect the model to outside resources like tools, information, and software, and coordinate how those resources work together.</p>
+      <p>Building all of those connections from scratch can require a significant time and effort. LangChain provides reusable components and a common framework for connecting them. This gives developers a consistent starting point for building useful applications faster.</p>
+      <p>For example, LangChain can help a developer connect an AI model to:</p>
+      <ul>
+        <li>A company's document library</li>
+        <li>Databases</li>
+        <li>Web search and other external data sources</li>
+        <li>External applications and Application Programming Interfaces (APIs)</li>
+        <li>Custom software tools</li>
+      </ul>
+      <p>Without connections like these, a model can generate responses but cannot retrieve specialized information or interact with external systems.</p>
+    </section>
+
+    <section class="beginner-block">
+      <h3>Who Uses It?</h3>
+      <p>LangChain is mainly used by software developers and AI engineers. They use it to build applications such as:</p>
+      <ul>
+        <li>Customer-support assistants</li>
+        <li>Research tools</li>
+        <li>Document-search systems</li>
+        <li>Scheduling assistants</li>
+        <li>AI agents that can complete tasks</li>
+      </ul>
+      <p>Most people do not interact with LangChain directly. Instead, they use the AI-enabled applications that developers have built with it.</p>
+    </section>
+
+    <section class="beginner-example">
+      <h3>Practical Use Case</h3>
+      <p>Imagine a company wants an AI assistant that can answer questions about customer orders.</p>
+      <p>By itself, the AI model will understand a customer's question, but it does not automatically have access to the company’s order information. Without that connection, it cannot determine what a customer ordered, how much it cost, or whether it has shipped.</p>
+      <p>A developer could use LangChain as part of an application that connects the model to the company’s order system.</p>
+      <p>When a customer asks, "Where is my order?", the application can:</p>
+      <ol class="beginner-steps">
+        <li>Identify the customer and order.</li>
+        <li>Retrieve the order's current status.</li>
+        <li>Provide the relevant information to the AI model.</li>
+        <li>Generate a clear response for the customer.</li>
+      </ol>
+      <div class="term-note">
+        <span><strong class="term-note-label">Through Line:</strong> LangChain helps the developer connect and coordinate the components involved in this process.</span>
+      </div>
+    </section>
+
+    <section class="beginner-block">
+      <h3>When Might I Need It?</h3>
+      <p>You might use LangChain when an AI application needs to do more than generate a response using the model’s training data.</p>
+      <p>For example, an application might need to:</p>
+      <ul>
+        <li>Retrieve information from an outside source</li>
+        <li>Search a collection of documents</li>
+        <li>Use software tools or APIs</li>
+        <li>Maintain information during a conversation</li>
+        <li>Decide which action to take next</li>
+        <li>Complete a task involving several steps</li>
+      </ul>
+      <div class="term-note beginner-takeaway">
+        <span><strong class="term-note-label">Rule of Thumb:</strong> If your application only needs to send one prompt to an AI model and return its response, you may not need LangChain.</span>
+      </div>
+    </section>
+  </div></details>
+
+<details class="level-section level-intermediate">
+  <summary class="level-summary">
+    <span class="level-kicker">Intermediate</span>
+    <h2>How the Components Work</h2>
+    <span class="level-description">How models, tools, state, memory, middleware, and related products work together.</span>
+  </summary>
+  <div class="level-content">
+      <h3> Major Components & Terminology</h3>
+
+<div class="term-container">
+  <h4 class="term-title">Model:</h4>
+  <span class="term-definition">The language model interprets inputs, generates responses, and can decide whether to call an available tool.</span>
+  <div class="term-note">
+   <span> <strong class="term-note-label">Important Note:</strong> LangChain does not provide the model itself. Instead, it provides standardized interfaces for working with models from providers such as Anthropic, Google,                                    and OpenAI.</span>
+  </div>
+</div>
+
+<div class="term-container">
+  <h4 class="term-title">Messages:</h4>
+  <span class="term-definition">Messages are the structured inputs and outputs exchanged with a chat model. They can represent:</span>
+
+  <ul>
+    <li>Developer or system instructions</li>
+    <li>User input</li>
+    <li>Model responses</li>
+    <li>Tool requests</li>
+    <li>Tool results</li>
+  </ul>
+  <!-- This is more precise than saying the model receives “a prompt,” because an agent often works with an evolving sequence of messages. -->
+</div>
+
+  <div class="term-container">
+  <h4 class="term-title">Tools:</h4>
+  <span class="term-definition">Tools are functions that allow an agent to retrieve information or perform actions outside the model. Examples include searching the web, querying a database, retrieving an order, or updating another application.</span>
+   
+  <div class="term-note">
+    <strong class="term-note-label"> Important Note:</strong> A tool has a defined purpose, input structure, and output. The model can request a tool call, but the surrounding application executes it.
+  </div>
+</div>
+
+<div class="term-container">
+  <h4 class="term-title">Agent:</h4>
+  <span class="term-definition">An agent combines a model with instructions, tools, and behavior that governs how they work together. LangChain currently defines the basic agent pattern as a model calling tools in a loop until it can complete the task.
+  </span>
+
+<div class="term-note">
+  <strong class="term-note-label"> Agent = Model + Harness</strong> 
+</div>
+<br>
+  <span class="term-definition"> The harness is the operational environment and control architecture that wraps around a core language model. It consists of instructions, tools, middleware and other components that enable the agent to execute tasks.      </span>
+ </div>
+
+ <div class="term-container">
+  <h4 class="term-title">Context:</h4>
+  <span class="term-definition">The information provided to a model when it is asked to generate a response or make a decision. Context can include instructions, messages, tool descriptions, tool results, and information retrieved from other sources.
+  </span>
+
+<div class="term-note">
+  <span> <strong class="term-note-label"> Important Note: </strong> The model can only reason from information included in its current context or learned during training. Information stored elsewhere must be retrieved and added to the context before the model can use it.</span>
+</div>
+</div>
+
+<div class="term-container">
+  <h4 class="term-title">Context Window:</h4>
+  <span class="term-definition">The maximum amount of information a model can process during a single call. Its size is measured in tokens and includes the input provided to the model and the space used for the generated output. Because the context window is limited, an application may need to select, summarize, or remove information before calling the model.</span>
+</div>
+
+<div class="term-container">
+  <h4 class="term-title">State:</h4>
+  <span class="term-definition">The evolving information an application maintains while an agent or workflow is running. State commonly includes conversation messages, tool results, uploaded files, authentication status, and other values needed to continue the task.
+  <br>
+  When the application calls the model, it may use some portion of that state to construct the model’s current context. </span>
+<div class="term-note">
+  <span> <strong class="term-note-label"> Important Note: </strong> State belongs to the application’s execution process. It is not identical to the context presented to the model. </span>
+</div>
+</div>
+
+  <div class="term-container">
+  <h4 class="term-title">Memory:</h4>
+  <span class="term-definition">The mechanisms an application uses to preserve and retrieve information beyond a single model call. It is comprised of <em>short-term memory</em> and <em>long-term memory</em>.
+    <br>
+    Memory <strong>does not mean</strong> that the model permanently remembers information itself. Instead, the application stores information and makes it available when it becomes relevant to the execution process.
+  </span>
+  </div>
+    <div class="subdefinition">
+      <span><strong class="subterm">Short-Term Memory:</strong> Information preserved within a single conversation or thread. In a LangChain agent, short-term memory is managed as part of the agent’s state and can be persisted so the thread can resume later.
+     <p>Examples include:</p>
+  <ul>
+    <li>Conversation history</li>
+    <li>Results from earlier tool calls</li>
+    <li>Files associated with the current thread</li>
+    <li>Progress made during a multi-step task</li>
+  </ul>
+        Long conversations may need to be trimmed or summarized because the entire history may not fit, or may not remain useful within the model’s context window.
+      </span>
+    </div>
+  <div class="subdefinition">
+      <span><strong class="subterm">Long-Term Memory:</strong> Information stored across different conversations or threads. It allows an application to retain information such as user preferences, historical details, or previously extracted insights and retrieve them when relevant.</span>  
+    <div class="term-note">
+    <span> <strong class="term-note-label"> Important Note: </strong> Long-term memory is not automatically included in every model call. The application must retrieve relevant information and add it to the model’s current context. </span>
+    </div>
+     <p><strong>Quick Analogy:</strong> Long-term memory is remembering all the summer trips you and your best friend have taken together. Short-term memory is remembering the destinations your friend has suggested while you plan this summer’s trip.</p>
+  </div>
+    
+<div class="term-container">
+  <h4 class="term-title">Middleware:</h4>
+  <span class="term-definition">Middleware lets developers inspect or modify what happens at different points in the agent loop.</span>
+   <p> Developers can use middleware to add functionality such as: </p> 
+     <ul>
+        <li>Logging agent activity</li>
+        <li>Applying guardrails</li>
+        <li>Adding human-in-the-loop review, approval, or decision points</li>
+        <li>Retries and fallbacks</li>
+        <li>Modifying model instructions</li>
+        <li>Restricting access to tools</li>
+        <li>Summarizing conversation history</li>
+      </ul>
+    <p>Rather than completing an agent’s primary task, middleware adds behavior around how the task is completed. This behavior can guide, constrain, or support the process.</p>
+  </div>
+
+<div class="term-container">
+   <div class="term-definition">
+    <h4 class="term-title">Structured Output:</h4>
+      <span>Is a way of requiring a model’s response to follow a predefined structure, rather than returning only free-form text.</span>
+       <p>Developers use structured output when another part of the application needs to reliably identify and use specific pieces of information from the response. </p>
+       <p class="definition-example"> <strong>For example:</strong> Instead of responding with a paragraph about an order, the model could return separate fields for the order number, shipping status, and estimated delivery date. </p>
+       <p class="term-comparison"> <strong>Middleware</strong> influences how an agent completes a task. <strong>Structured output</strong> defines how the final result must be organized. </p>
+  </div> 
+</div>
+
+ <h3> How Information Moves Through It </h3>
+   <p> A simplified process execution would look like: </p>
+    <ol>
+          <li> The user submits a request.</li>
+          <li> The application adds the request to the agent’s state.</li>
+          <li> LangChain prepares the model’s context using instructions, conversation history, available tools, and relevant state.</li>
+          <li> The model determines whether it can answer directly or needs a tool.</li>
+          <li> <em>If needed</em>, the model requests a tool call using structured inputs.</li>
+          <li> The application executes the tool and returns its result to the agent.</li>
+          <li> The result becomes additional context for the model.</li>
+          <li> The model may call another tool or generate a final response.</li>
+          <li> The application returns the response to the user.</li>
+        </ol>
+  <div>
+   <span> <strong class="term-note-label"> Critical Insight: </strong> Information does not simply travel from the user to the model and back. It may circulate through the agent loop several times as the model requests tools and receives their results.     </span>
+  </div>
+  <br>
+<img class="workflow-diagram" src="images/Agent-Workflow-Update.png" alt="Agent Process Flow">
+
+ <h3> Typical Development Workflow </h3>
+   <ol class="development-workflow"> 
+     <li>
+       <h4>Frame the Problem</h4>
+         <p>Before selecting a model or creating an agent, define the problem the application is intended to solve. This helps prevent teams from building an AI application simply because the technology is available. </p>
+         <p>Consider:</p>
+           <ul>
+             <li> Who experiences the problem?</li>
+             <li> What are they trying to accomplish?</li>
+             <li> Where does the current process create difficulty, delay, or risk?</li>
+             <li> What evidence confirms that the problem exists?</li>
+             <li> What measurable outcome would represent an improvement?</li>
+             <li> Does the problem require an AI agent, or could a simpler solution work better?</li>
+           </ul>
+      </li>
+      <li> 
+        <h4>Define the Application's Requirements</h4>
+          <p>Determine what the application must do to address the validated problem. Identify the information it needs, the actions it must perform, the people and systems it will interact with, and any operational or security constraints.</p>
+      </li>
+      <li> 
+        <h4>Select the Model</h4>
+          <p>Choose a model based on the capabilities the application requires, along with factors such as cost, response time, context-window size, privacy requirements, and provider availability.</p>
+      </li>
+      <li>
+        <h4>Define Instructions and Tools</h4>
+          <p>Write the agent’s instructions and define the tools it may use. Each tool should address a specific application requirement and have clearly defined inputs and outputs.</p>
+      </li>
+      <li>
+        <h4>Configure the Agent</h4>
+          <p>Connect the model, instructions, and tools. Add state, memory, middleware, and structured output where the application’s requirements justify them.</p>
+      </li>
+      <li>
+        <h4>Test and Evaluate</h4>
+          <p>Test the application using representative scenarios, including expected inputs, ambiguous requests, tool failures, and potentially unsafe actions.</p>
+          <p>Evaluate both technical performance and whether the application improves the original user problem.</p>
+      </li>
+      <li>
+        <h4>Deploy and Monitor</h4>
+          <p>Deploy the application into its intended environment. Monitor behavior, cost, response time, tool usage, failures, and user outcomes.</p>
+      </li>
+      <li> 
+        <h4>Improve the Application</h4>
+          <p>Use evaluation results, execution traces, and user feedback to revise the application. Improvements may involve changing instructions, tools, models, control logic, or even reconsidering whether the original solution was appropriate.</p>
+      </li>
+   </ol>
+      <strong class="term-note-label"> Frame the problem -> build the application -> measure the outcome -> reconsider the solution. </strong>
+<!-- Code example? --> 
+
+ <h3> How it Interacts with Other LangChain Products </h3>  
+   <div class="term-container">
+      <h4 class="term-title">LangGraph: Controlling Agent Workflows</h4>
+        <span class="term-definition">LangGraph is a lower-level orchestration runtime for building and executing stateful agents and workflows.</span>
+          <p>LangChain agents are built on LangGraph. LangChain provides higher-level components for configuring common agent behavior, while LangGraph provides the underlying capabilities for maintaining state and controlling how execution progresses.            </p>
+          <p>Developers may work directly with LangGraph when they need greater control over execution paths, persistence, human decision points, or workflows combining predetermined steps with model-driven decisions. 
+          </p>
+    <div class="term-note">
+      <span> <strong class="term-note-label">When to Use</strong> Use LangChain when its higher-level agent architecture provides enough control. Work directly with LangGraph when the application requires a more explicitly designed workflow. </span>
+    </div>
+   </div>
+  <div class="term-container">
+      <h4 class="term-title">LangSmith: Observing and Evaluating Applications</h4>
+        <p>LangSmith is a platform for observing, evaluating, and improving AI applications.</p>
+        <p>It records application activity as traces, allowing developers to inspect model calls, tool usage, workflow steps, errors, and final outputs. Developers can also test applications against datasets, compare versions, and monitor behavior in               production.
+        </p>
+        <p>LangSmith works with LangChain and LangGraph, but it is not required to run applications built with either product. It can also be used with other AI frameworks.</p>
+     <div class="term-note">
+      <span> <strong class="term-note-label">The Through Line:</strong> <strong>LangChain</strong> helps build the application. <strong>LangGraph</strong> controls more customized execution. <strong>LangSmith</strong> helps developers understand and improve how the application behaves. </span>
+    </div>
+  </div>
+ <h3>Benefits and Tradeoffs</h3>
+  <p><strong>Benefits:</strong></p> 
+    <ul>
+      <li>Provides standardized interfaces across model and tool providers</li>
+      <li>Reduces the amount of application plumbing developers build themselves</li>
+      <li>Offers reusable agent patterns and integrations</li>
+      <li>Supports memory, middleware, structured output, and tool calling</li>
+      <li>Makes it easier to replace or reconfigure individual components</li>
+      <li>Integrates with LangGraph for greater workflow control</li>
+      <li>Integrates with LangSmith for tracing and evaluation</li>
+    </ul>
+  <p><strong>Tradeoffs:</strong></p> 
+     <ul>
+       <li>Adds another abstraction layer that developers must understand</li>
+       <li>Can be unnecessary for simple model requests</li>
+       <li>Agent behavior can be nondeterministic and difficult to test</li>
+       <li>Additional tools and agent steps increase latency and cost</li>
+       <li>Framework updates can require developers to revise existing applications</li>
+       <li>Prebuilt abstractions may provide less control than custom code</li>
+       <li>Connecting a tool does not automatically make its data accurate, safe, or appropriate</li>
+       <li>Developers remain responsible for access controls, error handling, validation, and monitoring</li>
+     </ul>
+  </div>
+</details>
+
+
+<details class="level-section level-advanced">
+  <summary class="level-summary">
+    <span class="level-kicker">Advanced</span>
+    <h2>Architecture and Implementation</h2>
+    <span class="level-description">How execution, state, resilience, evaluation, and production behavior fit together.</span>
+  </summary>
+  <div class="level-content">
+<div class="content-block advanced-intro">
+  <p>At the beginner level, LangChain can be understood as a framework for connecting models to information, tools, and instructions. At the intermediate level, those components become a workflow. At the advanced level, the important questions change:</p>
+    <ul>
+      <li>How is that workflow executed?</li>
+      <li>What state survives between steps?</li>
+      <li>What happens when something fails?</li>
+      <li>How can execution be inspected, resumed, evaluated, and deployed reliably?</li>
+    </ul>   
+  <p>Advanced LangChain development is therefore less about adding more components and more about controlling the behavior of the system those components create.</p>
+</div>
+<div class="advanced-roadmap">
+  <p class="advanced-roadmap-label">Advanced Roadmap</p>
+  <nav aria-label="Advanced section roadmap">
+    <a href="#advanced-architecture">Architecture &amp; Execution</a>
+    <a href="#advanced-state">State &amp; Persistence</a>
+    <a href="#advanced-streaming">Streaming</a>
+    <a href="#advanced-configuration">Configuration</a>
+    <a href="#advanced-implementation">Implementation</a>
+    <a href="#advanced-failure">Failure &amp; Resilience</a>
+    <a href="#advanced-debugging">Debugging &amp; Evaluation</a>
+    <a href="#advanced-deployment">Production</a>
+    <a href="#advanced-when-not">When Not to Use It</a>
+    <a href="#advanced-references">References</a>
+  </nav>
+</div>
+<div id="advanced-architecture" class="content-block advanced-section advanced-architecture">  
+<h3>Architecture and Execution Model</h3>
+  <p>At Intermediate we talked about components interacting. Here we explain that those interactions ultimately create an <strong>execution topology</strong>.</p>
+  <p>A modern LangChain agent is not simply:</p>
+    <div class="term-note">
+      <span> <strong class="term-note-label"> User -> Prompt -> Model -> Answer </strong> </span>
+    </div>
+  <p>It is closer to:</p>
+   <div class="term-note">
+      <span> <strong class="term-note-label"> Input -> State -> Model -> Decision -> Tool -> State Update -> Model -> ... -> Output </strong> </span>
+  </div>
+  <p> When <code>create_agent</code> is used, LangChain constructs that agent on a LangGraph-based runtime. The graph contains steps such as model calls and tool execution, connections controlling how execution moves between them, and middleware that can intervene at different points in that process. The loop continues until the model produces a final response or another stop condition is reached.
+  </p>
+  <p><strong>LangChain</strong> provides higher-level abstractions for assembling AI applications. <strong>LangGraph</strong> provides the lower-level orchestration model used when those applications require explicit control over execution, state, persistence, branching, or recovery.
+  </p>
+  <p> A LangChain agent may therefore <em>run on LangGraph</em> without the developer manually constructing a graph. When an application's execution logic becomes more specialized, that same developer can move downward and work directly with LangGraph.    </p>
+  <div class="term-container">
+    <h4 class="term-title">Workflow vs. Agent</h4>
+       <div class="term-note">
+         <span> A <strong class="term-note-label">Workflow </strong> has substantially predetermined execution paths. </span>
+       </div>
+       <div class="term-note">
+         <span> An <strong class="term-note-label">Agent</strong> can dynamically choose its next action based on the model, available tools, and current state.</span>
+       </div>
+  </div>
+    <p>LangGraph supports both patterns, and they can be combined. A deterministic workflow might classify a request first, route it to a specialized agent, require human approval before a sensitive action, and then return to deterministic processing afterward.
+    </p>
+    <!-- Optional future diagram: deterministic workflow + agent loop -->
+</div>
+<div id="advanced-state" class="content-block advanced-section advanced-state">
+<h3>State, Persistence, and Memory</h3>
+  <p>Once an application contains multiple execution steps, information has to move between those steps. <strong>State is the application's working record of what is currently true during execution.</strong></p> 
+  <p>State may contain conversation messages, intermediate results, user identifiers, retrieved information, tool results, workflow status, or any other values later steps need.</p>
+  <p>In a graph-based workflow, individual nodes can read relevant portions of the current state and return updates to it. State therefore becomes the common information layer connecting otherwise separate steps in the execution process.</p>
+  <p>For example, a research workflow might maintain state containing:</p>
+    <ul>
+      <li>the user's original question;</li>
+      <li>documents retrieved so far;</li>
+      <li>sources already searched;</li>
+      <li>intermediate findings;</li>
+      <li>whether additional research is required; and</li>
+      <li>the final structured response.</li>
+    </ul>
+    <p>A retrieval node might add documents to that state. An analysis node might inspect those documents and add findings. A routing decision might then use those findings to determine whether the workflow should continue researching or proceed to the final response.</p>
+<div class="subdefinition content-block compact">
+      <span><strong class="subterm">Context, State, and Memory</strong></span> 
+        <p>These concepts are related, but they describe different parts of the system.</p>
+           <ul>
+             <li><strong>Context</strong> is the information made available to the model during a particular model call, within the limits of that model's context window.</li>
+             <li><strong>State</strong> is the information the application maintains while a thread or workflow is executing.</li>
+             <li><strong>Memory</strong> is information retained so that previous interactions or learned information can influence later ones.</li>
+           </ul>
+        <p>The important distinction is that <strong>the model does not necessarily receive everything stored in application state.</strong> The application determines which portions of state are relevant and supplies the appropriate information as context when calling the model. Likewise, not everything held in state needs to become long-term memory.</p>
+        <p>A workflow might temporarily store hundreds of retrieved documents in state while producing an answer without preserving those documents as information the system should remember later.</p>
+ </div>
+<div class="subdefinition content-block compact">
+      <span><strong class="subterm">Persistence and Checkpoints</strong></span> 
+        <p>Without persistence, application state exists only while the workflow is running. If execution stops, the process crashes, or the user returns later, that working state may be lost.</p>
+        <p>LangGraph provides persistence through <strong>checkpointers</strong>. When a graph uses a checkpointer, snapshots of its state are saved as execution progresses. Those snapshots are called <strong>checkpoints</strong> and are organized into <strong>threads</strong>. A thread represents the continuing history of a particular interaction or workflow. </p>
+        <p>Conceptually:</p>
+        <ul>
+          <li><strong>State</strong> <em>What does the application know right now?</em></li>
+          <p><strong>↓</strong></p>
+          <li><strong>Checkpoint</strong> <em>What did the application know at this point in execution?</em></li>
+          <p><strong>↓</strong></p>
+          <li><strong>Thread</strong> <em>Which continuing interaction do those checkpoints belong to?</em></li>
+          <p><strong>↓</strong></p>
+          <li><strong>Persistence</strong> <em>Can that state be recovered and used later?</em></li>
+        </ul>
+        <p>This means a workflow does not necessarily have to restart from the beginning every time execution is interrupted.</p>
+ </div>
+ <div class="subdefinition content-block compact">
+      <span><strong class="subterm">Why Checkpointing Matters</strong></span> 
+        <p>Checkpointing is useful for much more than remembering a conversation.</p> 
+        <p>Because previous execution state can be recovered, persisted workflows can support:</p>
+        <ul>
+          <li><strong>Fault recovery</strong> - If part of a workflow fails, execution can resume from previously persisted state rather than repeating every successful step.</li>
+          <li><strong>Human-in-the-loop execution</strong> - A workflow can pause before a consequential action, preserve its current state, wait for human review or approval, and then continue.</li>
+          <li><strong>Conversation continuity</strong> - Later interactions can continue within the same thread while retaining information from earlier interactions.</li>
+          <li><strong>Replay and time travel</strong> - Previous checkpoints can be inspected or replayed to understand how execution reached a particular result.</li>
+          <li><strong>Branching</strong> - Execution can be restarted from an earlier checkpoint with different information or decisions, allowing alternative paths to be explored.</li>
+        </ul>
+        <p>These capabilities are a major reason persistence becomes important as applications move from simple model calls toward long-running or stateful workflows.</p>
+ </div>
+ <div class="subdefinition content-block compact">
+      <span><strong class="subterm">Short-Term and Long-Term Memory</strong></span>
+        <p>LangChain distinguishes memory partly by <strong>how broadly the information should be available</strong>.</p>
+        <p><strong>Short-term memory</strong> is thread-scoped. It allows an application to retain information within an ongoing conversation or workflow. LangChain agents manage this as part of agent state, with a checkpointer persisting that state so the same thread can continue across multiple interactions.</p>
+        <p><strong>Long-term memory</strong> exists outside a single thread. It allows information to be recalled across different conversations or sessions.</p>
+        <p>LangGraph uses a <strong>Store</strong> for this type of persistence. Unlike a checkpointer, which preserves the evolving state of a particular thread, a Store holds application-defined information that can be accessed across threads.</p>
+        <p>For example, consider an assistant used repeatedly by the same person.</p>
+        <p>A checkpointer might preserve:</p>
+        <ul>
+          <li>the messages from the current conversation;</li>
+          <li>tool results produced during that conversation; and</li>
+          <li>where the current workflow is in its execution.</li>
+        </ul>
+        <p>A long-term Store might preserve:</p>
+        <ul>
+          <li>the user's preferred output format;</li>
+          <li>recurring project information;</li>
+          <li>previously established facts; or</li>
+          <li>other information the application intentionally wants available in future conversations.</li>
+        </ul>
+        <p><strong>Short-term memory:</strong> <em>What should this thread remember?</em></p>
+        <p><strong>Long-term memory:</strong> <em>What should the application remember beyond this thread?</em></p>
+        <p>Persistence therefore does more than make an AI application "remember." It creates continuity across execution, allowing workflows to pause, recover, resume, revisit earlier states, and selectively carry useful information into future interactions.</p>
+ </div>
+</div>
+<div id="advanced-streaming" class="content-block advanced-section advanced-streaming">
+<h3>Streaming and Runtime Behavior</h3>
+  <p class="heading-tagline"> Streaming <strong>does not</strong> only mean displaying words one token at a time.</p>
+  <p>An application can expose multiple kinds of information while it executes. LangChain currently supports streaming model tokens, agent progress updates, and application-defined custom events. At the LangGraph level, developers can also stream state values, state updates, checkpoint information, task execution events, and detailed debugging information.</p>
+  <p>Imagine an agent has to:</p>
+  <div class="term-note">
+      <span> <strong class="term-note-label"> Interpret request -> search records -> retrieve records -> analyze records -> generate recommendation </strong> </span>
+  </div>
+  <p>Without streaming, the user might stare at a loading indicator for twenty seconds <em>(otherwise known as a lifetime in 'waiting for the robot' time).</em></p>
+  <p>With streaming, the application could surface:</p>
+   <dl class="decision-list">
+     <dd>Searching records...</dd>
+     <dd><em>Found 14 candidate documents</em></dd>
+     <dd>Reviewing 6 relevant sources...</dd>
+     <dd>Comparing findings...</dd>
+     <dd>Generating recommendation...</dd>
+   </dl>
+ <p>All of this occurring while the final answer still streams token by token. That means streaming becomes more than a UX trick, but <strong>a layer of visibility over execution</strong>.</p>
+</div>
+  
+<div id="advanced-configuration" class="content-block advanced-section advanced-configuration">
+<h3>Configuration and Architectural Choices</h3>
+  <p>The important idea is that building with LangChain isn't primarily about turning features on. It's about deciding <strong>where the model should have discretion and where software should retain control.</strong></p>
+    <div class="subdefinition content-block compact">
+      <span><strong class="subterm">Agent or Deterministic Workflow?</strong></span> 
+       <dl class="decision-list">
+          <dt>Is the sequence already known?</dt>
+            <dd>Encode the sequence.</dd>
+          <dt>Does the next action require interpretation?</dt>
+            <dd>An agent may make sense.</dd>
+          <dt>Can normal software make the decision?</dt>
+            <dd>Don't make an LLM rediscover it.</dd>
+        </dl>
+    </div>
+    <div class="subdefinition content-block compact">
+      <span><strong class="subterm">Model Selection</strong></span>
+        <dl class="decision-list">
+          <dt>What level of reasoning does this step require?</dt>
+            <dd>Use greater model capability where the task warrants it rather than assuming every step needs the strongest available model.</dd>
+          <dt>What constraints matter besides capability?</dt>
+            <dd>Consider latency, cost, context-window size, tool support, structured output, multimodal input, and provider requirements.</dd>
+          <dt>Does every step need the same model?</dt>
+            <dd>No. Complex analysis may justify a more capable model while classification, extraction, or routing may not.</dd>
+          <dt>What capabilities does the model need?</dt>
+            <dd>Consider requirements such as context length, tool calling, structured output, multimodal input, and any provider-specific capabilities the application depends on.</dd>
+        </dl>
+      <div class="term-note">
+         <span><strong class="term-note-label">Principle:</strong> Match model capability to the job being performed.</span>
+       </div>
+    </div>
+    <div class="subdefinition content-block compact">
+      <span><strong class="subterm">Context and Retrieval Strategy </strong></span>
+        <p>The model should receive <strong>the information needed for the current decision, not automatically everything the application knows.</strong></p>
+      <dl class="decision-list">
+          <dt>What information does the model need right now?</dt>
+            <dd>Relevant context may come from the user request, state, memory, retrieved documents, databases, tool results, or runtime information.</dd>
+          <dt>When should that information be introduced?</dt>
+            <dd>Provide persistent or foundational context up front and retrieve situational information when the workflow actually needs it.</dd>
+          <dt>Is more context actually better?</dt>
+            <dd>Not necessarily. Irrelevant or excessive information consumes context-window space, increases cost, and can make important information harder for the model to distinguish.</dd>
+          <dt>How should external information be retrieved?</dt>
+            <dd>Use the retrieval method that matches the source and task, such as semantic search, metadata filtering, structured queries, tools, or a combination of approaches.</dd>
+      </dl>
+      <div class="term-note">
+         <span><strong class="term-note-label">Principle:</strong> The question is not "<em>What information can the application access?</em>” but “<em>What information does the model need for this decision?</em>”</span>
+       </div>
+    </div>
+    <div class="subdefinition content-block compact">
+      <span><strong class="subterm">Tool Design</strong></span>
+        <p>Tools determine what actions the model can request and how much freedom it has when doing so.</p>
+        <dl class="decision-list">
+          <dt>What should the model actually be allowed to do?</dt>
+            <dd>Expose only the capabilities necessary for its role in the application.</dd>
+          <dt>How broad should each tool be?</dt>
+            <dd>Broad tools provide flexibility; narrower tools reduce ambiguity and keep more control inside the application.</dd>
+          <dt>Can the tool's purpose be clearly understood?</dt>
+            <dd>Tool names, descriptions, inputs, and expected behavior should make it clear when the tool should be used and what information it requires.</dd>
+          <dt>What happens if the tool is used incorrectly?</dt>
+            <dd>Consequential actions may require validation, permissions, confirmation, or human review.</dd>
+        </dl>
+      <p>A generic database-query tool gives the model more discretion than a purpose-built <code>get_customer_record</code> tool. The choice determines how much responsibility belongs to the model and how much remains encoded in the application.</p>
+    </div>
+    <div class="subdefinition content-block compact">
+      <span><strong class="subterm">Structured Output</strong></span>
+        <p>Structured output controls how information leaves the model when the application needs a predictable result.</p>  
+        <dl class="decision-list">
+          <dt>Will another system consume the response?</dt>
+            <dd>Predictable fields and data types may be more useful than free-form prose.</dd>
+          <dt>Does the result need a consistent schema?</dt>
+            <dd>Require structured output when downstream software needs to reliably identify particular values.</dd>
+          <dt>Is free-form language actually valuable here?</dt>
+            <dd>Use it when flexibility matters; use structured output when consistency, validation, or machine readability matters more.</dd>
+        </dl>
+       <div class="term-note">
+         <span><strong class="term-note-label">Principle:</strong> Structured output does not primarily determine what the system does - it determines how the result is organized.</span>
+       </div>
+    </div>
+    <div class="subdefinition content-block compact">
+      <span><strong class="subterm">Middleware</strong></span>
+        <p>Middleware is useful for behavior that should occur <strong>around execution</strong> rather than being rebuilt inside individual models, tools, or nodes.</p>
+        <dl class="decision-list">
+          <dt>What behavior should apply across the application?</dt>
+            <dd>Logging, validation, guardrails, retries, context management, and similar controls can live in middleware.</dd>
+          <dt>Should execution change based on current conditions?</dt>
+            <dd>Middleware can inspect context or state and influence later model or tool behavior.</dd>
+          <dt>Does execution ever require human judgment?</dt>
+            <dd>Human-in-the-loop middleware can create decision-support checkpoints before consequential actions proceed.</dd>
+        </dl>
+      <div class="term-note">
+         <span><strong class="term-note-label">Principle:</strong> Cross-cutting behavior generally belongs around the workflow rather than being duplicated throughout it.</span>
+       </div>
+    </div>
+</div>
+
+<div id="advanced-implementation" class="content-block advanced-section advanced-implementation">
+<h3>Implementation Example</h3>
+  <p>The concepts discussed above become easier to understand when they are combined into a single application. Consider a <strong>decision-support research agent</strong> tasked with comparing several proposed software solutions against an established set of requirements.</p>
+  <p>A user might ask:</p>
+  <div class="term-note">
+    <span><strong class="term-note-label">Prompt:</strong> Compare these three proposed solutions against our requirements and recommend which should advance for further evaluation.</span>
+  </div>
+  <p>This is more complicated than a single model call. The system must retrieve authoritative requirements, gather relevant information about each proposal, determine whether enough evidence exists to make a comparison, organize its findings, and produce a recommendation that can be reviewed by a human decision-maker.</p>
+  <div class="subdefinition content-block compact">
+    <span><strong class="subterm">Execution Flow</strong></span>
+    <p>The workflow might follow this general path:</p>
+      <div class="flow-stack" aria-label="Decision-support execution flow">
+        <div class="flow-step">Receive Request</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step">Validate Required Information</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step">Retrieve Requirements</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step">Retrieve Proposal Information</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step">Analyze Evidence</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-decision">Is Additional Evidence Needed?</div>
+        <div class="flow-branch">
+          <span><strong>Yes:</strong> retrieve additional information and return to analysis.</span>
+          <span><strong>No:</strong> continue.</span>
+        </div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step">Generate Structured Recommendation</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step">Human Review</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step">Final Output</div>
+      </div>
+     <p>The first several steps are largely deterministic because the application already knows that requirements and proposal information are necessary. The model does not need to decide whether those steps exist.</p>
+     <p>The analysis stage introduces discretion. After comparing the available evidence, the system may determine that information is missing or insufficient and request another retrieval step. Once enough evidence exists, execution can leave the research loop and proceed toward a structured recommendation.</p>
+  </div>
+  <div class="subdefinition content-block compact">
+    <span><strong class="subterm">What Each Component Is Doing</strong></span>
+      <dl class="decision-list">
+        <dt>State</dt>
+          <dd>State carries the working information needed across the workflow: the original request, requirements, proposal data, retrieved evidence, intermediate findings, and current execution status.</dd>
+        <dt>Tools</dt>
+          <dd>Tools provide controlled access to external information, such as retrieving requirements, searching proposal records, or querying supporting documentation.</dd>
+        <dt>Agent Reasoning</dt>
+          <dd>The model interprets the available evidence and determines whether the comparison can proceed or whether additional information is required.</dd>
+        <dt>Retrieval</dt>
+          <dd>Rather than loading every available document into the model's context, the application retrieves relevant information when the workflow needs it.</dd>
+        <dt>Structured Output</dt>
+          <dd>
+            <ul>
+              <li>Proposal</li>
+              <li>Relevant Evidence</li>
+              <li>Requirements Satisfied</li>
+              <li>Identified gaps</li>
+              <li>Risks</li>
+              <li>Confidence</li>
+              <li>Recommendation</li>
+            </ul>
+          </dd>
+        <dt>Middleware</dt>
+          <dd>Middleware can apply behavior across execution, such as logging activity, managing context, validating tool calls, retrying failures, or enforcing review requirements.</dd>
+        <dt>Persistence</dt>
+          <dd>Checkpointing allows the workflow's state to survive interruptions. A long-running analysis could pause for additional information or human review and later resume without rebuilding the entire process.</dd>
+        <dt>Streaming</dt>
+          <dd>The application can expose progress while the workflow runs. For example, indicating that requirements are being retrieved, evidence is being analyzed, or additional research is underway.</dd>
+        <dt>Human-in-the-Loop Review</dt>
+          <dd>Before the recommendation becomes final or triggers a consequential action, execution can pause and present the findings to a human decision-maker for approval, modification, or rejection.</dd>
+        <dt>Observability</dt>
+          <dd>The application's execution can be traced so developers can later inspect which information was retrieved, which tools were called, how the workflow moved between steps, and where an unexpected result originated.</dd>
+      </dl>
+     <div class="term-note">
+        <span><strong class="term-note-label">The Through Line</strong></span>
+          <p>No individual feature makes this application “advanced.” The complexity comes from coordinating them.</p>
+          <p>Deterministic software controls the portions of the workflow that are already known. The model is given discretion where interpretation is useful. State carries information between steps. Tools constrain access to external systems. Persistence allows execution to survive interruptions. Structured output constrains the result, and human review retains authority over consequential decisions.</p>
+          <p>LangChain and LangGraph provide abstractions for coordinating these behaviors without requiring every part of the execution system to be built from scratch.</p>
+      </div>
+  </div>
+</div>
+  
+<div id="advanced-failure" class="content-block advanced-section advanced-failure">
+<h3>Failure Modes and Resilience</h3>
+  <p>Traditional software often fails when code encounters a condition the developer did not anticipate. LLM applications introduce an additional problem: <strong>the application can execute successfully while the model still makes a poor decision.</strong></p>
+  <p>A tool call can complete successfully but return irrelevant information. Retrieval can find documents that do not actually answer the question. A model can interpret good evidence incorrectly, choose the wrong tool, stop researching too early, or continue looping after enough information is already available. </p>
+  <p>This means failure in an LLM application is not limited to crashes, exceptions, or unavailable services. The system may remain technically operational while producing behavior that is incomplete, inefficient, inconsistent, or simply wrong.</p>
+ <div class="subdefinition content-block compact">
+    <span><strong class="subterm">Tool and External-System Failures</strong></span>
+      <p>Tools connect the model to systems outside the model itself, which introduces many of the same failure conditions found in traditional software.</p>
+      <p>An API may time out. A database may be unavailable. Authentication may expire. A tool may reject malformed arguments. A service may return incomplete data. The additional concern is that the <strong>model is often responsible for deciding when and how the tool should be used.</strong></p>
+      <p>A tool can therefore work exactly as designed while still being used incorrectly.</p>
+      <div class="term-note">
+         <span><strong class="term-note-label">Example:</strong></span>
+           <p>The decision-support workflow might successfully retrieve a proposal record, but the model could request the wrong proposal, use an overly broad search, or interpret the returned information as more authoritative than it actually is.</p>
+      </div>
+ </div>
+ <div class="subdefinition content-block compact">
+    <span><strong class="subterm">Retrieval and Context Failures</strong></span>
+    <p>Giving the model access to information does not guarantee that the right information reaches the model at the right time.</p>
+    <p>Retrieval may return irrelevant documents, overlook an important source, or rank weak evidence above more useful evidence. Too much information can also create problems by crowding the context window and making important details harder to distinguish.</p>
+    <p>A failure can therefore occur even when the required information exists somewhere in the application.</p>
+      <dl>
+        <dt>The important question is not only:</dt>
+          <dd><strong>"Was the information retrieved?"</strong></dd>
+        <dt>but:</dt>
+          <dd><strong>"Was the right information retrieved, and was it useful for the decision being made?"</strong></dd>
+      </dl>
+ </div>
+ <div class="subdefinition content-block compact">
+    <span><strong class="subterm">Model and Decision Failures</strong></span>
+    <p>Some failures occur because the model makes an incorrect judgment rather than because any software component breaks.</p>
+    <p>The model might:</p>
+      <ul>
+        <li>select the wrong tool;</li>
+        <li>misunderstand a requirement;</li>
+        <li>draw an unsupported conclusion;</li>
+        <li>decide that sufficient evidence exists when additional research is needed;</li>
+        <li>continue researching when enough evidence already exists; or</li>
+        <li>produce a response that sounds confident despite weak evidence.</li>
+      </ul>
+    <p>These failures are particularly important because they may not generate an exception or obvious error message.</p>
+    <p>From the application's perspective, execution may have completed normally.</p>
+ </div>
+ <div class="subdefinition content-block compact">
+    <span><strong class="subterm">Loops and Runaway Execution</strong></span>
+    <p>Agentic systems can revisit earlier steps when additional work is required. That flexibility is useful, but it also creates the possibility of unproductive loops.</p>
+    <p>An agent might repeatedly call the same tool, retrieve similar information, alternate between two actions, or continue searching because it never becomes sufficiently confident to stop.</p>
+    <p>Without boundaries, a workflow can consume increasing amounts of time, tokens, and external-service calls without meaningfully improving the result.</p>
+    <p>Applications therefore often need explicit limits such as:</p>
+      <ul>
+        <li>maximum iterations;</li>
+        <li>execution timeouts;</li>
+        <li>token or cost budgets; and</li>
+        <li>clear stop conditions.</li>
+      </ul>
+    <p>These controls can be layered. A workflow may use more than one when different limits protect against different kinds of runaway behavior.</p>
+    <p>The goal is not to eliminate iteration. It is to prevent <strong>iteration without progress</strong>.</p>
+ </div>
+  <div class="subdefinition content-block compact">
+    <span><strong class="subterm">State and Persistence Failures</strong></span>
+    <p>State introduces another category of risk because later steps depend on information created earlier in the workflow. State may become stale, incomplete, incorrectly updated, or inconsistent with the external systems it represents.</p>
+    <p><strong>Persistence can preserve those mistakes</strong>.</p>
+    <p>A checkpoint may accurately record what the application believed at an earlier point in time while the underlying data has since changed. Resuming from that checkpoint without verifying important information can cause the workflow to continue from assumptions that are no longer valid.</p>
+    <p>Persistence therefore improves continuity, but it does not guarantee correctness.</p>
+  </div>
+  <div class="subdefinition content-block compact">
+    <span><strong class="subterm">Retries and Consequential Actions</strong></span>
+    <p>Retries are a common response to temporary failures, but they require additional care when tools can change the outside world.</p>
+    <p>Repeating a failed document search may be harmless. Repeating an action that sends an email, creates a purchase, modifies a record, or submits a request may not be.</p>
+    <p>The application must distinguish between operations that can safely be repeated and operations where retrying could duplicate a real-world action. For consequential operations, the system may need confirmation, unique transaction identifiers, validation, or human review before retrying.</p>
+  </div>
+  <div class="subdefinition content-block compact">
+    <span><strong class="subterm">Building for Resilience</strong></span>
+    <p>Resilience does not mean preventing every possible failure. It means designing the application so that failures are <strong>contained, visible, and recoverable</strong>.</p>
+    <p>Common safeguards include:</p>
+      <dl class="decision-list">
+        <dt>Validation</dt>
+          <dd>Check tool inputs, structured outputs, and important intermediate results before allowing execution to continue.</dd>
+        <dt>Retries</dt>
+          <dd>Repeat operations when failures are likely to be temporary, but only when repetition is safe.</dd>
+        <dt>Timeouts and execution limits</dt>
+          <dd>Prevent tools or agents from running indefinitely.</dd>
+        <dt>Fallbacks</dt>
+          <dd>Provide an alternative model, tool, or execution path when the preferred option is unavailable.</dd>
+        <dt>Explicit stop conditions</dt>
+          <dd>Define when an agent should stop searching, reasoning, or calling tools.</dd>
+        <dt>Checkpointing</dt>
+          <dd>Preserve progress so a long-running workflow can recover from interruption without repeating every successful step.</dd>
+        <dt>Human review</dt>
+          <dd>Pause execution before actions or decisions where automated recovery is insufficient or the consequences justify human authority.</dd>
+      </dl>
+  </div>
+  <div class="subdefinition content-block compact">
+    <span><strong class="subterm">Failure Is Not Always an Error</strong></span>    
+    <p>One of the most important differences between traditional software and LLM applications is that <strong>a successful execution is not necessarily a successful result</strong>.</p>
+    <p>The system may call every tool correctly, maintain valid state, complete every graph node, and return perfectly valid structured output <strong>and still produce a poor recommendation</strong>.</p>
+     <div class="term-note">
+         <span><strong class="term-note-label">That means</strong></span>
+           <p>reliability cannot be measured only by whether the application crashed.</p>
+     </div>
+     <p>Developers also need visibility into <strong>how the application behaved and whether that behavior produced a useful result</strong>.</p>
+  </div>
+</div>
+
+<div id="advanced-debugging" class="content-block advanced-section advanced-debug">
+<h3>Debugging, Observability, and Evaluation</h3>
+  <p>In a simple application, debugging often means inspecting an error message or checking whether a function returned the expected value.</p>
+  <p>Agentic applications are harder to reason about because the final response may be the result of multiple model calls, tool calls, retrieval steps, routing decisions, state updates, and retries. Looking only at the final answer can therefore hide most of what actually happened.</p>
+  <p>That creates three related but different questions:</p>
+    <ul>
+      <li><strong>Debugging</strong> asks: <i>Why did this specific execution fail or behave unexpectedly?</i></li>
+      <li><strong>Observability</strong> asks: <i>What happened across the workflow while it was running?</i></li>
+      <li><strong>Evaluation</strong> asks: <i>Was the resulting behavior actually good?</i></li>
+    </ul>
+  <p>These questions overlap, but are not interchangeable.</p>
+<h4 class="section-subhead">Debugging</h4>
+ <div class="subdefinition content-block compact">
+    <span><strong class="subterm">Tracing Execution</strong></span>
+    <p>A trace provides a record of how an application moved from input to output.</p>
+    <p>Instead of only seeing:</p>
+    <p><strong>User Request → Final Answer</strong></p>
+    <p>A trace can expose the intermediate execution path:</p>
+      <dl class="decision-list">
+        <dt>User Request</dt>
+          <dd>→ Model Call</dd>
+          <dd>→ Tool Selection</dd>
+          <dd>→ Tool Result</dd>
+          <dd>→ State Update</dd>
+          <dd>→ Additional Model Call</dd>
+          <dd>→ Final Output</dd>
+      </dl>
+    <p>LangSmith provides one implementation of this approach by exposing traces and individual runs, making it possible to inspect the execution path rather than treating the final response as a black box.</p>
+    <p>This becomes especially important in agentic systems because a poor result may originate several steps before the final response is generated.</p>
+ </div>
+ <div class="subdefinition content-block compact">
+    <span><strong class="subterm">Debugging the Execution Path</strong></span>
+    <p>Suppose the decision-support workflow produces a weak recommendation. The final answer alone may not reveal why.</p>
+     <dl class="decision-list">
+       <dt>The underlying trace might show that:</dt>
+         <dd>the wrong retrieval tool was selected;</dd>
+         <dd>the correct tool was used with poor arguments;</dd>
+         <dd>retrieval returned weak evidence;</dd>
+         <dd>good evidence was retrieved but interpreted incorrectly;</dd>
+         <dd>the agent stopped researching too early;</dd>
+         <dd>or the final structured response omitted information that existed earlier in the workflow.</dd>
+    </dl>
+  <p>Debugging therefore means working backward through the execution path to identify <strong>where actual behavior diverged from expected behavior</strong>.</p>
+  <p>That distinction matters because changing the final prompt would not fix a retrieval problem, and changing the retrieval strategy would not fix a tool-selection problem.</p>
+   <div class="term-note">
+         <span> The <strong class="term-note-label">trace</strong> helps identify which layer actually needs attention.</span>
+   </div>
+ </div>
+<h4 class="section-subhead">Observability</h4>
+ <div class="subdefinition content-block compact">
+    <span><strong class="subterm">Observability Beyond Individual Failures</strong></span>
+    <p>Debugging usually begins with a particular problem. Observability is broader.</p>
+    <p>Observability provides enough visibility into application behavior to identify patterns across many executions rather than investigating only when a user reports something obviously wrong.</p>
+    <p>Useful signals might include:</p>
+     <ul> 
+       <li>execution latency,</li>
+       <li>model and tool usage,</li>
+       <li>error rates,</li>
+       <li>unusually long agent trajectories,</li>
+       <li>repeated tool calls,</li>
+       <li>user feedback,</li>
+       <li>or changes in response quality over time.</li>
+     </ul>
+    <p>Observability can extend beyond individual traces to aggregate production behavior, using metrics, dashboards, alerts, and feedback to reveal patterns across many executions. LangSmith provides tooling for this kind of trace-level and production-level monitoring.</p>
+    <p>This changes the question from:</p>  
+      <dl class="decision-list">
+        <dt>"Why did this request fail?"</dt>
+          <dd>to:</dd>
+        <dt>"How is the system behaving as a whole?"</dt>
+      </dl>
+    <p>A single unusually long run <i>might</i> be harmless. A <i>steady increase</i> in average tool calls may indicate that the agent is beginning to take less efficient execution paths.</p>
+    <p>An occasional retrieval miss may be expected. A <strong>consistent pattern</strong> of retrieval failures may point to a problem in the retrieval architecture itself.</p>   
+    <div class="term-note">
+         <span><strong class="term-note-label">Observability</strong> helps reveal those patterns.</span>
+    </div>
+ </div>
+<h4 class="section-subhead">Evaluation</h4>
+  <p>Observability tells you what happened. Evaluation asks whether what happened was <strong>good enough</strong>.</p>
+  <p>This is necessary because an LLM application can execute perfectly from a software perspective while still producing a poor result.</p>
+    <ul>
+      <li>Every API request may succeed.</li>
+      <li>Every tool may return valid data.</li>
+      <li>The graph may follow an allowed execution path.</li>
+      <li>The structured output may pass validation.</li>
+    </ul>
+  <p>And the answer may <strong>still</strong> be inaccurate, incomplete, poorly reasoned, or unhelpful.</p>
+  <p>Evaluation therefore requires defining what successful behavior actually looks like.</p>
+  <p>For the decision-support example, that might mean asking whether the system retrieved relevant evidence, interpreted requirements correctly, used appropriate tools, identified important gaps, supported its conclusions with evidence, and produced a recommendation consistent with the available information.</p>
+  <div class="term-note">
+         <span> The <strong class="term-note-label">exact criteria</strong> depend on the application.</span>
+  </div>
+  <div class="subdefinition content-block compact">
+    <span><strong class="subterm">Offline Evaluation</strong></span>
+    <p><strong>Offline evaluation</strong> tests the application against known examples before or between deployments.</p>
+    <p>A dataset might contain:</p>
+      <ul>
+        <li>representative user requests,</li>
+        <li>difficult edge cases,</li>
+        <li>previously observed failures,</li>
+        <li>and <em>where appropriate</em> reference outputs or expected behavior.</li>
+      </ul> 
+    <p>A new prompt, model, retrieval strategy, tool design, or workflow version can then be run against that same dataset.</p>
+      <dl class="decision-list">
+        <dt>This makes it possible to ask:</dt>
+          <dd>Did the change improve the cases we were trying to fix?</dd>
+          <dd>Did it accidentally make previously successful cases worse?</dd>
+          <dd>Does the new model behave differently on important edge cases?</dd>
+      </dl>
+    <p>Offline evaluation can support benchmarking, regression testing, unit-style checks, and backtesting against historical production examples. LangSmith provides tooling for these kinds of evaluation workflows. This is particularly useful because changes that improve one example may degrade another.</p>
+    <div class="term-note">
+         <span><strong class="term-note-label">Note:</strong> Without repeated evaluation against a broader dataset, it is easy to optimize an application around whichever failure the developer happened to look at last.</span>
+    </div>
+  </div>
+   <div class="subdefinition content-block compact">
+    <span><strong class="subterm">Online Evaluation</strong></span>
+    <p><strong>Online evaluation</strong> examines application behavior after deployment as real users and real inputs begin exercising the system.</p>
+    <p>Production interactions often do not have a single known correct answer. Instead, online evaluation can look for signals such as quality degradation, unexpected tool use, format or policy violations, unusual execution patterns, and user feedback.</p>
+    <p>The goal is not simply to assign a score to every run. It is to identify patterns and edge cases that deserve attention.</p>
+    <div class="term-note">
+      <span><strong class="term-note-label">Production feedback loop:</strong> A failure discovered in production can become a new offline evaluation case, making the test set more representative of how the application is actually used.</span>
+    </div>
+  </div>
+
+  <div class="subdefinition content-block compact">
+    <span><strong class="subterm">Choosing Evaluators</strong></span>
+    <p>Different questions require different kinds of evaluation.</p>
+    <dl class="decision-list">
+      <dt>Can the requirement be checked with a rule?</dt>
+        <dd>Use deterministic checks when possible. Examples include whether JSON parses correctly, required fields are present, the expected tool was called, or execution remained within a defined limit.</dd>
+      <dt>Does the requirement depend on judgment?</dt>
+        <dd>Qualities such as relevance, clarity, evidence use, or reasoning quality may require human review or model-based evaluation.</dd>
+      <dt>Is one evaluator enough?</dt>
+        <dd>Not always. A useful evaluation strategy may combine structural checks, quality judgments, operational metrics, and human feedback.</dd>
+    </dl>
+    <p>Model-based evaluators can scale subjective review, but they are still models making judgments. They should be calibrated against clearly defined criteria and, where the stakes justify it, human review.</p>
+  </div>
+
+  <div class="subdefinition content-block compact">
+    <span><strong class="subterm">Closing the Feedback Loop</strong></span>
+    <p>The value of debugging, observability, and evaluation comes from connecting them into a repeatable improvement cycle.</p>
+    <div class="term-note">
+      <span><strong class="term-note-label">Observe → Identify Failure → Debug → Add Evaluation Case → Modify Application → Evaluate → Deploy → Observe Again</strong></span>
+    </div>
+    <p>A production trace can reveal an unexpected result. Debugging identifies where the behavior diverged from expectations. That failure can then be added to an evaluation dataset so the next change is tested against both the new case and previously successful behavior.</p>
+    <p><strong>Observability makes behavior visible. Debugging explains unexpected behavior. Evaluation determines whether the behavior meets the application's goals.</strong></p>
+  </div>
+</div>
+
+<div id="advanced-deployment" class="content-block advanced-section advanced-deployment">
+<h3>Deployment and Production Behavior</h3>
+  <p>Running an application successfully on a developer's machine is not the same as operating it reliably for real users.</p>
+  <p>Production introduces simultaneous users, long-running tasks, persisted state, external services, changing data, security boundaries, and limits on time and cost. The architecture must account for what happens when many executions occur at once and when any individual execution is interrupted.</p>
+
+  <div class="subdefinition content-block compact">
+    <span><strong class="subterm">Concurrency and Execution</strong></span>
+    <p>Multiple requests may be running at the same time. Each execution needs the correct state, context, permissions, and tool results without leaking information between unrelated users or threads.</p>
+    <p>Long-running or asynchronous work may also need to continue after the original request has ended. Production systems often separate accepting a request from completing the work so execution can be queued, resumed, or processed by another worker.</p>
+  </div>
+
+  <div class="subdefinition content-block compact">
+    <span><strong class="subterm">Persistence and Recovery</strong></span>
+    <p>Important state should not depend on a single process remaining alive. A worker can restart, a network request can fail, or an external service can become temporarily unavailable.</p>
+    <p>Persistent checkpoints and external data stores allow another execution process to recover the workflow's state and continue from a known point rather than starting over.</p>
+  </div>
+
+  <div class="subdefinition content-block compact">
+    <span><strong class="subterm">Scaling and Backpressure</strong></span>
+    <p>More users do not only create more model calls. They can also create more retrieval requests, tool calls, database activity, streaming connections, and queued work.</p>
+    <p>A production design therefore needs to consider how much work can run concurrently, what happens when demand exceeds available capacity, and how requests should wait or fail when dependencies are overloaded.</p>
+  </div>
+
+  <div class="subdefinition content-block compact">
+    <span><strong class="subterm">Security and Operational Boundaries</strong></span>
+    <p>Tools can expose sensitive data or perform real actions, so production systems need explicit authentication, authorization, secret management, and least-privilege access.</p>
+    <p>The model should not receive credentials or permissions simply because the surrounding application has them. Access should be constrained to what the current user and workflow are actually allowed to do.</p>
+  </div>
+
+  <div class="subdefinition content-block compact">
+    <span><strong class="subterm">Latency and Cost</strong></span>
+    <p>Agentic workflows can multiply model calls, retrieval operations, and tool usage. A design that is affordable and responsive during testing may become slow or expensive under production traffic.</p>
+    <p>Production limits may include model selection rules, maximum iterations, request timeouts, caching, concurrency limits, or budgets for expensive operations.</p>
+  </div>
+
+  <div class="term-note">
+    <span><strong class="term-note-label">Production question:</strong> What happens when this workflow is running for many users, one dependency is slow, a worker disappears, and the application still has to preserve the right state and permissions?</span>
+  </div>
+  <p>LangSmith Deployment and Agent Server provide one implementation of these production concerns, but the underlying problems—concurrency, persistence, recovery, security, scaling, latency, and cost—exist regardless of the deployment platform.</p>
+</div>
+
+<div id="advanced-when-not" class="content-block advanced-section advanced-when-not">
+<h3>When Not to Use LangChain</h3>
+  <p>A framework is useful when the abstraction removes more complexity than it introduces. Not every application containing a language model needs LangChain.</p>
+
+  <div class="subdefinition content-block compact">
+    <span><strong class="subterm">A Single Model Call Is Enough</strong></span>
+    <p>If the application only sends input to a model and returns the response, a provider SDK may be simpler and easier to maintain.</p>
+  </div>
+
+  <div class="subdefinition content-block compact">
+    <span><strong class="subterm">The Workflow Is Already Deterministic</strong></span>
+    <p>If ordinary application logic already knows exactly what should happen next, introducing an agent may add uncertainty without solving a real problem.</p>
+  </div>
+
+  <div class="subdefinition content-block compact">
+    <span><strong class="subterm">The Framework Adds More Abstraction Than Value</strong></span>
+    <p>For a small number of straightforward integrations, custom code may be clearer than introducing framework-specific concepts, dependencies, and upgrade requirements.</p>
+  </div>
+
+  <div class="subdefinition content-block compact">
+    <span><strong class="subterm">Predictability or Control Matters More Than Flexibility</strong></span>
+    <p>Some systems require tightly controlled execution, low latency, or highly predictable behavior. Model-driven routing or tool selection may be inappropriate when the flexibility it provides is not worth the additional uncertainty.</p>
+  </div>
+
+  <div class="subdefinition content-block compact">
+    <span><strong class="subterm">Existing Infrastructure Already Solves the Problem</strong></span>
+    <p>A team that already has orchestration, persistence, observability, evaluation, or workflow infrastructure may only need selected LangChain components rather than adopting the full framework.</p>
+  </div>
+
+  <div class="term-note">
+    <span><strong class="term-note-label">Principle:</strong> Use LangChain when its abstractions simplify the system you actually need—not simply because the application contains an LLM.</span>
+  </div>
+</div>
+
+<div id="advanced-references" class="content-block advanced-section advanced-references">
+<h3>API and Reference Documentation</h3>
+  <p>This section focuses on the architectural mental model. Implementation details, current APIs, and provider-specific behavior change more quickly, so the official documentation should be the source of truth when building.</p>
+
+  <div class="resource-grid">
+<div class="resource-card">
+    <span><strong class="subterm">LangChain</strong></span>
+    <ul>
+      <li><a href="https://docs.langchain.com/oss/python/langchain/overview" target="_blank" rel="noopener noreferrer">LangChain Overview</a></li>
+      <li><a href="https://docs.langchain.com/oss/python/langchain/agents" target="_blank" rel="noopener noreferrer">Agents</a></li>
+      <li><a href="https://docs.langchain.com/oss/python/langchain/middleware/overview" target="_blank" rel="noopener noreferrer">Middleware</a></li>
+      <li><a href="https://docs.langchain.com/oss/python/langchain/structured-output" target="_blank" rel="noopener noreferrer">Structured Output</a></li>
+    </ul>
+  </div>
+
+  <div class="resource-card">
+    <span><strong class="subterm">LangGraph</strong></span>
+    <ul>
+      <li><a href="https://docs.langchain.com/oss/python/langgraph/overview" target="_blank" rel="noopener noreferrer">LangGraph Overview</a></li>
+      <li><a href="https://docs.langchain.com/oss/python/langgraph/persistence" target="_blank" rel="noopener noreferrer">Persistence and Checkpointing</a></li>
+      <li><a href="https://docs.langchain.com/oss/python/langgraph/streaming" target="_blank" rel="noopener noreferrer">Streaming</a></li>
+    </ul>
+  </div>
+
+  <div class="resource-card">
+    <span><strong class="subterm">LangSmith</strong></span>
+    <ul>
+      <li><a href="https://docs.langchain.com/langsmith/observability" target="_blank" rel="noopener noreferrer">Observability</a></li>
+      <li><a href="https://docs.langchain.com/langsmith/evaluation-types" target="_blank" rel="noopener noreferrer">Evaluation Types</a></li>
+      <li><a href="https://docs.langchain.com/langsmith/deployment" target="_blank" rel="noopener noreferrer">Deployment</a></li>
+    </ul>
+  </div>
+
+</div>
+  <p><strong>Advanced LangChain development is ultimately about controlling execution deliberately:</strong> deciding where the model has discretion, what information it receives, what actions it may take, how failures are contained, how behavior is inspected, and when a simpler architecture is the better choice.</p>
+</div>
+  </div>
+</details>
+
+</main>
+
+
+</body>
+</html>
