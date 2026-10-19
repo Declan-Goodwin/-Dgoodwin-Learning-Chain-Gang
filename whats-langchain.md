@@ -363,7 +363,7 @@ layout: default
     <a href="#advanced-references">References</a>
   </nav>
 </div>
-<div class="content-block">  
+<div id="advanced-architecture" class="content-block advanced-section advanced-architecture">  
 <h3>Architecture and Execution Model</h3>
   <p>At Intermediate we talked about components interacting. Here we explain that those interactions ultimately create an <strong>execution topology</strong>.</p>
   <p>A modern LangChain agent is not simply:</p>
@@ -423,7 +423,7 @@ layout: default
         <p>Without persistence, application state exists only while the workflow is running. If execution stops, the process crashes, or the user returns later, that working state may be lost.</p>
         <p>LangGraph provides persistence through <strong>checkpointers</strong>. When a graph uses a checkpointer, snapshots of its state are saved as execution progresses. Those snapshots are called <strong>checkpoints</strong> and are organized into <strong>threads</strong>. A thread represents the continuing history of a particular interaction or workflow. </p>
         <p>Conceptually:</p>
-        <ul style="line-height: 1.15; margin-top: 8px;">
+        <ul>
           <li><strong>State</strong> <em>What does the application know right now?</em></li>
           <p><strong>↓</strong></p>
           <li><strong>Checkpoint</strong> <em>What did the application know at this point in execution?</em></li>
@@ -482,7 +482,7 @@ layout: default
   </div>
   <p>Without streaming, the user might stare at a loading indicator for twenty seconds <em>(otherwise known as a lifetime in 'waiting for the robot' time).</em></p>
   <p>With streaming, the application could surface:</p>
-   <dl style="line-height: 1.15; margin-top: 8px;">
+   <dl class="decision-list">
      <dd>Searching records...</dd>
      <dd><em>Found 14 candidate documents</em></dd>
      <dd>Reviewing 6 relevant sources...</dd>
@@ -666,8 +666,8 @@ layout: default
   </div>
 </div>
   
-<div class="content-block">
-<h3>Failure Modes and Resilience </h3>
+<div id="advanced-failure" class="content-block advanced-section advanced-failure">
+<h3>Failure Modes and Resilience</h3>
   <p>Traditional software often fails when code encounters a condition the developer did not anticipate. LLM applications introduce an additional problem: <strong>the application can execute successfully while the model still makes a poor decision.</strong></p>
   <p>A tool call can complete successfully but return irrelevant information. Retrieval can find documents that do not actually answer the question. A model can interpret good evidence incorrectly, choose the wrong tool, stop researching too early, or continue looping after enough information is already available. </p>
   <p>This means failure in an LLM application is not limited to crashes, exceptions, or unavailable services. The system may remain technically operational while producing behavior that is incomplete, inefficient, inconsistent, or simply wrong.</p>
