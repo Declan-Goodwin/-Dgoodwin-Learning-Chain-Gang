@@ -345,7 +345,7 @@ LangChain helps the developer connect and coordinate the components involved in 
    <div class="term-note">
       <span> <strong class="term-note-label"> Input -> State -> Model -> Decision -> Tool -> State Update -> Model -> ... -> Output </strong> </span>
   </div>
-  <p> When create_agent is used, LangChain constructs that agent on a LangGraph-based runtime. The graph contains steps such as model calls and tool execution, connections controlling how execution moves between them, and middleware that can intervene at different points in that process. The loop continues until the model produces a final response or another stop condition is reached.
+  <p> When <code>create_agent</code> is used, LangChain constructs that agent on a LangGraph-based runtime. The graph contains steps such as model calls and tool execution, connections controlling how execution moves between them, and middleware that can intervene at different points in that process. The loop continues until the model produces a final response or another stop condition is reached.
   </p>
   <p><strong>LangChain</strong> provides higher-level abstractions for assembling AI applications. <strong>LangGraph</strong> provides the lower-level orchestration model used when those applications require explicit control over execution, state, persistence, branching, or recovery.
   </p>
@@ -361,7 +361,7 @@ LangChain helps the developer connect and coordinate the components involved in 
   </div>
     <p>LangGraph supports both patterns, and they can be combined. A deterministic workflow might classify a request first, route it to a specialized agent, require human approval before a sensitive action, and then return to deterministic processing afterward.
     </p>
-    <p>Insert Diagram Here :)</p>
+    <!-- Optional future diagram: deterministic workflow + agent loop -->
 </div>
 <div class="content-block">
 <h3>State, Persistence, and Memory</h3>
@@ -386,7 +386,7 @@ LangChain helps the developer connect and coordinate the components involved in 
              <li><strong>State</strong> is the information the application maintains while a thread or workflow is executing.</li>
              <li><strong>Memory</strong> is information retained so that previous interactions or learned information can influence later ones.</li>
            </ul>
-        <p>The important distinction is that <strong>the model does not necessarily receive everything stored in application state.</strong>The application determines which portions of state are relevant and supplies the appropriate information as context when calling the model. Likewise, not everything held in state needs to become long-term memory.</p>
+        <p>The important distinction is that <strong>the model does not necessarily receive everything stored in application state.</strong> The application determines which portions of state are relevant and supplies the appropriate information as context when calling the model. Likewise, not everything held in state needs to become long-term memory.</p>
         <p>A workflow might temporarily store hundreds of retrieved documents in state while producing an answer without preserving those documents as information the system should remember later.</p>
  </div>
 <div class="subdefinition content-block compact">
@@ -504,7 +504,7 @@ LangChain helps the developer connect and coordinate the components involved in 
           <dt>Is more context actually better?</dt>
             <dd>Not necessarily. Irrelevant or excessive information consumes context-window space, increases cost, and can make important information harder for the model to distinguish.</dd>
           <dt>How should external information be retrieved?</dt>
-            <dd>Not necessarily. Excess information consumes context-window space, increases cost, and can make relevant information harder to distinguish.</dd>
+            <dd>Use the retrieval method that matches the source and task, such as semantic search, metadata filtering, structured queries, tools, or a combination of approaches.</dd>
       </dl>
       <div class="term-note">
          <span><strong class="term-note-label">Principle:</strong> The question is not "<em>What information can the application access?</em>” but “<em>What information does the model need for this decision?</em>”</span>
@@ -568,7 +568,7 @@ LangChain helps the developer connect and coordinate the components involved in 
   <div class="subdefinition content-block compact">
     <span><strong class="subterm">Execution Flow</strong></span>
     <p>The workflow might follow this general path:</p>
-      <d1> 
+      <dl class="decision-list"> 
         <dt><strong>Receive Request</strong></dt>
           <dd>↓</dd>
         <dt><strong>Validate Required Information</strong></dt>
@@ -592,10 +592,9 @@ LangChain helps the developer connect and coordinate the components involved in 
         <dt><strong>Human Review</strong></dt>
           <dd>↓</dd>
         <dt><strong>Final Output</strong></dt>
-      </d1>
+      </dl>
      <p>The first several steps are largely deterministic because the application already knows that requirements and proposal information are necessary. The model does not need to decide whether those steps exist.</p>
      <p>The analysis stage introduces discretion. After comparing the available evidence, the system may determine that information is missing or insufficient and request another retrieval step. Once enough evidence exists, execution can leave the research loop and proceed toward a structured recommendation.</p>
-      </div>
   </div>
   <div class="subdefinition content-block compact">
     <span><strong class="subterm">What Each Component Is Doing</strong></span>
@@ -638,16 +637,17 @@ LangChain helps the developer connect and coordinate the components involved in 
           <p>LangChain and LangGraph provide abstractions for coordinating these behaviors without requiring every part of the execution system to be built from scratch.</p>
       </div>
   </div>
+</div>
   
 <div class="content-block">
 <h3>Failure Modes and Resilience </h3>
-  <p>Traditional software often fails when code encounters a condition the developer did not anticipate. LLM applications introduce an additional problem: <strong>the application can execute successfully while the model still makes a poor decision.</strong> 
+  <p>Traditional software often fails when code encounters a condition the developer did not anticipate. LLM applications introduce an additional problem: <strong>the application can execute successfully while the model still makes a poor decision.</strong></p>
   <p>A tool call can complete successfully but return irrelevant information. Retrieval can find documents that do not actually answer the question. A model can interpret good evidence incorrectly, choose the wrong tool, stop researching too early, or continue looping after enough information is already available. </p>
   <p>This means failure in an LLM application is not limited to crashes, exceptions, or unavailable services. The system may remain technically operational while producing behavior that is incomplete, inefficient, inconsistent, or simply wrong.</p>
  <div class="subdefinition content-block compact">
     <span><strong class="subterm">Tool and External-System Failures</strong></span>
       <p>Tools connect the model to systems outside the model itself, which introduces many of the same failure conditions found in traditional software.</p>
-      <p>An API may time out. A database may be unavailable. Authentication may expire. A tool may reject malformed arguments. A service may return incomplete data.The additional concern is that the <strong>model is often responsible for deciding when and how the tool should be used</strong></p>
+      <p>An API may time out. A database may be unavailable. Authentication may expire. A tool may reject malformed arguments. A service may return incomplete data. The additional concern is that the <strong>model is often responsible for deciding when and how the tool should be used.</strong></p>
       <p>A tool can therefore work exactly as designed while still being used incorrectly.</p>
       <div class="term-note">
          <span><strong class="term-note-label">Example:</strong></span>
@@ -663,9 +663,8 @@ LangChain helps the developer connect and coordinate the components involved in 
         <dt>The important question is not only:</dt>
           <dd><strong>"Was the information retrieved?"</strong></dd>
         <dt>but:</dt>
-          <dd><strong>"Was the right information retrieved, and was it useful for the decision being made?</strong></dd>
+          <dd><strong>"Was the right information retrieved, and was it useful for the decision being made?"</strong></dd>
       </dl>
-  <p><strong>Aside:</strong>**Consider an analogy here :)** </p> 
  </div>
  <div class="subdefinition content-block compact">
     <span><strong class="subterm">Model and Decision Failures</strong></span>
@@ -694,7 +693,7 @@ LangChain helps the developer connect and coordinate the components involved in 
         <li>token or cost budgets; and</li>
         <li>clear stop conditions.</li>
       </ul>
-    <p><strong>Aside:</strong>One, Many, or All explicit limits? How many is too many? How do we know when there are enough?</p>
+    <p>These controls can be layered. A workflow may use more than one when different limits protect against different kinds of runaway behavior.</p>
     <p>The goal is not to eliminate iteration. It is to prevent <strong>iteration without progress</strong>.</p>
  </div>
   <div class="subdefinition content-block compact">
@@ -734,13 +733,14 @@ LangChain helps the developer connect and coordinate the components involved in 
   <div class="subdefinition content-block compact">
     <span><strong class="subterm">Failure Is Not Always an Error</strong></span>    
     <p>One of the most important differences between traditional software and LLM applications is that <strong>a successful execution is not necessarily a successful result</strong>.</p>
-    <p>The system may call every tool correctly, maintain valid state, complete every graph node, and return perfectly valid structured output<strong>and still produce a poor recommendation</strong>.</p>
+    <p>The system may call every tool correctly, maintain valid state, complete every graph node, and return perfectly valid structured output <strong>and still produce a poor recommendation</strong>.</p>
      <div class="term-note">
          <span><strong class="term-note-label">That means</strong></span>
            <p>reliability cannot be measured only by whether the application crashed.</p>
      </div>
      <p>Developers also need visibility into <strong>how the application behaved and whether that behavior produced a useful result</strong>.</p>
   </div>
+</div>
 
 <div class="content-block">
 <h3>Debugging, Observability, and Evaluation</h3>
@@ -749,7 +749,7 @@ LangChain helps the developer connect and coordinate the components involved in 
   <p>That creates three related but different questions:</p>
     <ul>
       <li><strong>Debugging</strong> asks: <i>Why did this specific execution fail or behave unexpectedly?</i></li>
-      <li><Strong>Observability</Strong> asks: <i>What happened across the workflow while it was running?</i></li>
+      <li><strong>Observability</strong> asks: <i>What happened across the workflow while it was running?</i></li>
       <li><strong>Evaluation</strong> asks: <i>Was the resulting behavior actually good?</i></li>
     </ul>
   <p>These questions overlap, but are not interchangeable.</p>
@@ -796,7 +796,7 @@ LangChain helps the developer connect and coordinate the components involved in 
     <p>Debugging usually begins with a particular problem. Observability is broader.</p>
     <p>Observability provides enough visibility into application behavior to identify patterns across many executions rather than investigating only when a user reports something obviously wrong.</p>
     <p>Useful signals might include:</p>
-     <u1> 
+     <ul> 
        <li>execution latency,</li>
        <li>model and tool usage,</li>
        <li>error rates,</li>
@@ -804,7 +804,7 @@ LangChain helps the developer connect and coordinate the components involved in 
        <li>repeated tool calls,</li>
        <li>user feedback,</li>
        <li>or changes in response quality over time.</li>
-     </u1>
+     </ul>
     <p>Observability can extend beyond individual traces to aggregate production behavior, using metrics, dashboards, alerts, and feedback to reveal patterns across many executions. LangSmith provides tooling for this kind of trace-level and production-level monitoring.</p>
     <p>This changes the question from:</p>  
       <dl class="decision-list">
@@ -857,12 +857,151 @@ LangChain helps the developer connect and coordinate the components involved in 
   </div>
    <div class="subdefinition content-block compact">
     <span><strong class="subterm">Online Evaluation</strong></span>
-    
+    <p><strong>Online evaluation</strong> examines application behavior after deployment as real users and real inputs begin exercising the system.</p>
+    <p>Production interactions often do not have a single known correct answer. Instead, online evaluation can look for signals such as quality degradation, unexpected tool use, format or policy violations, unusual execution patterns, and user feedback.</p>
+    <p>The goal is not simply to assign a score to every run. It is to identify patterns and edge cases that deserve attention.</p>
+    <div class="term-note">
+      <span><strong class="term-note-label">Production feedback loop:</strong> A failure discovered in production can become a new offline evaluation case, making the test set more representative of how the application is actually used.</span>
+    </div>
+  </div>
 
+  <div class="subdefinition content-block compact">
+    <span><strong class="subterm">Choosing Evaluators</strong></span>
+    <p>Different questions require different kinds of evaluation.</p>
+    <dl class="decision-list">
+      <dt>Can the requirement be checked with a rule?</dt>
+        <dd>Use deterministic checks when possible. Examples include whether JSON parses correctly, required fields are present, the expected tool was called, or execution remained within a defined limit.</dd>
+      <dt>Does the requirement depend on judgment?</dt>
+        <dd>Qualities such as relevance, clarity, evidence use, or reasoning quality may require human review or model-based evaluation.</dd>
+      <dt>Is one evaluator enough?</dt>
+        <dd>Not always. A useful evaluation strategy may combine structural checks, quality judgments, operational metrics, and human feedback.</dd>
+    </dl>
+    <p>Model-based evaluators can scale subjective review, but they are still models making judgments. They should be calibrated against clearly defined criteria and, where the stakes justify it, human review.</p>
+  </div>
 
-  
-    
- <!-- 
+  <div class="subdefinition content-block compact">
+    <span><strong class="subterm">Closing the Feedback Loop</strong></span>
+    <p>The value of debugging, observability, and evaluation comes from connecting them into a repeatable improvement cycle.</p>
+    <div class="term-note">
+      <span><strong class="term-note-label">Observe → Identify Failure → Debug → Add Evaluation Case → Modify Application → Evaluate → Deploy → Observe Again</strong></span>
+    </div>
+    <p>A production trace can reveal an unexpected result. Debugging identifies where the behavior diverged from expectations. That failure can then be added to an evaluation dataset so the next change is tested against both the new case and previously successful behavior.</p>
+    <p><strong>Observability makes behavior visible. Debugging explains unexpected behavior. Evaluation determines whether the behavior meets the application's goals.</strong></p>
+  </div>
+</div>
+
+<div class="content-block">
+<h3>Deployment and Production Behavior</h3>
+  <p>Running an application successfully on a developer's machine is not the same as operating it reliably for real users.</p>
+  <p>Production introduces simultaneous users, long-running tasks, persisted state, external services, changing data, security boundaries, and limits on time and cost. The architecture must account for what happens when many executions occur at once and when any individual execution is interrupted.</p>
+
+  <div class="subdefinition content-block compact">
+    <span><strong class="subterm">Concurrency and Execution</strong></span>
+    <p>Multiple requests may be running at the same time. Each execution needs the correct state, context, permissions, and tool results without leaking information between unrelated users or threads.</p>
+    <p>Long-running or asynchronous work may also need to continue after the original request has ended. Production systems often separate accepting a request from completing the work so execution can be queued, resumed, or processed by another worker.</p>
+  </div>
+
+  <div class="subdefinition content-block compact">
+    <span><strong class="subterm">Persistence and Recovery</strong></span>
+    <p>Important state should not depend on a single process remaining alive. A worker can restart, a network request can fail, or an external service can become temporarily unavailable.</p>
+    <p>Persistent checkpoints and external data stores allow another execution process to recover the workflow's state and continue from a known point rather than starting over.</p>
+  </div>
+
+  <div class="subdefinition content-block compact">
+    <span><strong class="subterm">Scaling and Backpressure</strong></span>
+    <p>More users do not only create more model calls. They can also create more retrieval requests, tool calls, database activity, streaming connections, and queued work.</p>
+    <p>A production design therefore needs to consider how much work can run concurrently, what happens when demand exceeds available capacity, and how requests should wait or fail when dependencies are overloaded.</p>
+  </div>
+
+  <div class="subdefinition content-block compact">
+    <span><strong class="subterm">Security and Operational Boundaries</strong></span>
+    <p>Tools can expose sensitive data or perform real actions, so production systems need explicit authentication, authorization, secret management, and least-privilege access.</p>
+    <p>The model should not receive credentials or permissions simply because the surrounding application has them. Access should be constrained to what the current user and workflow are actually allowed to do.</p>
+  </div>
+
+  <div class="subdefinition content-block compact">
+    <span><strong class="subterm">Latency and Cost</strong></span>
+    <p>Agentic workflows can multiply model calls, retrieval operations, and tool usage. A design that is affordable and responsive during testing may become slow or expensive under production traffic.</p>
+    <p>Production limits may include model selection rules, maximum iterations, request timeouts, caching, concurrency limits, or budgets for expensive operations.</p>
+  </div>
+
+  <div class="term-note">
+    <span><strong class="term-note-label">Production question:</strong> What happens when this workflow is running for many users, one dependency is slow, a worker disappears, and the application still has to preserve the right state and permissions?</span>
+  </div>
+  <p>LangSmith Deployment and Agent Server provide one implementation of these production concerns, but the underlying problems—concurrency, persistence, recovery, security, scaling, latency, and cost—exist regardless of the deployment platform.</p>
+</div>
+
+<div class="content-block">
+<h3>When Not to Use LangChain</h3>
+  <p>A framework is useful when the abstraction removes more complexity than it introduces. Not every application containing a language model needs LangChain.</p>
+
+  <div class="subdefinition content-block compact">
+    <span><strong class="subterm">A Single Model Call Is Enough</strong></span>
+    <p>If the application only sends input to a model and returns the response, a provider SDK may be simpler and easier to maintain.</p>
+  </div>
+
+  <div class="subdefinition content-block compact">
+    <span><strong class="subterm">The Workflow Is Already Deterministic</strong></span>
+    <p>If ordinary application logic already knows exactly what should happen next, introducing an agent may add uncertainty without solving a real problem.</p>
+  </div>
+
+  <div class="subdefinition content-block compact">
+    <span><strong class="subterm">The Framework Adds More Abstraction Than Value</strong></span>
+    <p>For a small number of straightforward integrations, custom code may be clearer than introducing framework-specific concepts, dependencies, and upgrade requirements.</p>
+  </div>
+
+  <div class="subdefinition content-block compact">
+    <span><strong class="subterm">Predictability or Control Matters More Than Flexibility</strong></span>
+    <p>Some systems require tightly controlled execution, low latency, or highly predictable behavior. Model-driven routing or tool selection may be inappropriate when the flexibility it provides is not worth the additional uncertainty.</p>
+  </div>
+
+  <div class="subdefinition content-block compact">
+    <span><strong class="subterm">Existing Infrastructure Already Solves the Problem</strong></span>
+    <p>A team that already has orchestration, persistence, observability, evaluation, or workflow infrastructure may only need selected LangChain components rather than adopting the full framework.</p>
+  </div>
+
+  <div class="term-note">
+    <span><strong class="term-note-label">Principle:</strong> Use LangChain when its abstractions simplify the system you actually need—not simply because the application contains an LLM.</span>
+  </div>
+</div>
+
+<div class="content-block">
+<h3>API and Reference Documentation</h3>
+  <p>This section focuses on the architectural mental model. Implementation details, current APIs, and provider-specific behavior change more quickly, so the official documentation should be the source of truth when building.</p>
+
+  <div class="subdefinition content-block compact">
+    <span><strong class="subterm">LangChain</strong></span>
+    <ul>
+      <li><a href="https://docs.langchain.com/oss/python/langchain/overview" target="_blank" rel="noopener noreferrer">LangChain Overview</a></li>
+      <li><a href="https://docs.langchain.com/oss/python/langchain/agents" target="_blank" rel="noopener noreferrer">Agents</a></li>
+      <li><a href="https://docs.langchain.com/oss/python/langchain/middleware/overview" target="_blank" rel="noopener noreferrer">Middleware</a></li>
+      <li><a href="https://docs.langchain.com/oss/python/langchain/structured-output" target="_blank" rel="noopener noreferrer">Structured Output</a></li>
+    </ul>
+  </div>
+
+  <div class="subdefinition content-block compact">
+    <span><strong class="subterm">LangGraph</strong></span>
+    <ul>
+      <li><a href="https://docs.langchain.com/oss/python/langgraph/overview" target="_blank" rel="noopener noreferrer">LangGraph Overview</a></li>
+      <li><a href="https://docs.langchain.com/oss/python/langgraph/persistence" target="_blank" rel="noopener noreferrer">Persistence and Checkpointing</a></li>
+      <li><a href="https://docs.langchain.com/oss/python/langgraph/streaming" target="_blank" rel="noopener noreferrer">Streaming</a></li>
+    </ul>
+  </div>
+
+  <div class="subdefinition content-block compact">
+    <span><strong class="subterm">LangSmith</strong></span>
+    <ul>
+      <li><a href="https://docs.langchain.com/langsmith/observability" target="_blank" rel="noopener noreferrer">Observability</a></li>
+      <li><a href="https://docs.langchain.com/langsmith/evaluation-types" target="_blank" rel="noopener noreferrer">Evaluation Types</a></li>
+      <li><a href="https://docs.langchain.com/langsmith/deployment" target="_blank" rel="noopener noreferrer">Deployment</a></li>
+    </ul>
+  </div>
+
+  <p><strong>Advanced LangChain development is ultimately about controlling execution deliberately:</strong> deciding where the model has discretion, what information it receives, what actions it may take, how failures are contained, how behavior is inspected, and when a simpler architecture is the better choice.</p>
+</div>
+</details>
+
+<!-- 
    <p>
     LangChain is a composable orchestration framework that abstracts the complexities of integrating Large Language Models(LLMs) into software architectures through modular abstractions. 
     <br><br>
