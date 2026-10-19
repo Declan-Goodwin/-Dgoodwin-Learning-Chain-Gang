@@ -6,7 +6,7 @@
   --text: #f8fafc;
   --text-soft: #cbd5e1;
   --text-muted: #94a3b8;
-  --heading: #a8c7dc;
+  --heading: #7ec7fc;
   --accent: #7ec7fc;
   --accent-strong: #79c0ff;
   --border: rgba(148, 163, 184, 0.18);
@@ -131,13 +131,8 @@ code {
 }
 
 .level-summary {
-  position: relative;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 0.35rem 1rem;
-  align-items: center;
   cursor: pointer;
-  padding: 1.05rem 3.2rem 1.05rem 1.25rem;
+  padding: 1.05rem 1.25rem 0.95rem;
   list-style: none;
   transition: background-color 140ms ease;
 }
@@ -150,50 +145,51 @@ code {
   background: var(--surface-hover);
 }
 
-.level-summary::after {
-  content: "›";
-  position: absolute;
-  right: 1.35rem;
-  top: 50%;
-  color: var(--accent);
-  font-size: 1.65rem;
-  line-height: 1;
-  transform: translateY(-50%) rotate(90deg);
-  transition: transform 140ms ease;
-}
-
-.level-section[open] > .level-summary::after {
-  transform: translateY(-50%) rotate(-90deg);
-}
 
 .level-section[open] > .level-summary {
   border-bottom: 1px solid var(--border);
   background: rgba(15, 23, 42, 0.48);
 }
 
-.level-kicker {
-  grid-column: 1;
-  color: var(--accent);
-  font-size: 0.76rem;
-  font-weight: 750;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
 .level-summary h2 {
-  grid-column: 1;
   margin: 0;
-  color: var(--text-soft);
-  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  color: var(--accent);
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
   line-height: 1.25;
-  font-weight: 650;
+  font-weight: 700;
 }
 
 .level-description {
-  grid-column: 1;
-  color: var(--text-muted);
-  font-size: 0.92rem;
-  line-height: 1.4;
+  display: block;
+  margin-top: 0.35rem;
+  color: var(--text-soft);
+  font-size: 0.94rem;
+  line-height: 1.45;
+}
+
+.level-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.42rem;
+  margin-top: 0.72rem;
+  color: var(--accent);
+  font-size: 0.82rem;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.level-toggle::before {
+  content: "›";
+  font-size: 1.15rem;
+  line-height: 1;
+  transform: rotate(0deg);
+  transform-origin: center;
+  transition: transform 140ms ease;
+}
+
+.level-section[open] > .level-summary .level-toggle::before {
+  transform: rotate(90deg);
 }
 
 .level-content {
@@ -202,6 +198,12 @@ code {
 
 .level-content > :first-child {
   margin-top: 0;
+}
+
+/* Semantic emphasis inside explanatory prose */
+.level-content p strong:not(.term-note-label) {
+  color: #cfe9ff;
+  font-weight: 750;
 }
 
 /* Heading hierarchy */
@@ -223,7 +225,7 @@ h3 {
 }
 
 h4 {
-  color: var(--text-soft);
+  color: #9ed8ff;
 }
 
 .section-subhead {
@@ -386,9 +388,9 @@ h4 {
 
 .workflow-diagram {
   display: block;
-  width: min(550px, 100%);
+  width: min(340px, 82vw);
   height: auto;
-  margin: 1.35rem auto 2rem;
+  margin: 1.25rem auto 1.8rem;
 }
 
 /* Decision lists */
@@ -610,7 +612,7 @@ h4 {
   }
 
   .level-summary {
-    padding-left: 1rem;
+    padding: 0.95rem 1rem 0.9rem;
   }
 
   .level-content {
