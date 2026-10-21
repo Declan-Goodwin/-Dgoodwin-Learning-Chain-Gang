@@ -1,9 +1,10 @@
 ---
 layout: default
 ---
+<main class="site-shell">
 <header class="page-heading"> 
-<h1 style="display: flex; align-items: center; gap: 15px;">
-  <img src="{{ '/images/LangChain-Logo-only.png' | relative_url }}" height="60" style="vertical-align: middle;" alt="LangChain Logo">
+<h1>
+  <img class="page-logo" src="{{ '/images/LangChain-Logo-only.png' | relative_url }}" alt="LangChain Logo">
   <span>What is LangChain?</span>
 </h1>
   <p class="page-tagline">
@@ -11,79 +12,88 @@ layout: default
   </p>
 </header>
 
-<details>
-  <summary style="cursor: pointer; display: list-item;">
-    <h2 style="display: inline; margin-left: 5px;">LangChain Beginner: Explain it Simply</h2>
+<details class="level-section level-beginner">
+  <summary class="level-summary">
+    <h2>Explain it Simply</h2>
+    <span class="level-description">What LangChain is, what problem it solves, and when it might be useful.</span>
+    <span class="level-toggle">Beginner</span>
   </summary>
-  
-  <p>LangChain is an open-source framework that helps developers build applications powered by AI models. 
-    <br><br>
-  It provides reusable components for connecting AI models to data, tools, and other software. It also helps developers coordinate how those components work together. Developers can combine these components instead of building every part of an AI application from scratch.</p>
+  <div class="level-content">
+    <div class="beginner-intro">
+      <p>LangChain is an open-source framework that helps developers build applications powered by AI models.</p>
+      <p>It provides reusable components for connecting AI models to data, tools, and other software. It also helps developers coordinate how those components work together. Developers can combine these components instead of building every part of an AI application from scratch.</p>
+    </div>
 
- <h3>What Problem Does It Solve?</h3>
- <p>Building an AI application requires more than choosing an AI model. Developers also need ways to connect the model to outside resources like tools, information, and software, and coordinate how those resources work together.
-     <br><br>
-   Building all of those connections from scratch can require a significant time and effort. LangChain provides reusable components and a common framework for connecting them. This gives developers a consistent starting point for building useful applications faster.
-     <br><br>
-   For example, LangChain can help a developer connect an AI model to:
- </p>
-  <ul>
-    <li>A company's document library</li>
-    <li>Databases</li>
-    <li>Web search and other external data sources</li>
-    <li>External applications and Application Programming Interfaces (APIs)</li>
-    <li>Custom software tools</li>
-  </ul>
-  <p> Without connections like these, a model can generate responses but cannot retrieve specialized information or interact with external systems.</p>
+    <section class="beginner-block">
+      <h3>What Problem Does It Solve?</h3>
+      <p>Building an AI application requires more than choosing an AI model. Developers also need ways to connect the model to outside resources like tools, information, and software, and coordinate how those resources work together.</p>
+      <p>Building all of those connections from scratch can require a significant time and effort. LangChain provides reusable components and a common framework for connecting them. This gives developers a consistent starting point for building useful applications faster.</p>
+      <p>For example, LangChain can help a developer connect an AI model to:</p>
+      <ul>
+        <li>A company's document library</li>
+        <li>Databases</li>
+        <li>Web search and other external data sources</li>
+        <li>External applications and Application Programming Interfaces (APIs)</li>
+        <li>Custom software tools</li>
+      </ul>
+      <p>Without connections like these, a model can generate responses but cannot retrieve specialized information or interact with external systems.</p>
+    </section>
 
- <h3>Who Uses It?</h3>
-  <p>LangChain is mainly used by software developers and AI engineers. They use it to build applications such as:</p>
-  <ul>
-    <li>Customer-support assistants</li>
-    <li>Research tools</li>
-    <li>Document-search systems</li>
-    <li>Scheduling assistants</li>
-    <li> AI agents that can complete tasks</li>
-  </ul>
-<p>Most people do not interact with LangChain directly. Instead, they use the AI-enabled applications that developers have built with it.</p>
+    <section class="beginner-block">
+      <h3>Who Uses It?</h3>
+      <p>LangChain is mainly used by software developers and AI engineers. They use it to build applications such as:</p>
+      <ul>
+        <li>Customer-support assistants</li>
+        <li>Research tools</li>
+        <li>Document-search systems</li>
+        <li>Scheduling assistants</li>
+        <li>AI agents that can complete tasks</li>
+      </ul>
+      <p>Most people do not interact with LangChain directly. Instead, they use the AI-enabled applications that developers have built with it.</p>
+    </section>
 
-<h3>Practical Use Case </h3>
-<p>Imagine a company wants an AI assistant that can answer questions about customer orders. 
-   <br><br>
-By itself, the AI model will understand a customer's question, but it does not automatically have access to the company’s order information. Without that connection, it cannot determine what a customer ordered, how much it cost, or whether it has shipped.
-  <br><br>
-A developer could use LangChain as part of an application that connects the model to the company’s order system.
-  <br><br>
-When a customer asks, "Where is my order?", the application can:
-  <ol>
-  <li> Identify the customer and order.</li>
-  <li> Retrieve the order's current status.</li>
-  <li> Provide the relevant information to the AI model.</li>
-  <li> Generate a clear response for the customer.</li>
-</ol>
-LangChain helps the developer connect and coordinate the components involved in this process.
-</p>
+    <section class="beginner-example">
+      <h3>Practical Use Case</h3>
+      <p>Imagine a company wants an AI assistant that can answer questions about customer orders.</p>
+      <p>By itself, the AI model will understand a customer's question, but it does not automatically have access to the company’s order information. Without that connection, it cannot determine what a customer ordered, how much it cost, or whether it has shipped.</p>
+      <p>A developer could use LangChain as part of an application that connects the model to the company’s order system.</p>
+      <p>When a customer asks, "Where is my order?", the application can:</p>
+      <ol class="beginner-steps">
+        <li>Identify the customer and order.</li>
+        <li>Retrieve the order's current status.</li>
+        <li>Provide the relevant information to the AI model.</li>
+        <li>Generate a clear response for the customer.</li>
+      </ol>
+      <div class="term-note">
+        <span><strong class="term-note-label">Through Line:</strong> LangChain helps the developer connect and coordinate the components involved in this process.</span>
+      </div>
+    </section>
 
-<h3>When Might I Need It?</h3>
-   <p>You might use LangChain when an AI application needs to do more than generate a response using the model’s training data.
-   <br>
-   For example, an application might need to:
-   <ul>
-     <li> Retrieve information from an outside source</li>
-     <li> Search a collection of documents</li>
-     <li> Use software tools or APIs</li>
-     <li> Maintain information during a conversation</li>
-     <li> Decide which action to take next</li>
-     <li> Complete a task involving several steps</li>
-   </ul>
-   If your application only needs to send one prompt to an AI model and return its response, you may not need LangChain.
-   </p>
-</details>
+    <section class="beginner-block">
+      <h3>When Might I Need It?</h3>
+      <p>You might use LangChain when an AI application needs to do more than generate a response using the model’s training data.</p>
+      <p>For example, an application might need to:</p>
+      <ul>
+        <li>Retrieve information from an outside source</li>
+        <li>Search a collection of documents</li>
+        <li>Use software tools or APIs</li>
+        <li>Maintain information during a conversation</li>
+        <li>Decide which action to take next</li>
+        <li>Complete a task involving several steps</li>
+      </ul>
+      <div class="term-note beginner-takeaway">
+        <span><strong class="term-note-label">Rule of Thumb:</strong> If your application only needs to send one prompt to an AI model and return its response, you may not need LangChain.</span>
+      </div>
+    </section>
+  </div></details>
 
-<details>
- <summary style="cursor: pointer; display: list-item;">
-    <h2 style="display: inline; margin-left: 5px;">LangChain Intermediate: How the Components Work</h2>
+<details class="level-section level-intermediate">
+  <summary class="level-summary">
+    <h2>How the Components Work</h2>
+    <span class="level-description">How models, tools, state, memory, middleware, and related products work together.</span>
+    <span class="level-toggle">Intermediate</span>
   </summary>
+  <div class="level-content">
       <h3> Major Components & Terminology</h3>
 
 <div class="term-container">
@@ -98,7 +108,7 @@ LangChain helps the developer connect and coordinate the components involved in 
   <h4 class="term-title">Messages:</h4>
   <span class="term-definition">Messages are the structured inputs and outputs exchanged with a chat model. They can represent:</span>
 
-  <ul style="line-height: 1.5; margin-top: 8px;">
+  <ul>
     <li>Developer or system instructions</li>
     <li>User input</li>
     <li>Model responses</li>
@@ -164,7 +174,7 @@ LangChain helps the developer connect and coordinate the components involved in 
     <div class="subdefinition">
       <span><strong class="subterm">Short-Term Memory:</strong> Information preserved within a single conversation or thread. In a LangChain agent, short-term memory is managed as part of the agent’s state and can be persisted so the thread can resume later.
      <p>Examples include:</p>
-  <ul style="line-height: 1.5; margin-top: 8px;">
+  <ul>
     <li>Conversation history</li>
     <li>Results from earlier tool calls</li>
     <li>Files associated with the current thread</li>
@@ -184,8 +194,8 @@ LangChain helps the developer connect and coordinate the components involved in 
 <div class="term-container">
   <h4 class="term-title">Middleware:</h4>
   <span class="term-definition">Middleware lets developers inspect or modify what happens at different points in the agent loop.</span>
-   <p style="line-height: 1.5; margin-top: 8px;"> Developers can use middleware to add functionality such as: </p> 
-     <ul style="line-height: 1.5; margin-top: 8px;">
+   <p> Developers can use middleware to add functionality such as: </p> 
+     <ul>
         <li>Logging agent activity</li>
         <li>Applying guardrails</li>
         <li>Adding human-in-the-loop review, approval, or decision points</li>
@@ -209,7 +219,7 @@ LangChain helps the developer connect and coordinate the components involved in 
 
  <h3> How Information Moves Through It </h3>
    <p> A simplified process execution would look like: </p>
-    <ol style="line-height: 1.5; margin-top: 8px;">
+    <ol>
           <li> The user submits a request.</li>
           <li> The application adds the request to the agent’s state.</li>
           <li> LangChain prepares the model’s context using instructions, conversation history, available tools, and relevant state.</li>
@@ -224,7 +234,7 @@ LangChain helps the developer connect and coordinate the components involved in 
    <span> <strong class="term-note-label"> Critical Insight: </strong> Information does not simply travel from the user to the model and back. It may circulate through the agent loop several times as the model requests tools and receives their results.     </span>
   </div>
   <br>
-<img src="{{ '/images/Agent-Workflow-Update.png' | relative_url }}" width="550" height="550" style="display: block; margin: 0 auto;" alt="Agent Process Flow">
+<img class="workflow-diagram" src="{{ '/images/Agent-Workflow-Update.png' | relative_url }}" alt="Agent Process Flow">
 
  <h3> Typical Development Workflow </h3>
    <ol class="development-workflow"> 
@@ -232,7 +242,7 @@ LangChain helps the developer connect and coordinate the components involved in 
        <h4>Frame the Problem</h4>
          <p>Before selecting a model or creating an agent, define the problem the application is intended to solve. This helps prevent teams from building an AI application simply because the technology is available. </p>
          <p>Consider:</p>
-           <ul style="line-height: 1.5; margin-top: 8px;">
+           <ul>
              <li> Who experiences the problem?</li>
              <li> What are they trying to accomplish?</li>
              <li> Where does the current process create difficulty, delay, or risk?</li>
@@ -297,7 +307,7 @@ LangChain helps the developer connect and coordinate the components involved in 
   </div>
  <h3>Benefits and Tradeoffs</h3>
   <p><strong>Benefits:</strong></p> 
-    <ul style="line-height: 1.5; margin-top: 8px;">
+    <ul>
       <li>Provides standardized interfaces across model and tool providers</li>
       <li>Reduces the amount of application plumbing developers build themselves</li>
       <li>Offers reusable agent patterns and integrations</li>
@@ -307,7 +317,7 @@ LangChain helps the developer connect and coordinate the components involved in 
       <li>Integrates with LangSmith for tracing and evaluation</li>
     </ul>
   <p><strong>Tradeoffs:</strong></p> 
-     <ul style="line-height: 1.5; margin-top: 8px;">
+     <ul>
        <li>Adds another abstraction layer that developers must understand</li>
        <li>Can be unnecessary for simple model requests</li>
        <li>Agent behavior can be nondeterministic and difficult to test</li>
@@ -317,15 +327,19 @@ LangChain helps the developer connect and coordinate the components involved in 
        <li>Connecting a tool does not automatically make its data accurate, safe, or appropriate</li>
        <li>Developers remain responsible for access controls, error handling, validation, and monitoring</li>
      </ul>
-  </details>
+  </div>
+</details>
 
 
-<details>
- <summary style="cursor: pointer; display: list-item;">
-    <h2 style="display: inline; margin-left: 5px;">LangChain Advanced: Architecture and Implementation</h2>
+<details class="level-section level-advanced">
+  <summary class="level-summary">
+    <h2>Architecture and Implementation</h2>
+    <span class="level-description">How execution, state, resilience, evaluation, and production behavior fit together.</span>
+    <span class="level-toggle">Advanced</span>
   </summary>
-<div class="content-block">
-  <p> At the beginner level, LangChain can be understood as a framework for connecting models to information, tools, and instructions. At the intermediate level, those components become a workflow. At the advanced level, the important questions change:</p>
+  <div class="level-content">
+<div class="content-block advanced-intro">
+  <p>At the beginner level, LangChain can be understood as a framework for connecting models to information, tools, and instructions. At the intermediate level, those components become a workflow. At the advanced level, the important questions change:</p>
     <ul>
       <li>How is that workflow executed?</li>
       <li>What state survives between steps?</li>
@@ -334,7 +348,22 @@ LangChain helps the developer connect and coordinate the components involved in 
     </ul>   
   <p>Advanced LangChain development is therefore less about adding more components and more about controlling the behavior of the system those components create.</p>
 </div>
-<div class="content-block">  
+<div class="advanced-roadmap">
+  <p class="advanced-roadmap-label">Advanced Roadmap</p>
+  <nav aria-label="Advanced section roadmap">
+    <a href="#advanced-architecture">Architecture &amp; Execution</a>
+    <a href="#advanced-state">State &amp; Persistence</a>
+    <a href="#advanced-streaming">Streaming</a>
+    <a href="#advanced-configuration">Configuration</a>
+    <a href="#advanced-implementation">Implementation</a>
+    <a href="#advanced-failure">Failure &amp; Resilience</a>
+    <a href="#advanced-debugging">Debugging &amp; Evaluation</a>
+    <a href="#advanced-deployment">Production</a>
+    <a href="#advanced-when-not">When Not to Use It</a>
+    <a href="#advanced-references">References</a>
+  </nav>
+</div>
+<div id="advanced-architecture" class="content-block advanced-section advanced-architecture">  
 <h3>Architecture and Execution Model</h3>
   <p>At Intermediate we talked about components interacting. Here we explain that those interactions ultimately create an <strong>execution topology</strong>.</p>
   <p>A modern LangChain agent is not simply:</p>
@@ -363,13 +392,13 @@ LangChain helps the developer connect and coordinate the components involved in 
     </p>
     <!-- Optional future diagram: deterministic workflow + agent loop -->
 </div>
-<div class="content-block">
+<div id="advanced-state" class="content-block advanced-section advanced-state">
 <h3>State, Persistence, and Memory</h3>
   <p>Once an application contains multiple execution steps, information has to move between those steps. <strong>State is the application's working record of what is currently true during execution.</strong></p> 
   <p>State may contain conversation messages, intermediate results, user identifiers, retrieved information, tool results, workflow status, or any other values later steps need.</p>
   <p>In a graph-based workflow, individual nodes can read relevant portions of the current state and return updates to it. State therefore becomes the common information layer connecting otherwise separate steps in the execution process.</p>
   <p>For example, a research workflow might maintain state containing:</p>
-    <ul style="line-height: 1.5; margin-top: 8px;">
+    <ul>
       <li>the user's original question;</li>
       <li>documents retrieved so far;</li>
       <li>sources already searched;</li>
@@ -381,7 +410,7 @@ LangChain helps the developer connect and coordinate the components involved in 
 <div class="subdefinition content-block compact">
       <span><strong class="subterm">Context, State, and Memory</strong></span> 
         <p>These concepts are related, but they describe different parts of the system.</p>
-           <ul style="line-height: 1.5; margin-top: 8px;">
+           <ul>
              <li><strong>Context</strong> is the information made available to the model during a particular model call, within the limits of that model's context window.</li>
              <li><strong>State</strong> is the information the application maintains while a thread or workflow is executing.</li>
              <li><strong>Memory</strong> is information retained so that previous interactions or learned information can influence later ones.</li>
@@ -394,7 +423,7 @@ LangChain helps the developer connect and coordinate the components involved in 
         <p>Without persistence, application state exists only while the workflow is running. If execution stops, the process crashes, or the user returns later, that working state may be lost.</p>
         <p>LangGraph provides persistence through <strong>checkpointers</strong>. When a graph uses a checkpointer, snapshots of its state are saved as execution progresses. Those snapshots are called <strong>checkpoints</strong> and are organized into <strong>threads</strong>. A thread represents the continuing history of a particular interaction or workflow. </p>
         <p>Conceptually:</p>
-        <ul style="line-height: 1.15; margin-top: 8px;">
+        <ul>
           <li><strong>State</strong> <em>What does the application know right now?</em></li>
           <p><strong>↓</strong></p>
           <li><strong>Checkpoint</strong> <em>What did the application know at this point in execution?</em></li>
@@ -409,7 +438,7 @@ LangChain helps the developer connect and coordinate the components involved in 
       <span><strong class="subterm">Why Checkpointing Matters</strong></span> 
         <p>Checkpointing is useful for much more than remembering a conversation.</p> 
         <p>Because previous execution state can be recovered, persisted workflows can support:</p>
-        <ul style="line-height: 1.5; margin-top: 8px;">
+        <ul>
           <li><strong>Fault recovery</strong> - If part of a workflow fails, execution can resume from previously persisted state rather than repeating every successful step.</li>
           <li><strong>Human-in-the-loop execution</strong> - A workflow can pause before a consequential action, preserve its current state, wait for human review or approval, and then continue.</li>
           <li><strong>Conversation continuity</strong> - Later interactions can continue within the same thread while retaining information from earlier interactions.</li>
@@ -426,13 +455,13 @@ LangChain helps the developer connect and coordinate the components involved in 
         <p>LangGraph uses a <strong>Store</strong> for this type of persistence. Unlike a checkpointer, which preserves the evolving state of a particular thread, a Store holds application-defined information that can be accessed across threads.</p>
         <p>For example, consider an assistant used repeatedly by the same person.</p>
         <p>A checkpointer might preserve:</p>
-        <ul style="line-height: 1.5; margin-top: 8px;">
+        <ul>
           <li>the messages from the current conversation;</li>
           <li>tool results produced during that conversation; and</li>
           <li>where the current workflow is in its execution.</li>
         </ul>
         <p>A long-term Store might preserve:</p>
-        <ul style="line-height: 1.5; margin-top: 8px;">
+        <ul>
           <li>the user's preferred output format;</li>
           <li>recurring project information;</li>
           <li>previously established facts; or</li>
@@ -443,7 +472,7 @@ LangChain helps the developer connect and coordinate the components involved in 
         <p>Persistence therefore does more than make an AI application "remember." It creates continuity across execution, allowing workflows to pause, recover, resume, revisit earlier states, and selectively carry useful information into future interactions.</p>
  </div>
 </div>
-<div class="content-block">
+<div id="advanced-streaming" class="content-block advanced-section advanced-streaming">
 <h3>Streaming and Runtime Behavior</h3>
   <p class="heading-tagline"> Streaming <strong>does not</strong> only mean displaying words one token at a time.</p>
   <p>An application can expose multiple kinds of information while it executes. LangChain currently supports streaming model tokens, agent progress updates, and application-defined custom events. At the LangGraph level, developers can also stream state values, state updates, checkpoint information, task execution events, and detailed debugging information.</p>
@@ -453,7 +482,7 @@ LangChain helps the developer connect and coordinate the components involved in 
   </div>
   <p>Without streaming, the user might stare at a loading indicator for twenty seconds <em>(otherwise known as a lifetime in 'waiting for the robot' time).</em></p>
   <p>With streaming, the application could surface:</p>
-   <dl style="line-height: 1.15; margin-top: 8px;">
+   <dl class="decision-list">
      <dd>Searching records...</dd>
      <dd><em>Found 14 candidate documents</em></dd>
      <dd>Reviewing 6 relevant sources...</dd>
@@ -463,7 +492,7 @@ LangChain helps the developer connect and coordinate the components involved in 
  <p>All of this occurring while the final answer still streams token by token. That means streaming becomes more than a UX trick, but <strong>a layer of visibility over execution</strong>.</p>
 </div>
   
-<div class="content-block">
+<div id="advanced-configuration" class="content-block advanced-section advanced-configuration">
 <h3>Configuration and Architectural Choices</h3>
   <p>The important idea is that building with LangChain isn't primarily about turning features on. It's about deciding <strong>where the model should have discretion and where software should retain control.</strong></p>
     <div class="subdefinition content-block compact">
@@ -557,7 +586,7 @@ LangChain helps the developer connect and coordinate the components involved in 
     </div>
 </div>
 
-<div class="content-block">
+<div id="advanced-implementation" class="content-block advanced-section advanced-implementation">
 <h3>Implementation Example</h3>
   <p>The concepts discussed above become easier to understand when they are combined into a single application. Consider a <strong>decision-support research agent</strong> tasked with comparing several proposed software solutions against an established set of requirements.</p>
   <p>A user might ask:</p>
@@ -568,31 +597,29 @@ LangChain helps the developer connect and coordinate the components involved in 
   <div class="subdefinition content-block compact">
     <span><strong class="subterm">Execution Flow</strong></span>
     <p>The workflow might follow this general path:</p>
-      <dl class="decision-list"> 
-        <dt><strong>Receive Request</strong></dt>
-          <dd>↓</dd>
-        <dt><strong>Validate Required Information</strong></dt>
-          <dd>↓</dd>
-        <dt><strong>Retrieve Requirements</strong></dt>
-          <dd>↓</dd>
-        <dt><strong>Retrieve Proposal Information</strong></dt>
-          <dd>↓</dd>
-        <dt><strong>Analyze Evidence</strong></dt>
-          <dd>↓</dd>
-        <dt><strong>Is Additional Evidence Needed?</strong></dt>
-          <dd>
-            <p><strong>Yes</strong> → retrieve additional information → return to analysis</p>
-          </dd>
-          <dd>
-            <p><strong>No</strong> → continue</p>
-          </dd>
-          <dd>↓</dd>
-        <dt><strong>Generate Structured Recommendation</strong></dt>
-          <dd>↓</dd>
-        <dt><strong>Human Review</strong></dt>
-          <dd>↓</dd>
-        <dt><strong>Final Output</strong></dt>
-      </dl>
+      <div class="flow-stack" aria-label="Decision-support execution flow">
+        <div class="flow-step">Receive Request</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step">Validate Required Information</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step">Retrieve Requirements</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step">Retrieve Proposal Information</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step">Analyze Evidence</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-decision">Is Additional Evidence Needed?</div>
+        <div class="flow-branch">
+          <span><strong>Yes:</strong> retrieve additional information and return to analysis.</span>
+          <span><strong>No:</strong> continue.</span>
+        </div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step">Generate Structured Recommendation</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step">Human Review</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step">Final Output</div>
+      </div>
      <p>The first several steps are largely deterministic because the application already knows that requirements and proposal information are necessary. The model does not need to decide whether those steps exist.</p>
      <p>The analysis stage introduces discretion. After comparing the available evidence, the system may determine that information is missing or insufficient and request another retrieval step. Once enough evidence exists, execution can leave the research loop and proceed toward a structured recommendation.</p>
   </div>
@@ -639,8 +666,8 @@ LangChain helps the developer connect and coordinate the components involved in 
   </div>
 </div>
   
-<div class="content-block">
-<h3>Failure Modes and Resilience </h3>
+<div id="advanced-failure" class="content-block advanced-section advanced-failure">
+<h3>Failure Modes and Resilience</h3>
   <p>Traditional software often fails when code encounters a condition the developer did not anticipate. LLM applications introduce an additional problem: <strong>the application can execute successfully while the model still makes a poor decision.</strong></p>
   <p>A tool call can complete successfully but return irrelevant information. Retrieval can find documents that do not actually answer the question. A model can interpret good evidence incorrectly, choose the wrong tool, stop researching too early, or continue looping after enough information is already available. </p>
   <p>This means failure in an LLM application is not limited to crashes, exceptions, or unavailable services. The system may remain technically operational while producing behavior that is incomplete, inefficient, inconsistent, or simply wrong.</p>
@@ -742,7 +769,7 @@ LangChain helps the developer connect and coordinate the components involved in 
   </div>
 </div>
 
-<div class="content-block">
+<div id="advanced-debugging" class="content-block advanced-section advanced-debug">
 <h3>Debugging, Observability, and Evaluation</h3>
   <p>In a simple application, debugging often means inspecting an error message or checking whether a function returned the expected value.</p>
   <p>Agentic applications are harder to reason about because the final response may be the result of multiple model calls, tool calls, retrieval steps, routing decisions, state updates, and retries. Looking only at the final answer can therefore hide most of what actually happened.</p>
@@ -753,7 +780,7 @@ LangChain helps the developer connect and coordinate the components involved in 
       <li><strong>Evaluation</strong> asks: <i>Was the resulting behavior actually good?</i></li>
     </ul>
   <p>These questions overlap, but are not interchangeable.</p>
-<h3>Debugging</h3>
+<h4 class="section-subhead">Debugging</h4>
  <div class="subdefinition content-block compact">
     <span><strong class="subterm">Tracing Execution</strong></span>
     <p>A trace provides a record of how an application moved from input to output.</p>
@@ -790,7 +817,7 @@ LangChain helps the developer connect and coordinate the components involved in 
          <span> The <strong class="term-note-label">trace</strong> helps identify which layer actually needs attention.</span>
    </div>
  </div>
-<h3>Observability</h3>
+<h4 class="section-subhead">Observability</h4>
  <div class="subdefinition content-block compact">
     <span><strong class="subterm">Observability Beyond Individual Failures</strong></span>
     <p>Debugging usually begins with a particular problem. Observability is broader.</p>
@@ -818,7 +845,7 @@ LangChain helps the developer connect and coordinate the components involved in 
          <span><strong class="term-note-label">Observability</strong> helps reveal those patterns.</span>
     </div>
  </div>
-<h3>Evaluation</h3>
+<h4 class="section-subhead">Evaluation</h4>
   <p>Observability tells you what happened. Evaluation asks whether what happened was <strong>good enough</strong>.</p>
   <p>This is necessary because an LLM application can execute perfectly from a software perspective while still producing a poor result.</p>
     <ul>
@@ -890,7 +917,7 @@ LangChain helps the developer connect and coordinate the components involved in 
   </div>
 </div>
 
-<div class="content-block">
+<div id="advanced-deployment" class="content-block advanced-section advanced-deployment">
 <h3>Deployment and Production Behavior</h3>
   <p>Running an application successfully on a developer's machine is not the same as operating it reliably for real users.</p>
   <p>Production introduces simultaneous users, long-running tasks, persisted state, external services, changing data, security boundaries, and limits on time and cost. The architecture must account for what happens when many executions occur at once and when any individual execution is interrupted.</p>
@@ -931,7 +958,7 @@ LangChain helps the developer connect and coordinate the components involved in 
   <p>LangSmith Deployment and Agent Server provide one implementation of these production concerns, but the underlying problems—concurrency, persistence, recovery, security, scaling, latency, and cost—exist regardless of the deployment platform.</p>
 </div>
 
-<div class="content-block">
+<div id="advanced-when-not" class="content-block advanced-section advanced-when-not">
 <h3>When Not to Use LangChain</h3>
   <p>A framework is useful when the abstraction removes more complexity than it introduces. Not every application containing a language model needs LangChain.</p>
 
@@ -965,11 +992,12 @@ LangChain helps the developer connect and coordinate the components involved in 
   </div>
 </div>
 
-<div class="content-block">
+<div id="advanced-references" class="content-block advanced-section advanced-references">
 <h3>API and Reference Documentation</h3>
   <p>This section focuses on the architectural mental model. Implementation details, current APIs, and provider-specific behavior change more quickly, so the official documentation should be the source of truth when building.</p>
 
-  <div class="subdefinition content-block compact">
+  <div class="resource-grid">
+<div class="resource-card">
     <span><strong class="subterm">LangChain</strong></span>
     <ul>
       <li><a href="https://docs.langchain.com/oss/python/langchain/overview" target="_blank" rel="noopener noreferrer">LangChain Overview</a></li>
@@ -979,7 +1007,7 @@ LangChain helps the developer connect and coordinate the components involved in 
     </ul>
   </div>
 
-  <div class="subdefinition content-block compact">
+  <div class="resource-card">
     <span><strong class="subterm">LangGraph</strong></span>
     <ul>
       <li><a href="https://docs.langchain.com/oss/python/langgraph/overview" target="_blank" rel="noopener noreferrer">LangGraph Overview</a></li>
@@ -988,7 +1016,7 @@ LangChain helps the developer connect and coordinate the components involved in 
     </ul>
   </div>
 
-  <div class="subdefinition content-block compact">
+  <div class="resource-card">
     <span><strong class="subterm">LangSmith</strong></span>
     <ul>
       <li><a href="https://docs.langchain.com/langsmith/observability" target="_blank" rel="noopener noreferrer">Observability</a></li>
@@ -997,9 +1025,13 @@ LangChain helps the developer connect and coordinate the components involved in 
     </ul>
   </div>
 
+</div>
   <p><strong>Advanced LangChain development is ultimately about controlling execution deliberately:</strong> deciding where the model has discretion, what information it receives, what actions it may take, how failures are contained, how behavior is inspected, and when a simpler architecture is the better choice.</p>
 </div>
+  </div>
 </details>
+
+</main>
 
 <!-- 
    <p>
@@ -1029,7 +1061,7 @@ Full three-product architecture table → ecosystem overview or homepage
     <span class="term-definition">LangGraph is a lower-level orchestration runtime for building and executing stateful agents and workflows.</span>
       <p>In this context, <strong>orchestration</strong> means controlling how an application progresses through different steps, what information it maintains, and what happens when the application must branch, pause, resume, or wait for human input.         </p>
       <p>LangGraph provides execution capabilities such as:</p>
-        <ul style="line-height: 1.5; margin-top: 8px;">
+        <ul>
           <li>Maintaining and persisting state</li>
           <li>Controlling how a workflow moves between steps</li>
           <li>Combining predetermined steps with model-driven decisions</li>
@@ -1041,7 +1073,7 @@ Full three-product architecture table → ecosystem overview or homepage
      <div class="subdefinition">
        <strong class="subterm">How LangChain and LangGraph Work Together</strong>
          <p>LangChain agents are built on LangGraph. When a developer creates an agent through LangChain, LangChain provides the higher-level components and interfaces used to configure the agent. LangGraph provides the underlying runtime that executes the agent loop and maintains its progress.</p>
-           <ul style="line-height: 1.5; margin-top: 8px;">
+           <ul>
              <li><strong>LangChain</strong></li>
                <p>Provides higher-level abstractions for assembling models, tools, instructions, middleware, and common agent behavior</p>
              <li><strong>LangGraph</strong></li>
@@ -1055,7 +1087,7 @@ Full three-product architecture table → ecosystem overview or homepage
            <p>LangChain is often sufficient when an application follows a common agent pattern: the model receives a request, selects and calls tools as needed, and continues until it can produce a response.</p>
            <p>A developer might work directly with LangGraph when the application requires more explicit control over how that process unfolds.</p>
            <p>For example, direct LangGraph development may be useful when an application must:</p>
-             <ul style="line-height: 1.5; margin-top: 8px;">
+             <ul>
                <li>Follow some steps in a predetermined order</li>
                <li>Choose between different execution paths</li>
                <li>Maintain custom information throughout a workflow </li>
@@ -1069,7 +1101,7 @@ Full three-product architecture table → ecosystem overview or homepage
      <div class="subdefinition">
           <strong class="subterm">Practical Example</strong>
             <p>Consider an AI customer-service application that handles order problems. A basic LangChain agent might:</p>
-             <ol style="line-height: 1.5; margin-top: 8px;">
+             <ol>
                <li>Interpret the customer’s question.</li>
                <li>Use a tool to retrieve the order.</li>
                <li>Review the order status.</li>
@@ -1077,7 +1109,7 @@ Full three-product architecture table → ecosystem overview or homepage
              </ol>
            <p>That common model-and-tool loop may be sufficient when the application only needs to locate information and explain it.</p>
            <p>The workflow becomes more complex if the application must also:</p>
-             <ol style="line-height: 1.5; margin-top: 8px;">
+             <ol>
                <li>Verify the customer’s identity.</li>
                <li>Retrieve the order and shipping history.</li>
                <li>Determine whether the package is delayed, lost, or delivered.</li>
