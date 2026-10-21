@@ -299,8 +299,12 @@ h4 {
 .term-container {
   max-width: 98ch;
   margin: 0;
-  padding: 1rem 0 1.15rem;
-  border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+  padding: 1.15rem 0 1.3rem;
+  border-bottom: 1px solid rgba(126, 199, 252, 0.18);
+}
+
+.term-container + .term-container {
+  padding-top: 1.3rem;
 }
 
 .term-container:last-of-type {
@@ -510,9 +514,10 @@ h4 {
 .advanced-deployment .subdefinition {
   margin: 0.55rem 0;
   padding: 1rem;
-  border: 1px solid var(--border);
+  border: 1px solid rgba(126, 199, 252, 0.2);
   border-radius: 10px;
-  background: rgba(15, 23, 42, 0.3);
+  background: rgba(13, 27, 47, 0.7);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.02);
 }
 
 .advanced-when-not {
@@ -530,9 +535,10 @@ h4 {
 .advanced-when-not .subdefinition {
   margin: 0.45rem 0;
   padding: 0.95rem 1rem;
-  border: 1px solid var(--border);
+  border: 1px solid rgba(126, 199, 252, 0.18);
   border-radius: 10px;
-  background: rgba(15, 23, 42, 0.22);
+  background: rgba(13, 27, 47, 0.6);
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.018);
 }
 
 .resource-grid {
@@ -546,9 +552,10 @@ h4 {
   min-width: 0;
   margin: 0;
   padding: 1rem;
-  border: 1px solid var(--border);
+  border: 1px solid rgba(126, 199, 252, 0.18);
   border-radius: 10px;
-  background: rgba(15, 23, 42, 0.3);
+  background: rgba(13, 27, 47, 0.58);
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.1);
 }
 
 .resource-card ul {
@@ -564,15 +571,17 @@ h4 {
 
 .flow-step,
 .flow-decision {
-  padding: 0.62rem 0.8rem;
-  border: 1px solid var(--border);
+  padding: 0.68rem 0.85rem;
+  border: 1px solid rgba(126, 199, 252, 0.22);
   border-radius: 8px;
-  background: rgba(15, 23, 42, 0.34);
+  background: rgba(15, 28, 48, 0.72);
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.025);
   font-weight: 650;
 }
 
 .flow-decision {
-  border-color: var(--border-strong);
+  border-color: rgba(126, 199, 252, 0.46);
+  background: rgba(18, 35, 58, 0.78);
 }
 
 .flow-arrow {
@@ -590,9 +599,10 @@ h4 {
 }
 
 .flow-branch span {
-  padding: 0.65rem 0.75rem;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid rgba(126, 199, 252, 0.14);
   border-left: 2px solid var(--rail);
-  background: rgba(15, 23, 42, 0.24);
+  background: rgba(12, 24, 41, 0.62);
   color: var(--text-soft);
 }
 
