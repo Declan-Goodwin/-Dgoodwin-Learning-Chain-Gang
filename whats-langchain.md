@@ -14,9 +14,9 @@ layout: default
 
 <details class="level-section level-beginner">
   <summary class="level-summary">
-    <span class="level-kicker">Beginner</span>
     <h2>Explain it Simply</h2>
     <span class="level-description">What LangChain is, what problem it solves, and when it might be useful.</span>
+    <span class="level-toggle">Beginner</span>
   </summary>
   <div class="level-content">
     <div class="beginner-intro">
@@ -89,9 +89,9 @@ layout: default
 
 <details class="level-section level-intermediate">
   <summary class="level-summary">
-    <span class="level-kicker">Intermediate</span>
     <h2>How the Components Work</h2>
     <span class="level-description">How models, tools, state, memory, middleware, and related products work together.</span>
+    <span class="level-toggle">Intermediate</span>
   </summary>
   <div class="level-content">
       <h3> Major Components & Terminology</h3>
@@ -333,9 +333,9 @@ layout: default
 
 <details class="level-section level-advanced">
   <summary class="level-summary">
-    <span class="level-kicker">Advanced</span>
     <h2>Architecture and Implementation</h2>
     <span class="level-description">How execution, state, resilience, evaluation, and production behavior fit together.</span>
+    <span class="level-toggle">Advanced</span>
   </summary>
   <div class="level-content">
 <div class="content-block advanced-intro">
