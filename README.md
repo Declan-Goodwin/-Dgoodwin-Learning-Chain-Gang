@@ -61,7 +61,6 @@ The design intentionally becomes denser as the technical depth increases.
 - `style.css` — shared site design system
 - `_layouts/default.html` — basic Jekyll page shell
 - `images/` — diagrams and supporting visuals
-- `Lang Template` — working structure for future learning topics
 
 ## Project status
 
